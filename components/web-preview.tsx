@@ -1,13 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { cn } from "@/lib/utils"
 
 interface WebPreviewProps {
   code: string
   language: string
+  className?: string
 }
 
-export default function WebPreview({ code, language }: WebPreviewProps) {
+export default function WebPreview({ code, language, className }: WebPreviewProps) {
   const [html, setHtml] = useState<string>("")
 
   useEffect(() => {
@@ -24,11 +26,11 @@ export default function WebPreview({ code, language }: WebPreviewProps) {
           <style>${code}</style>
         </head>
         <body>
-          <div class="preview-container">
+          <div class="preview-container" style="padding: 20px; font-family: system-ui, sans-serif;">
             <h1>CSS Preview</h1>
             <p>This is a paragraph to preview your CSS.</p>
             <button>Button Element</button>
-            <div class="box">Div with class "box"</div>
+            <div class="box" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc;">Div with class "box"</div>
           </div>
         </body>
         </html>
@@ -74,7 +76,7 @@ export default function WebPreview({ code, language }: WebPreviewProps) {
   }, [code, language])
 
   return (
-    <div className="h-full w-full bg-white">
+    <div className={cn("h-full w-full bg-white", className)}>
       <iframe title="Web Preview" srcDoc={html} className="h-full w-full border-0" sandbox="allow-scripts" />
     </div>
   )

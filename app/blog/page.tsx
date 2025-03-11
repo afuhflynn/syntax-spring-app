@@ -4,9 +4,10 @@ import Image from "next/image"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CalendarDays } from "lucide-react"
+import { formatDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Blog | Syntax Spring",
+  title: "Blog",
   description: "Read our latest articles about coding, programming languages, and software development.",
 }
 
@@ -90,7 +91,7 @@ export default function BlogPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post) => (
-          <Card key={post.id} className="flex flex-col h-full overflow-hidden">
+          <Card key={post.id} className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
             <div className="relative h-48 w-full">
               <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
             </div>
@@ -99,11 +100,7 @@ export default function BlogPage() {
                 <Badge variant="secondary">{post.category}</Badge>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <CalendarDays className="h-3 w-3 mr-1" />
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
+                  {formatDate(post.date)}
                 </div>
               </div>
               <CardTitle className="text-xl">

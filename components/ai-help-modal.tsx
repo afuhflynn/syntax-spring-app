@@ -8,6 +8,7 @@ import { X, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Avatar } from "@/components/ui/avatar"
+import { cn } from "@/lib/utils"
 
 interface AIHelpModalProps {
   isOpen: boolean
@@ -104,7 +105,10 @@ export default function AIHelpModal({ isOpen, onClose, challenge, code, language
               {conversation.map((message, index) => (
                 <div
                   key={index}
-                  className={`flex gap-3 mb-4 ${message.role === "assistant" ? "items-start" : "items-start flex-row-reverse"}`}
+                  className={cn(
+                    "flex gap-3 mb-4",
+                    message.role === "assistant" ? "items-start" : "items-start flex-row-reverse",
+                  )}
                 >
                   {message.role === "assistant" && (
                     <Avatar className="h-8 w-8 bg-primary">
@@ -112,9 +116,10 @@ export default function AIHelpModal({ isOpen, onClose, challenge, code, language
                     </Avatar>
                   )}
                   <div
-                    className={`rounded-lg p-3 max-w-[80%] ${
-                      message.role === "assistant" ? "bg-muted" : "bg-primary text-primary-foreground ml-auto"
-                    }`}
+                    className={cn(
+                      "rounded-lg p-3 max-w-[80%]",
+                      message.role === "assistant" ? "bg-muted" : "bg-primary text-primary-foreground ml-auto",
+                    )}
                   >
                     <p className="whitespace-pre-wrap text-sm">{message.content}</p>
                   </div>

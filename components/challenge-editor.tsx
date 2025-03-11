@@ -9,16 +9,22 @@ import CodeEditor from "@/components/code-editor"
 import OutputTerminal from "@/components/output-terminal"
 import WebPreview from "@/components/web-preview"
 import AIHelpModal from "@/components/ai-help-modal"
+import { useLocalStorage } from "@/hooks/use-local-storage"
+import { cn } from "@/lib/utils"
+import type { Challenge } from "@/lib/challenges"
 
 interface ChallengeEditorProps {
-  challenge: any
+  challenge: Challenge
 }
 
 export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
     Object.keys(challenge.defaultCode || {})[0] || "javascript",
   )
-  const [code, setCode] = useState<string>(challenge.defaultCode?.[selectedLanguage] || "")
+
+  const storageKey = `code-${challenge.slug}-${selectedLanguage}`
+  const [code, setCode] = useLocalStorage<string>(storageKey, challenge.defaultCode?.[selectedLanguage] || "")
+
   const [isRunning, setIsRunning] = useState<boolean>(false)
   const [output, setOutput] = useState<string>("")
   const [isAIHelpOpen, setIsAIHelpOpen] = useState<boolean>(false)
@@ -26,33 +32,25 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   const { toast } = useToast()
   const editorRef = useRef<any>(null)
 
-  // Update code when language changes
   useEffect(() => {
     if (challenge.defaultCode?.[selectedLanguage]) {
-      setCode(challenge.defaultCode[selectedLanguage])
+      const savedCode = localStorage.getItem(`code-${challenge.slug}-${selectedLanguage}`)
+      if (savedCode) {
+        setCode(JSON.parse(savedCode))
+      } else {
+        setCode(challenge.defaultCode[selectedLanguage])
+      }
     }
-  }, [selectedLanguage, challenge.defaultCode])
+  }, [selectedLanguage, challenge.defaultCode, challenge.slug, setCode])
 
   const runCode = async () => {
     setIsRunning(true)
     setOutput("Running code...")
 
     try {
-      // In a real app, this would call the Piston API
-      // For demo purposes, we'll simulate a response
+      // In a real app, this would call an API to execute the code
       await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      if (selectedLanguage === "javascript") {
-        setOutput("Output:\n[0, 1]\n\nExecution completed successfully.")
-      } else if (selectedLanguage === "python") {
-        setOutput("Output:\n[0, 1]\n\nExecution completed successfully.")
-      } else if (selectedLanguage === "html") {
-        // For HTML, we don't show output in the terminal
-        setOutput("HTML rendered in preview pane.")
-      } else {
-        setOutput("Output:\n[0, 1]\n\nExecution completed successfully.")
-      }
-
+      setOutput(`Output for ${challenge.title} in ${selectedLanguage}:\n\nExecution completed successfully.`)
       toast({
         title: "Code executed successfully",
         description: "Your code has been run without errors.",
@@ -76,7 +74,7 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   const isWebLanguage = selectedLanguage === "html" || selectedLanguage === "css" || selectedLanguage === "javascript"
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-card">
+    <div className="border rounded-lg overflow-hidden bg-card shadow-sm">
       <div className="p-4 flex justify-between items-center border-b">
         <div className="flex items-center gap-2">
           <Tabs value={selectedLanguage} onValueChange={setSelectedLanguage} className="w-full">
@@ -94,54 +92,57 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
             variant="outline"
             size="sm"
             onClick={() => setViewMode("editor")}
-            className={viewMode === "editor" ? "bg-muted" : ""}
+            className={cn(viewMode === "editor" ? "bg-muted" : "")}
+            aria-label="Editor view"
           >
             <Code className="h-4 w-4 mr-1" />
-            Editor
+            <span className="hidden sm:inline">Editor</span>
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setViewMode("output")}
-            className={viewMode === "output" ? "bg-muted" : ""}
+            className={cn(viewMode === "output" ? "bg-muted" : "")}
+            aria-label="Output view"
           >
             {isWebLanguage ? <Layout className="h-4 w-4 mr-1" /> : <Terminal className="h-4 w-4 mr-1" />}
-            Output
+            <span className="hidden sm:inline">Output</span>
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setViewMode("split")}
-            className={viewMode === "split" ? "bg-muted" : ""}
+            className={cn(viewMode === "split" ? "bg-muted" : "")}
+            aria-label="Split view"
           >
-            Split
+            <span className="hidden sm:inline">Split</span>
+            <span className="sm:hidden">⚌</span>
           </Button>
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row h-[600px]">
-        {/* Editor */}
         <div
-          className={`${
+          className={cn(
             viewMode === "output"
               ? "hidden md:hidden"
               : viewMode === "split"
                 ? "h-1/2 md:h-auto md:w-1/2"
-                : "h-full w-full"
-          } border-r`}
+                : "h-full w-full",
+            "border-r",
+          )}
         >
           <CodeEditor language={selectedLanguage} value={code} onChange={setCode} editorRef={editorRef} />
         </div>
 
-        {/* Output */}
         <div
-          className={`${
+          className={cn(
             viewMode === "editor"
               ? "hidden md:hidden"
               : viewMode === "split"
                 ? "h-1/2 md:h-auto md:w-1/2"
-                : "h-full w-full"
-          }`}
+                : "h-full w-full",
+          )}
         >
           {isWebLanguage ? <WebPreview code={code} language={selectedLanguage} /> : <OutputTerminal output={output} />}
         </div>

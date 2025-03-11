@@ -1,13 +1,16 @@
 import Link from "next/link"
-import { Github, Twitter, Linkedin } from "lucide-react"
+import { Github, Twitter, Linkedin, Code } from "lucide-react"
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="border-t bg-background">
       <div className="container py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center space-x-2">
+              <Code className="h-6 w-6 text-primary" />
               <span className="font-bold text-xl">
                 Syntax<span className="text-primary">Spring</span>
               </span>
@@ -21,7 +24,7 @@ export default function Footer() {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
@@ -30,7 +33,7 @@ export default function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
@@ -39,7 +42,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
@@ -51,22 +54,22 @@ export default function Footer() {
             <h3 className="font-medium text-sm">Platform</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link href="/challenges" className="text-muted-foreground hover:text-primary">
+                <Link href="/challenges" className="text-muted-foreground hover:text-primary transition-colors">
                   Challenges
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary">
+                <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-muted-foreground hover:text-primary">
+                <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary">
+                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                   Contact
                 </Link>
               </li>
@@ -77,17 +80,17 @@ export default function Footer() {
             <h3 className="font-medium text-sm">Legal</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link href="/privacy" className="text-muted-foreground hover:text-primary">
+                <Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-muted-foreground hover:text-primary">
+                <Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/cookies" className="text-muted-foreground hover:text-primary">
+                <Link href="/cookies" className="text-muted-foreground hover:text-primary transition-colors">
                   Cookie Policy
                 </Link>
               </li>
@@ -96,7 +99,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Syntax Spring. All rights reserved.</p>
+          <p>© {currentYear} Syntax Spring. All rights reserved.</p>
         </div>
       </div>
     </footer>
