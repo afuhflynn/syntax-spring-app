@@ -58,9 +58,9 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Challenges", path: "/challenges" },
-    { name: "Community", path: "/community" },
-    { name: "About", path: "/about" },
+    { name: "Challenges", path: "/platform/challenges" },
+    { name: "Community", path: "/platform/community" },
+    { name: "About", path: "/platform/about" },
   ];
 
   const handleLogout = () => {

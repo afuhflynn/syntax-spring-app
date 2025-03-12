@@ -61,7 +61,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm">
               <li>
                 <Link
-                  href="/challenges"
+                  href="/platform/challenges"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Challenges
@@ -69,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/platform/about"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   About
@@ -77,7 +77,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/blog"
+                  href="/platform/blog"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Blog
@@ -85,7 +85,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/platform/contact"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Contact

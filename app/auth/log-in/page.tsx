@@ -22,8 +22,10 @@ import { Github, Twitter } from "lucide-react";
 import Logo from "@/components/logo";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    password: "",
+    username: "",
+  });
   const router = useRouter();
   const { toast } = useToast();
 
@@ -37,6 +39,10 @@ export default function LoginPage() {
       description: "You've successfully logged in!",
     });
     router.push("/dashboard");
+  };
+
+  const handleInputChange = (name: string, value: string) => {
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -60,13 +66,16 @@ export default function LoginPage() {
           <form onSubmit={handleLogin}>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Username or Email</Label>
                 <Input
                   id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  name="username"
+                  placeholder="Enter your username or email"
+                  value={formData.username}
+                  onChange={(e) =>
+                    handleInputChange(e.target.name, e.target.value)
+                  }
                   required
                 />
               </div>
@@ -84,8 +93,11 @@ export default function LoginPage() {
                   id="password"
                   type="password"
                   placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  name="password"
+                  onChange={(e) =>
+                    handleInputChange(e.target.name, e.target.value)
+                  }
                   required
                 />
               </div>

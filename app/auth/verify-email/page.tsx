@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,8 @@ import Logo from "@/components/logo";
 
 export default function VerifyEmailPage() {
   const [verificationCode, setVerificationCode] = useState("");
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(1);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -45,6 +47,18 @@ export default function VerifyEmailPage() {
     });
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (seconds === 0 && minutes !== 0) {
+        setSeconds(60);
+        setMinutes(0);
+      }
+      if (seconds !== 0 && minutes === 0) {
+        setSeconds((prev) => prev - 1);
+      }
+    }, 1000);
+  }, [seconds]);
+
   return (
     <div className="container flex items-center justify-center min-h-screen py-12">
       <motion.div
@@ -62,8 +76,8 @@ export default function VerifyEmailPage() {
               Verify your email
             </CardTitle>
             <CardDescription>
-              We've sent a verification code to your email. Please enter it
-              below.
+              We've sent a 6 digit verification code to your email. Please enter
+              it below.
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
@@ -72,7 +86,7 @@ export default function VerifyEmailPage() {
                 <Label htmlFor="verification-code">Verification Code</Label>
                 <Input
                   id="verification-code"
-                  type="text"
+                  type="number"
                   placeholder="Enter verification code"
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
@@ -85,8 +99,18 @@ export default function VerifyEmailPage() {
             </CardContent>
           </form>
           <CardFooter className="flex justify-center">
-            <Button variant="link" onClick={resendVerificationEmail}>
-              Resend verification email
+            <Button
+              variant="link"
+              onClick={resendVerificationEmail}
+              disabled={seconds !== 0}
+            >
+              Resend email{" "}
+              {seconds !== 0 && (
+                <span className="ml-1 font-semibold text-[16px]">
+                  {minutes > 9 ? minutes : `0${minutes}`} :{" "}
+                  {seconds > 9 ? seconds : `0${seconds}`}s
+                </span>
+              )}
             </Button>
           </CardFooter>
         </Card>

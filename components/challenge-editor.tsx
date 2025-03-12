@@ -164,14 +164,14 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
 
       <div className="flex flex-col md:flex-row h-[600px]">
         <div
-          className={cn(
+          className={`resize-x ${cn(
             viewMode === "output"
               ? "hidden md:hidden"
               : viewMode === "split"
               ? "h-1/2 md:h-auto md:w-1/2"
               : "h-full w-full",
             "border-r"
-          )}
+          )}`}
         >
           <CodeEditor
             language={selectedLanguage}
@@ -182,13 +182,13 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
         </div>
 
         <div
-          className={cn(
+          className={`resize-x ${cn(
             viewMode === "editor"
               ? "hidden md:hidden"
               : viewMode === "split"
               ? "h-1/2 md:h-auto md:w-1/2"
               : "h-full w-full"
-          )}
+          )}`}
         >
           {isWebLanguage ? (
             <WebPreview code={code} language={selectedLanguage} />

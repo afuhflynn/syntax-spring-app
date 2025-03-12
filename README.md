@@ -1,7 +1,8 @@
 # SyntaxSpring App
 
 <!-- Banner Section -->
-![Banner Image](./SyntaxSpringBanner.png)
+
+![Banner Image](/public/SyntaxSpringBanner.png)
 
 The frontend of **SyntaxSpring** provides an intuitive and responsive user interface for users to interact with the application. It is designed for both web and mobile platforms to ensure accessibility and a seamless experience.
 
@@ -19,10 +20,11 @@ The frontend of **SyntaxSpring** provides an intuitive and responsive user inter
 
 ## Tech Stack
 
-- **React**: Library for building user interfaces.
+- **Nextjs**: Library for building user interfaces and apis.
+- **Auth.js**: Library for user authentication.
 - **TypeScript**: For type-safe development.
 - **TailwindCSS**: For fast and modern styling.
-- **React Router**: For routing and navigation.
+- **Zustand**: For managing global state.
 - **Axios**: For API requests.
 
 ---
@@ -32,12 +34,12 @@ The frontend of **SyntaxSpring** provides an intuitive and responsive user inter
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/syntaxspring-frontend.git
+   git clone https://github.com/your-username/syntax-spring.git
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [GNU GENERAL PUBLIC LICENSE](./LICENSE) file for details.
 
 ### Author
 
-Created by Afuh Fyine Tembeng. Feel free to reach out for any questions or collaboration.
+Created by Afuh Fynn Tembeng. Feel free to reach out for any questions or collaboration.

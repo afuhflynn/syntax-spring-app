@@ -206,6 +206,11 @@
     @apply cursor-pointer border-none;
   }
 
+  input::-webkit-inner-spin-button,
+  input::-webkit-outer-spin-button {
+    @apply hidden;
+  }
+
   .container {
     @apply px-4 md:px-6;
   }

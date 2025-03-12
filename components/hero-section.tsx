@@ -70,12 +70,12 @@ export default function Hero() {
             variants={fadeIn}
           >
             <Button size="lg" asChild>
-              <Link href="/challenges">
+              <Link href="/platform/challenges">
                 Start Coding <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link href="/about">Learn More</Link>
+              <Link href="/platform/about">Learn More</Link>
             </Button>
           </motion.div>
         </motion.div>

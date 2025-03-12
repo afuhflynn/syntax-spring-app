@@ -1,4 +1,4 @@
-[] Add the tooltip package from mui lib
+[] Add the tooltip package from mui lib and zustand
 [] Add search and filter tab at the top of challenges view page.
 [] Add fix the monaco error
 [] Add a button to ask users if they are ready to start coding. And after wards add one to minimize the coding env.
@@ -9,3 +9,6 @@
 [] Access dashboard by clicking user icon on navbar not link.
 [] Generate dashboard title dynamically based on user data.
 [] Streaks, leaderboard, leagues and points visible on dashboard only.
+[] Add other code samples (data)
+[] convert fav-icon.svg to fav-icon.png
+[] Add next auth for authentication

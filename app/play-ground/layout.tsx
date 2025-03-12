@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { getChallengeBySlug } from "@/lib/challenges";
+import { ThemeProvider } from "@/components/theme-provider";
+import devLog from "@/lib/devLog";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,7 +13,7 @@ const inter = Inter({
 export async function generateMetadata(params: {
   slug: string;
 }): Promise<Metadata> {
-  console.log(params.slug);
+  devLog(params.slug);
   const challenge = getChallengeBySlug(params.slug);
 
   if (!challenge) {
@@ -34,7 +36,18 @@ export default function PlaygroundLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`min-h-screen bg-background ${inter.className}`}>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div
+            className={`h-screen w-screen overflow-hidden ${inter.className}`}
+          >
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
