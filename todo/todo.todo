@@ -8,3 +8,4 @@
 [] Hide home page link from logged in users and always redirect to the dashboard
 [] Access dashboard by clicking user icon on navbar not link.
 [] Generate dashboard title dynamically based on user data.
+[] Streaks, leaderboard, leagues and points visible on dashboard only.

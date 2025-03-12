@@ -99,7 +99,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm">
               <li>
                 <Link
-                  href="/organization/privacy-policy"
+                  href="/legal/privacy-policy"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Privacy Policy
@@ -107,7 +107,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/organization/terms-service"
+                  href="/legal/terms-service"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Terms of Service
@@ -115,7 +115,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/organization/cookies-policy"
+                  href="/legal/cookies-policy"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Cookie Policy
@@ -123,7 +123,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/organization/faqs-us"
+                  href="/legal/faqs-us"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   FAQs
