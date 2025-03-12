@@ -60,7 +60,6 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "Challenges", path: "/challenges" },
     { name: "Community", path: "/community" },
-    ...(isAuthenticated ? [{ name: "Dashboard", path: "/dashboard" }] : []),
     { name: "About", path: "/about" },
   ];
 

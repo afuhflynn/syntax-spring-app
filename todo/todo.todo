@@ -5,3 +5,6 @@
 [] Add intellisense for all current available langs and vb.net
 [] Modify the footer to include correct data
 [] Download (React, Nextj, Tailwindcss, Typescript, Framer-motion) logos
+[] Hide home page link from logged in users and always redirect to the dashboard
+[] Access dashboard by clicking user icon on navbar not link.
+[] Generate dashboard title dynamically based on user data.
