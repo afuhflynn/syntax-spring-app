@@ -44,6 +44,15 @@ export default function Footer() {
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
+              <Link
+                href="https://frontendmentor.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Code className="h-5 w-5" />
+                <span className="sr-only">FrontendMentor</span>
+              </Link>
             </div>
           </div>
 
@@ -90,7 +99,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm">
               <li>
                 <Link
-                  href="/privacy"
+                  href="/organization/privacy-policy"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Privacy Policy
@@ -98,7 +107,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/organization/terms-service"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Terms of Service
@@ -106,10 +115,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/cookies"
+                  href="/organization/cookies-policy"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/organization/faqs-us"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  FAQs
                 </Link>
               </li>
             </ul>

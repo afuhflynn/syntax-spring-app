@@ -2,3 +2,6 @@
 [] Add search and filter tab at the top of challenges view page.
 [] Add fix the monaco error
 [] Add a button to ask users if they are ready to start coding. And after wards add one to minimize the coding env.
+[] Add intellisense for all current available langs and vb.net
+[] Modify the footer to include correct data
+[] Download (React, Nextj, Tailwindcss, Typescript, Framer-motion) logos
