@@ -14,10 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Syntax Spring - Interactive Coding Challenge Platform",
-    template: "%s | Syntax Spring",
-  },
+  title: "Syntax Spring - Interactive Coding Challenge Platform",
   description:
     "Master coding challenges in multiple languages with our interactive platform. Code directly in your browser and see results in real-time.",
   keywords: [

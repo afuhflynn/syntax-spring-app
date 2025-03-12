@@ -21,13 +21,69 @@ export const challenges: Challenge[] = [
   // Algorithms - Easy
   {
     id: "1",
-    title: "Two Sum",
-    description:
-      "Given an array of integers, return indices of the two numbers such that they add up to a specific target.",
-    difficulty: "Easy",
-    languages: ["JavaScript", "Python", "Java", "C++"],
     slug: "two-sum",
+    title: "Two Sum",
     category: "Algorithms",
+    languages: ["JavaScript", "Python", "Java", "C++"],
+    description:
+      "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.",
+    difficulty: "Easy",
+    examples: [
+      {
+        input: "nums = [2,7,11,15], target = 9",
+        output: "[0,1]",
+        explanation: "Because nums[0] + nums[1] == 9, we return [0, 1].",
+      },
+      {
+        input: "nums = [3,2,4], target = 6",
+        output: "[1,2]",
+        explanation: "Because nums[1] + nums[2] == 6, we return [1, 2].",
+      },
+    ],
+    constraints: [
+      "2 <= nums.length <= 10^4",
+      "-10^9 <= nums[i] <= 10^9",
+      "-10^9 <= target <= 10^9",
+      "Only one valid answer exists.",
+    ],
+    defaultCode: {
+      javascript: `/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+function twoSum(nums, target) {
+  // Your solution here
+}
+
+// Example usage
+console.log(twoSum([2, 7, 11, 15], 9)); // Expected output: [0, 1]
+`,
+      python: `def two_sum(nums, target):
+    # Your solution here
+    pass
+
+# Example usage
+print(two_sum([2, 7, 11, 15], 9))  # Expected output: [0, 1]
+`,
+      java: `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // Your solution here
+        return new int[]{0, 0};
+    }
+}
+`,
+      cpp: `#include <vector>
+
+class Solution {
+public:
+    std::vector<int> twoSum(std::vector<int>& nums, int target) {
+        // Your solution here
+        return {0, 0};
+    }
+};
+`,
+    },
   },
   {
     id: "2",
@@ -405,6 +461,5 @@ export const challenges: Challenge[] = [
 
 export function getChallengeBySlug(slug: string): Challenge | undefined {
   const challenge = challenges.find((challenge) => challenge.slug === slug);
-  console.log(challenge);
   return challenge;
 }

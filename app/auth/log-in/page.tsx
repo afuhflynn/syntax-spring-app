@@ -19,6 +19,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Github, Twitter } from "lucide-react";
+import Logo from "@/components/logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -47,6 +48,9 @@ export default function LoginPage() {
         className="w-full max-w-md"
       >
         <Card>
+          <div className="w-full h-auto flex flex-row items-center justify-center mt-8">
+            <Logo />
+          </div>
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold">Log in</CardTitle>
             <CardDescription>
@@ -95,24 +99,24 @@ export default function LoginPage() {
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t" />
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
+              <div className="relative flex justify-center text-x">
                 <span className="bg-background px-2 text-muted-foreground">
                   Or continue with
                 </span>
               </div>
             </div>
             <div className="flex space-x-2">
-              <Button variant="outline" className="w-full">
+              <Button variant="secondary" className="w-full border-border">
                 <Github className="mr-2 h-4 w-4" /> Github
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button variant="secondary" className="w-full border-border">
                 <Twitter className="mr-2 h-4 w-4" /> Twitter
               </Button>
             </div>
             <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
               <Link
-                href="/auth/signup"
+                href="/auth/sign-up"
                 className="text-primary hover:underline"
               >
                 Sign up

@@ -1,15 +1,22 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 export default function CommunityPage() {
-  const [question, setQuestion] = useState("")
+  const [question, setQuestion] = useState("");
   const [questions, setQuestions] = useState([
     {
       id: 1,
@@ -27,10 +34,31 @@ export default function CommunityPage() {
         "I'm building a large Python application and want to implement robust error handling. What are some best practices or patterns I should follow?",
       answers: 5,
     },
-  ])
+  ]);
+
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      // Replace this with your actual authentication check
+      const auth = localStorage.getItem("isAuthenticated") === "true";
+      setIsAuthenticated(auth);
+      setIsLoading(false);
+      if (!auth) {
+        router.push("/auth/log-in");
+      }
+    };
+    checkAuth();
+  }, [router]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleAskQuestion = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send the question to your backend
     // For demo purposes, we'll just add it to the local state
     setQuestions([
@@ -42,8 +70,12 @@ export default function CommunityPage() {
         answers: 0,
       },
       ...questions,
-    ])
-    setQuestion("")
+    ]);
+    setQuestion("");
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or a more sophisticated loading component
   }
 
   return (
@@ -79,7 +111,9 @@ export default function CommunityPage() {
                 </Avatar>
                 <div>
                   <CardTitle className="text-lg">{q.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground">Asked by {q.user}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Asked by {q.user}
+                  </p>
                 </div>
               </div>
             </CardHeader>
@@ -95,6 +129,5 @@ export default function CommunityPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }
-

@@ -1,14 +1,18 @@
-import { notFound } from "next/navigation";
+import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { getChallengeBySlug } from "@/lib/challenges";
-import ChallengeClient from "./challenge-client";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export async function generateMetadata(params: {
   slug: string;
 }): Promise<Metadata> {
   console.log(params.slug);
   const challenge = getChallengeBySlug(params.slug);
-  // console.log(challenge);
 
   if (!challenge) {
     return {
@@ -22,12 +26,16 @@ export async function generateMetadata(params: {
   };
 }
 
-export default function ChallengePage(params: { slug: string }) {
-  const challenge = getChallengeBySlug(params.slug);
-
-  if (!challenge) {
-    notFound();
-  }
-
-  return <ChallengeClient challenge={challenge} />;
+export default function PlaygroundLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={`min-h-screen bg-background ${inter.className}`}>
+        {children}
+      </body>
+    </html>
+  );
 }

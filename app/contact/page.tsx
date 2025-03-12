@@ -1,16 +1,28 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
-import { Mail, MessageSquare, Send } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { Mail, MessageSquare, Send } from "lucide-react";
+
+/**
+ * maxLength: number - max message input length
+ */
+const maxLength = 350;
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -22,14 +34,19 @@ const formSchema = z.object({
   subject: z.string().min(5, {
     message: "Subject must be at least 5 characters.",
   }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
-})
+  message: z
+    .string()
+    .min(10, {
+      message: "Message must be at least 10 characters.",
+    })
+    .max(maxLength, {
+      message: `Message must not be more than ${maxLength} characters.`,
+    }),
+});
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,29 +56,30 @@ export default function ContactPage() {
       subject: "",
       message: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      console.log(values);
 
       toast({
         title: "Message sent!",
         description: "We'll get back to you as soon as possible.",
-      })
+      });
 
-      form.reset()
+      form.reset();
     } catch (error) {
       toast({
         title: "Something went wrong",
         description: "Your message couldn't be sent. Please try again later.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -74,10 +92,12 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold tracking-tighter mb-4">Contact Us</h1>
+          <h1 className="text-4xl font-bold tracking-tighter mb-4">
+            Contact Us
+          </h1>
           <p className="text-muted-foreground max-w-[700px] mx-auto">
-            Have a question or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you
-            as soon as possible.
+            Have a question or feedback? We'd love to hear from you. Fill out
+            the form below and we'll get back to you as soon as possible.
           </p>
         </motion.div>
 
@@ -88,7 +108,9 @@ export default function ContactPage() {
                 <Mail className="h-6 w-6 text-primary mt-1" />
                 <div>
                   <h3 className="font-medium">Email</h3>
-                  <p className="text-sm text-muted-foreground mt-1">contact@syntaxspring.com</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    syntaxspring1516@gmail.com
+                  </p>
                 </div>
               </div>
 
@@ -96,7 +118,9 @@ export default function ContactPage() {
                 <MessageSquare className="h-6 w-6 text-primary mt-1" />
                 <div>
                   <h3 className="font-medium">Live Chat</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Available Monday-Friday, 9am-5pm EST</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Available Monday-Saturday, 2am-5am or 4pm-7pm EST
+                  </p>
                 </div>
               </div>
             </div>
@@ -104,7 +128,10 @@ export default function ContactPage() {
 
           <div className="md:col-span-2">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -142,7 +169,10 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Subject</FormLabel>
                       <FormControl>
-                        <Input placeholder="Subject of your message" {...field} />
+                        <Input
+                          placeholder="Subject of your message"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -156,14 +186,29 @@ export default function ContactPage() {
                     <FormItem>
                       <FormLabel>Message</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Your message" className="min-h-[150px]" {...field} />
+                        <Textarea
+                          placeholder="Your message"
+                          className="min-h-[150px] resize-none"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <div className="flex flex-row items-center justify-between w-full h-auto">
+                  <span>Max</span>
+                  <span>
+                    {"0"} / {maxLength}
+                  </span>
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? (
                     <>Sending message...</>
                   ) : (
@@ -179,6 +224,5 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

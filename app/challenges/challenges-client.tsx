@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -33,7 +32,7 @@ export default function ChallengesClient({
       setIsAuthenticated(auth);
       setIsLoading(false);
       if (!auth) {
-        // router.push("/auth/login")
+        router.push("/auth/log-in");
       }
     };
     checkAuth();
@@ -60,6 +59,10 @@ export default function ChallengesClient({
     }
   };
 
+  const handleRouting = (slug: string) => {
+    router.push(`/play-ground/challenge/${slug}`);
+  };
+
   return (
     <div className="container py-12">
       <div className="mb-12 text-center">
@@ -77,7 +80,8 @@ export default function ChallengesClient({
         {challenges.map((challenge) => (
           <Card
             key={challenge.id}
-            className="flex flex-col h-full hover:shadow-md transition-shadow"
+            onClick={() => handleRouting(challenge.slug)}
+            className="flex flex-col h-full hover:shadow-md transition-shadow cursor-pointer"
           >
             <CardHeader>
               <div className="flex justify-between items-start">
@@ -105,10 +109,11 @@ export default function ChallengesClient({
               </div>
             </CardContent>
             <CardFooter>
-              <Button asChild className="w-full">
-                <Link href={`/challenges/${challenge.slug}`}>
-                  Solve Challenge <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+              <Button
+                className="w-full"
+                onClick={() => handleRouting(challenge.slug)}
+              >
+                Solve Challenge <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </CardFooter>
           </Card>

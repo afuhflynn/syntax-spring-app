@@ -1,21 +1,25 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface WebPreviewProps {
-  code: string
-  language: string
-  className?: string
+  code: string;
+  language: string;
+  className?: string;
 }
 
-export default function WebPreview({ code, language, className }: WebPreviewProps) {
-  const [html, setHtml] = useState<string>("")
+export default function WebPreview({
+  code,
+  language,
+  className,
+}: WebPreviewProps) {
+  const [html, setHtml] = useState<string>("");
 
   useEffect(() => {
     // For HTML, directly use the code
     if (language === "html") {
-      setHtml(code)
+      setHtml(code);
     }
     // For CSS, wrap in a basic HTML structure
     else if (language === "css") {
@@ -24,6 +28,7 @@ export default function WebPreview({ code, language, className }: WebPreviewProp
         <html>
         <head>
           <style>${code}</style>
+          <title>New Web Document</title>
         </head>
         <body>
           <div class="preview-container" style="padding: 20px; font-family: system-ui, sans-serif;">
@@ -34,7 +39,7 @@ export default function WebPreview({ code, language, className }: WebPreviewProp
           </div>
         </body>
         </html>
-      `)
+      `);
     }
     // For JavaScript, wrap in a basic HTML structure
     else if (language === "javascript") {
@@ -71,14 +76,18 @@ export default function WebPreview({ code, language, className }: WebPreviewProp
           </script>
         </body>
         </html>
-      `)
+      `);
     }
-  }, [code, language])
+  }, [code, language]);
 
   return (
     <div className={cn("h-full w-full bg-white", className)}>
-      <iframe title="Web Preview" srcDoc={html} className="h-full w-full border-0" sandbox="allow-scripts" />
+      <iframe
+        title="Web Preview"
+        srcDoc={html}
+        className="h-full w-full border-0"
+        sandbox="allow-scripts"
+      />
     </div>
-  )
+  );
 }
-

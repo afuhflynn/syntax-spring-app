@@ -1,54 +1,60 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Code, User } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { cn } from "@/lib/utils"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Logo from "./logo";
 
 // This is a mock function. Replace it with your actual authentication logic.
 const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Simulate checking auth status
   useEffect(() => {
     const checkAuth = async () => {
       // Replace this with actual auth check
-      const auth = localStorage.getItem("isAuthenticated") === "true"
-      setIsAuthenticated(auth)
-    }
-    checkAuth()
-  }, [])
+      const auth = localStorage.getItem("isAuthenticated") === "true";
+      setIsAuthenticated(auth);
+    };
+    checkAuth();
+  }, []);
 
-  return { isAuthenticated, setIsAuthenticated }
-}
+  return { isAuthenticated, setIsAuthenticated };
+};
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const pathname = usePathname()
-  const { isAuthenticated, setIsAuthenticated } = useAuth()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
+      setIsScrolled(window.scrollY > 10);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
+    setIsOpen(false);
+  }, [pathname]);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -56,14 +62,14 @@ export default function Navbar() {
     { name: "Community", path: "/community" },
     ...(isAuthenticated ? [{ name: "Dashboard", path: "/dashboard" }] : []),
     { name: "About", path: "/about" },
-  ]
+  ];
 
   const handleLogout = () => {
     // Implement logout logic here
-    setIsAuthenticated(false)
-    localStorage.removeItem("isAuthenticated")
+    setIsAuthenticated(false);
+    localStorage.removeItem("isAuthenticated");
     // Redirect to home page or login page
-  }
+  };
 
   return (
     <header
@@ -71,18 +77,11 @@ export default function Navbar() {
         "sticky top-0 z-50 w-full transition-all duration-200",
         isScrolled
           ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-          : "bg-background",
+          : "bg-background"
       )}
     >
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center space-x-2">
-            <Code className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl">
-              Syntax<span className="text-primary">Spring</span>
-            </span>
-          </Link>
-        </div>
+        <Logo />
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
@@ -92,7 +91,9 @@ export default function Navbar() {
               href={item.path}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary relative py-1",
-                pathname === item.path ? "text-primary" : "text-muted-foreground",
+                pathname === item.path
+                  ? "text-primary"
+                  : "text-muted-foreground"
               )}
             >
               {item.name}
@@ -117,17 +118,35 @@ export default function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onSelect={() => handleLogout()}>Log out</DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => handleLogout()}>
+                  Log out
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild className="hidden md:flex">
-              <Link href="/auth/login">Log in</Link>
-            </Button>
+            <>
+              <Button
+                variant="outline"
+                size="lg"
+                asChild
+                className="hidden md:flex"
+              >
+                <Link href="/auth/log-in">Log in</Link>
+              </Button>
+              <Button asChild className="hidden md:flex">
+                <Link href="/auth/sign-up">Get started for free</Link>
+              </Button>
+            </>
           )}
 
           {/* Mobile Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+          >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
@@ -150,7 +169,9 @@ export default function Navbar() {
                   href={item.path}
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-primary py-2",
-                    pathname === item.path ? "text-primary" : "text-muted-foreground",
+                    pathname === item.path
+                      ? "text-primary"
+                      : "text-muted-foreground"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
@@ -160,15 +181,24 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <Button onClick={handleLogout}>Log out</Button>
               ) : (
-                <Button asChild>
-                  <Link href="/auth/login">Log in</Link>
-                </Button>
+                <>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    asChild
+                    className="hidden md:flex"
+                  >
+                    <Link href="/auth/log-in">Log in</Link>
+                  </Button>
+                  <Button asChild className="hidden md:flex">
+                    <Link href="/auth/sign-up">Get Started</Link>
+                  </Button>
+                </>
               )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
-

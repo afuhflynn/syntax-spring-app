@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
 import type { Challenge } from "@/lib/challenges";
+import Logo from "@/components/logo";
 
 export default function ChallengeClient({
   challenge,
@@ -22,7 +23,7 @@ export default function ChallengeClient({
       setIsAuthenticated(auth);
       setIsLoading(false);
       if (!auth) {
-        router.push("/auth/login");
+        router.push("/auth/log-in");
       }
     };
     checkAuth();
@@ -51,8 +52,11 @@ export default function ChallengeClient({
 
   return (
     <div className="container py-8">
+      <div className="flex flex-row items-center mb-6 h-auto">
+        <Logo />
+      </div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tighter mb-2">
+        <h1 className="text-3xl font-bold tracking-tighter mb-4">
           {challenge.title}
         </h1>
         <div className="flex items-center gap-2 mb-4">
@@ -97,7 +101,6 @@ export default function ChallengeClient({
           )}
         </div>
       </div>
-
       <ChallengeEditor challenge={challenge} />
     </div>
   );
