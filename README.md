@@ -1,6 +1,6 @@
 # Syntax Spring
 
-![Syntax Spring Logo](public/logo.png)
+![Syntax Spring Banner](public/SyntaxSpringBanner.png)
 
 Syntax Spring is a modern, interactive coding challenge platform designed to help developers improve their programming skills through hands-on practice. Built with Next.js, TypeScript, and Tailwind CSS, this platform offers a comprehensive learning experience with features like in-browser code execution, AI assistance, and community interaction.
 
@@ -36,6 +36,6 @@ Syntax Spring is a modern, interactive coding challenge platform designed to hel
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/syntax-spring.git
+   git clone https://github.com/AfuhFlynns/syntax-spring-app.git
    cd syntax-spring
 
