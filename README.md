@@ -1,45 +1,41 @@
-# SyntaxSpring App
+# Syntax Spring
 
-<!-- Banner Section -->
+![Syntax Spring Logo](public/logo.png)
 
-![Banner Image](/public/SyntaxSpringBanner.png)
+Syntax Spring is a modern, interactive coding challenge platform designed to help developers improve their programming skills through hands-on practice. Built with Next.js, TypeScript, and Tailwind CSS, this platform offers a comprehensive learning experience with features like in-browser code execution, AI assistance, and community interaction.
 
-The frontend of **SyntaxSpring** provides an intuitive and responsive user interface for users to interact with the application. It is designed for both web and mobile platforms to ensure accessibility and a seamless experience.
+## 🚀 Features
 
----
+- **Interactive Coding Challenges**: Practice coding in multiple languages with our in-browser editor
+- **Real-time Code Execution**: Run your code and see results instantly
+- **Progress Tracking**: Track your learning journey with streaks, badges, and points
+- **AI Assistance**: Get help from our AI assistant when you're stuck
+- **Community Features**: Connect with other learners and find study partners
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Dark/Light Mode**: Choose your preferred theme
+- **User Authentication**: Secure login, registration, and account management
 
-## Features
+## 🛠️ Tech Stack
 
-- Responsive design for desktop and mobile devices.
-- User-friendly navigation and interactions.
-- Integration with the backend APIs.
-- Real-time updates and notifications.
-- Secure authentication workflows.
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **State Management**: React Hooks
+- **Code Editor**: Monaco Editor
+- **Animations**: Framer Motion
+- **Authentication**: Custom auth system (can be integrated with Auth.js/NextAuth)
+- **Deployment**: Vercel
 
----
+## 📋 Prerequisites
 
-## Tech Stack
+- Node.js 18.x or higher
+- npm or yarn or pnpm
 
-- **Nextjs**: Library for building user interfaces and apis.
-- **Auth.js**: Library for user authentication.
-- **TypeScript**: For type-safe development.
-- **TailwindCSS**: For fast and modern styling.
-- **Zustand**: For managing global state.
-- **Axios**: For API requests.
+## 🚀 Getting Started
 
----
-
-## Installation
+### Installation
 
 1. Clone the repository:
-
    ```bash
-   git clone https://github.com/your-username/syntax-spring.git
+   git clone https://github.com/yourusername/syntax-spring.git
+   cd syntax-spring
 
-## License
-
-This project is licensed under the MIT License. See the [GNU GENERAL PUBLIC LICENSE](./LICENSE) file for details.
-
-### Author
-
-Created by Afuh Fynn Tembeng. Feel free to reach out for any questions or collaboration.

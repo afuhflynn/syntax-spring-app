@@ -121,8 +121,8 @@ export default function LoginPage() {
               <Button variant="secondary" className="w-full border-border">
                 <Github className="mr-2 h-4 w-4" /> Github
               </Button>
-              <Button variant="secondary" className="w-full border-border">
-                <Twitter className="mr-2 h-4 w-4" /> Twitter
+              <Button variant="secondary" className="w-full">
+                <Twitter className="mr-2 h-4 w-4" /> Google
               </Button>
             </div>
             <p className="text-center text-sm text-muted-foreground">
