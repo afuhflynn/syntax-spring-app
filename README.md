@@ -39,3 +39,6 @@ Syntax Spring is a modern, interactive coding challenge platform designed to hel
    git clone https://github.com/AfuhFlynns/syntax-spring-app.git
    cd syntax-spring
 
+## Contributing
+
+Follow the instructions in the [CONTRIBUTING file to continue](./CONTRIBUTING.md)

@@ -10,7 +10,6 @@ import {
   Code,
   Terminal,
   Layout,
-  CheckCircle2,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CodeEditor from "@/components/code-editor";
@@ -19,6 +18,8 @@ import WebPreview from "@/components/web-preview";
 import AIHelpModal from "@/components/ai-help-modal";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { cn } from "@/lib/utils";
+import { configureMonacoLanguages } from "@/utils/monaco-languages";
+import type { Monaco } from "@monaco-editor/react";
 import type { Challenge } from "@/lib/challenges";
 
 interface ChallengeEditorProps {
@@ -44,6 +45,7 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   );
   const { toast } = useToast();
   const editorRef = useRef<any>(null);
+  const monacoRef = useRef<Monaco | null>(null);
 
   useEffect(() => {
     if (challenge.defaultCode?.[selectedLanguage]) {
@@ -58,6 +60,13 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
     }
   }, [selectedLanguage, challenge.defaultCode, challenge.slug, setCode]);
 
+  // Initialize Monaco with language services
+  useEffect(() => {
+    if (monacoRef.current) {
+      configureMonacoLanguages(monacoRef.current);
+    }
+  }, [monacoRef.current]);
+
   const runCode = async () => {
     setIsRunning(true);
     setOutput("Running code...");
@@ -65,9 +74,9 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
     try {
       // In a real app, this would call an API to execute the code
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      setOutput(
-        `Output for ${challenge.title} in ${selectedLanguage}:\n\nExecution completed successfully.`
-      );
+      setOutput(`Output for ${challenge.title} in ${selectedLanguage}:
+
+Execution completed successfully.`);
       toast({
         title: "Code executed successfully",
         description: "Your code has been run without errors.",
@@ -93,9 +102,17 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
     selectedLanguage === "css" ||
     selectedLanguage === "javascript";
 
+  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+    editorRef.current = editor;
+    monacoRef.current = monaco;
+
+    // Configure language services
+    configureMonacoLanguages(monaco);
+  };
+
   return (
-    <div className="border rounded-lg overflow-hidden bg-card shadow-sm h-[90%] w-full">
-      <div className="py-2 px-4 flex justify-between items-center border-b w-full">
+    <div className="border rounded-lg overflow-hidden bg-card shadow-sm">
+      <div className="p-4 flex justify-between items-center border-b">
         <div className="flex items-center gap-2">
           <Tabs
             value={selectedLanguage}
@@ -146,32 +163,19 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
             <span className="hidden sm:inline">Split</span>
             <span className="sm:hidden">⚌</span>
           </Button>
-          <Button onClick={runCode} disabled={isRunning}>
-            {isRunning ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Running...
-              </>
-            ) : (
-              <>
-                <Play className="h-4 w-4 mr-2" />
-                Run Code
-              </>
-            )}
-          </Button>
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row h-[600px]">
         <div
-          className={`resize-x ${cn(
+          className={cn(
             viewMode === "output"
               ? "hidden md:hidden"
               : viewMode === "split"
               ? "h-1/2 md:h-auto md:w-1/2"
               : "h-full w-full",
             "border-r"
-          )}`}
+          )}
         >
           <CodeEditor
             language={selectedLanguage}
@@ -182,13 +186,13 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
         </div>
 
         <div
-          className={`resize-x ${cn(
+          className={cn(
             viewMode === "editor"
               ? "hidden md:hidden"
               : viewMode === "split"
               ? "h-1/2 md:h-auto md:w-1/2"
               : "h-full w-full"
-          )}`}
+          )}
         >
           {isWebLanguage ? (
             <WebPreview code={code} language={selectedLanguage} />
@@ -198,15 +202,24 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
         </div>
       </div>
 
-      <div className="py-2 px-4 border-t flex justify-between items-center">
-        <Button variant="secondary" onClick={handleAIHelp}>
+      <div className="p-4 border-t flex justify-between items-center">
+        <Button variant="outline" onClick={handleAIHelp}>
           <HelpCircle className="h-4 w-4 mr-2" />
           Ask AI for Help
         </Button>
 
-        <Button disabled={isRunning}>
-          <CheckCircle2 className="h-4 w-4 mr-2" />
-          Submit
+        <Button onClick={runCode} disabled={isRunning}>
+          {isRunning ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Running...
+            </>
+          ) : (
+            <>
+              <Play className="h-4 w-4 mr-2" />
+              Run Code
+            </>
+          )}
         </Button>
       </div>
 
