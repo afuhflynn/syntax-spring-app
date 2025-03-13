@@ -41,23 +41,34 @@ export default function ChallengesClient({
   const [isDifficultyFilterDropdown, setIsDifficultyFilterDropDown] =
     useState(false);
 
-  const filteredChallenges = challenges.filter(
-    (challenge) =>
-      challenge.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      challenge.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      challenge.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      challenge.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      challenge.languages.find((item) =>
-        item.toLowerCase().includes(searchQuery.toLowerCase())
-      ) ||
-      challenge.difficulty.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      challenge.category
-        .toLowerCase()
-        .includes(categoryFilterQuery.toLowerCase()) ||
-      challenge.difficulty
-        .toLowerCase()
-        .includes(difficultyFilterQuery.toLowerCase())
-  );
+  const [filteredChallenges, setFilteredChallenges] = useState(challenges);
+
+  const handleSearchFilter = (searchTerm: string) => {
+    setSearchQuery(searchTerm);
+    const filteredChallenges = challenges.filter(
+      (challenge) =>
+        challenge.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        challenge.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        challenge.description
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        challenge.slug.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        challenge.languages.find((item) =>
+          item.toLowerCase().includes(searchTerm.toLowerCase())
+        ) ||
+        challenge.difficulty.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredChallenges(filteredChallenges);
+  };
+
+  const handleFilterToggle = (value: string) => {
+    const filteredChallenges = challenges.filter(
+      (challenge) =>
+        challenge.category.toLowerCase() === value.toLowerCase() ||
+        challenge.difficulty.toLowerCase() === value.toLowerCase()
+    );
+    setFilteredChallenges(filteredChallenges);
+  };
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -101,7 +112,7 @@ export default function ChallengesClient({
     <div className="container py-12">
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold tracking-tighter mb-4">
-          Search or Filter Challenges
+          Search or filter Challenges
         </h1>
         {/* Search bar and filter bar */}
         <div className="w-full md:w-full h-auto grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 items-center justify-center md:gap-4 gap-3 md:my-8">
@@ -112,7 +123,7 @@ export default function ChallengesClient({
               placeholder="Search a challenge..."
               className="pl-10 py-2"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchFilter(e.target.value)}
             />
           </div>
           <div className="w-full grid grid-cols-2 grid-rows-1 items-center gap-4 md:gap-6">
@@ -134,6 +145,8 @@ export default function ChallengesClient({
                       onClick={() => {
                         setIsCategoryFilterDropDown((prev) => !prev);
                         setCategoryFilterQuery(item.data);
+                        setDifficultyFilterQuery(initialDifficultyFilterQuery);
+                        handleFilterToggle(item.data);
                       }}
                     >
                       {item.data}
@@ -160,6 +173,8 @@ export default function ChallengesClient({
                       onClick={() => {
                         setIsDifficultyFilterDropDown((prev) => !prev);
                         setDifficultyFilterQuery(item.data);
+                        setCategoryFilterQuery(initialCategoryFilterQuery);
+                        handleFilterToggle(item.data);
                       }}
                     >
                       {item.data}
@@ -182,7 +197,8 @@ export default function ChallengesClient({
         {filteredChallenges.length === 0 ? (
           <div className="text-center py-8 w-full">
             <p className="text-muted-foreground">
-              No challenge found matching your search. Try a different query.
+              No challenge found matching your search or filter. Try a different
+              query.
             </p>
           </div>
         ) : (
