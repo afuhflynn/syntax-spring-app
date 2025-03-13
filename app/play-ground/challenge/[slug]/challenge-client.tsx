@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
 import type { Challenge } from "@/lib/challenges";
 import Logo from "@/components/logo";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowLeftCircle } from "lucide-react";
 
 export default function ChallengeClient({
   challenge,
@@ -52,8 +55,13 @@ export default function ChallengeClient({
 
   return (
     <div className="container py-8">
-      <div className="flex flex-row items-center mb-6 h-auto">
+      <div className="flex flex-row items-center justify-between mb-6 h-auto">
         <Logo />
+        <Button className="flex flex-row items-center gap-2" asChild>
+          <Link href={"/platform/challenges"}>
+            <ArrowLeftCircle /> Back to Challenges.
+          </Link>
+        </Button>
       </div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tighter mb-4">

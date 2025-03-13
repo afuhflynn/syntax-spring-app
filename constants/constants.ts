@@ -81,3 +81,40 @@ export const features = [
     CtaIcon: Zap,
   },
 ];
+
+// category: "Algorithms",
+// difficulty: "Easy",
+
+export const categoryFilter = [
+  {
+    id: 1,
+    data: "Algorithms",
+  },
+  {
+    id: 2,
+    data: "Web/Mobile",
+  },
+  {
+    id: 3,
+    data: "Block Chain",
+  },
+  {
+    id: 4,
+    data: "UI/UX",
+  },
+];
+
+export const difficultyFilter = [
+  {
+    id: 1,
+    data: "Easy",
+  },
+  {
+    id: 2,
+    data: "Medium",
+  },
+  {
+    id: 3,
+    data: "Hard",
+  },
+];

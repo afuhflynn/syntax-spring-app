@@ -10,6 +10,7 @@ import {
   Code,
   Terminal,
   Layout,
+  CheckCircleIcon,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CodeEditor from "@/components/code-editor";
@@ -112,7 +113,7 @@ Execution completed successfully.`);
 
   return (
     <div className="border rounded-lg overflow-hidden bg-card shadow-sm">
-      <div className="p-4 flex justify-between items-center border-b">
+      <div className="px-4 py-2 flex justify-between items-center border-b">
         <div className="flex items-center gap-2">
           <Tabs
             value={selectedLanguage}
@@ -163,10 +164,23 @@ Execution completed successfully.`);
             <span className="hidden sm:inline">Split</span>
             <span className="sm:hidden">⚌</span>
           </Button>
+          <Button onClick={runCode} disabled={isRunning}>
+            {isRunning ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Running...
+              </>
+            ) : (
+              <>
+                <Play className="h-4 w-4 mr-2" />
+                Run Code
+              </>
+            )}
+          </Button>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row h-[600px]">
+      <div className="flex flex-col  md:flex-row h-[600px]">
         <div
           className={cn(
             viewMode === "output"
@@ -186,13 +200,13 @@ Execution completed successfully.`);
         </div>
 
         <div
-          className={cn(
+          className={`${cn(
             viewMode === "editor"
               ? "hidden md:hidden"
               : viewMode === "split"
               ? "h-1/2 md:h-auto md:w-1/2"
               : "h-full w-full"
-          )}
+          )}`}
         >
           {isWebLanguage ? (
             <WebPreview code={code} language={selectedLanguage} />
@@ -202,24 +216,15 @@ Execution completed successfully.`);
         </div>
       </div>
 
-      <div className="p-4 border-t flex justify-between items-center">
+      <div className="px-4 py-2 flex border-t border-t-foreground justify-between items-center">
         <Button variant="outline" onClick={handleAIHelp}>
           <HelpCircle className="h-4 w-4 mr-2" />
           Ask AI for Help
         </Button>
 
-        <Button onClick={runCode} disabled={isRunning}>
-          {isRunning ? (
-            <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Running...
-            </>
-          ) : (
-            <>
-              <Play className="h-4 w-4 mr-2" />
-              Run Code
-            </>
-          )}
+        <Button disabled={isRunning}>
+          <CheckCircleIcon className="h-4 w-4 mr-2" />
+          Submit
         </Button>
       </div>
 

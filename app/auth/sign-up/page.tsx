@@ -18,11 +18,10 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Github, Twitter } from "lucide-react";
+import { Check, Github, Twitter } from "lucide-react";
 import Logo from "@/components/logo";
 import PasswordStrengthCriteria from "@/components/password-strength-criteria";
 import PasswordStrengthMeter from "@/components/password-strength-meter";
-import { Checkbox } from "@radix-ui/react-checkbox";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -121,13 +120,13 @@ export default function SignUpPage() {
               )}
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="terms"
-                    checked={acceptTerms}
-                    onCheckedChange={(checked) =>
-                      setAcceptTerms(checked === true)
-                    }
-                  />
+                  {/* Custom Checkbox button */}
+                  <div
+                    className="border-[1px] border-border p-[0.1rem] h-[1.4rem] w-[1.4rem] rounded-md cursor-pointer"
+                    onClick={() => setAcceptTerms((prev) => !prev)}
+                  >
+                    {acceptTerms && <Check className="h-full w-full" />}
+                  </div>
                   <Label
                     htmlFor="terms"
                     className="text-sm text-muted-foreground"

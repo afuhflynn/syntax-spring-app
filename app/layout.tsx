@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       "Master coding challenges in multiple languages with our interactive platform.",
     creator: "@syntaxspring",
   },
-  generator: "v0.dev",
+  generator: "afuhflynn",
 };
 
 export default function RootLayout({
