@@ -22,6 +22,7 @@ import { Github, Twitter } from "lucide-react";
 import Logo from "@/components/logo";
 import PasswordStrengthCriteria from "@/components/password-strength-criteria";
 import PasswordStrengthMeter from "@/components/password-strength-meter";
+import { Checkbox } from "@radix-ui/react-checkbox";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ export default function SignUpPage() {
     password: "",
     username: "",
   });
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -117,6 +119,38 @@ export default function SignUpPage() {
               {formData.password.trim() !== "" && (
                 <PasswordStrengthCriteria password={formData.password} />
               )}
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="terms"
+                    checked={acceptTerms}
+                    onCheckedChange={(checked) =>
+                      setAcceptTerms(checked === true)
+                    }
+                  />
+                  <Label
+                    htmlFor="terms"
+                    className="text-sm text-muted-foreground"
+                  >
+                    I agree to the{" "}
+                    <Link
+                      href="/terms"
+                      className="text-primary hover:underline"
+                      target="_blank"
+                    >
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/privacy"
+                      className="text-primary hover:underline"
+                      target="_blank"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </Label>
+                </div>
+              </div>
               <Button type="submit" className="w-full">
                 Sign Up
               </Button>
