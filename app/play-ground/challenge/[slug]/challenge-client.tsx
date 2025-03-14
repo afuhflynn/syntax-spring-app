@@ -1,44 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+// import { useState, useEffect } from "react";
+// import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
-import type { Challenge } from "@/lib/challenges";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeftCircle } from "lucide-react";
+import { Challenge } from "@/TYPES";
 
 export default function ChallengeClient({
   challenge,
 }: {
   challenge: Challenge;
 }) {
-  const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const router = useRouter();
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      // Replace this with your actual authentication check
-      const auth = localStorage.getItem("isAuthenticated") === "true";
-      setIsAuthenticated(auth);
-      setIsLoading(false);
-      if (!auth) {
-        router.push("/auth/log-in");
-      }
-    };
-    checkAuth();
-  }, [router]);
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     // Replace this with your actual authentication check
+  //     const auth = localStorage.getItem("isAuthenticated") === "true";
+  //     setIsAuthenticated(auth);
+  //     setIsLoading(false);
+  //     if (!auth) {
+  //       router.push("/auth/log-in");
+  //     }
+  //   };
+  //   checkAuth();
+  // }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Or a more sophisticated loading component
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>; // Or a more sophisticated loading component
+  // }
 
-  if (!isAuthenticated) {
-    return null;
-  }
+  // if (!isAuthenticated) {
+  //   return null;
+  // }
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {

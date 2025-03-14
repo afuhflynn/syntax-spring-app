@@ -18,8 +18,9 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Github, Twitter } from "lucide-react";
+import { Github } from "lucide-react";
 import Logo from "@/components/logo";
+import GoogleIcon from "@/components/GoogleIcon";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -122,7 +123,7 @@ export default function LoginPage() {
                 <Github className="mr-2 h-4 w-4" /> Github
               </Button>
               <Button variant="secondary" className="w-full">
-                <Twitter className="mr-2 h-4 w-4" /> Google
+                <GoogleIcon className="mr-2 h-4 w-4" /> Google
               </Button>
             </div>
             <p className="text-center text-sm text-muted-foreground">

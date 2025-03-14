@@ -1,5 +1,6 @@
 "use client";
 
+import * as monaco_editor from "monaco-editor";
 import { useState, useRef, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ import { useLocalStorage } from "@/hooks/use-local-storage";
 import { cn } from "@/lib/utils";
 import { configureMonacoLanguages } from "@/utils/monaco-languages";
 import type { Monaco } from "@monaco-editor/react";
-import type { Challenge } from "@/lib/challenges";
+import { Challenge } from "@/TYPES";
 
 interface ChallengeEditorProps {
   challenge: Challenge;
@@ -60,13 +61,6 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
       }
     }
   }, [selectedLanguage, challenge.defaultCode, challenge.slug, setCode]);
-
-  // Initialize Monaco with language services
-  useEffect(() => {
-    if (monacoRef.current) {
-      configureMonacoLanguages(monacoRef.current);
-    }
-  }, [monacoRef.current]);
 
   const runCode = async () => {
     setIsRunning(true);
@@ -111,8 +105,13 @@ Execution completed successfully.`);
     configureMonacoLanguages(monaco);
   };
 
+  // Initialize Monaco with language services
+  useEffect(() => {
+    handleEditorDidMount(editorRef, monaco_editor);
+  }, []);
+
   return (
-    <div className="border rounded-lg overflow-hidden bg-card shadow-sm">
+    <div className="border rounded-lg overflow-hidden bg-card shadow-sm w-full h-full p-0">
       <div className="px-4 py-2 flex justify-between items-center border-b">
         <div className="flex items-center gap-2">
           <Tabs
@@ -180,32 +179,33 @@ Execution completed successfully.`);
         </div>
       </div>
 
-      <div className="flex flex-col  md:flex-row h-[600px]">
+      <div className="flex flex-col h-[500px]">
         <div
-          className={cn(
+          className={`w-full ${cn(
             viewMode === "output"
               ? "hidden md:hidden"
               : viewMode === "split"
-              ? "h-1/2 md:h-auto md:w-1/2"
-              : "h-full w-full",
+              ? "h-[70%]"
+              : "h-full",
             "border-r"
-          )}
+          )}`}
         >
           <CodeEditor
             language={selectedLanguage}
             value={code}
             onChange={setCode}
             editorRef={editorRef}
+            className="resize-x"
           />
         </div>
 
         <div
-          className={`${cn(
+          className={`w-full border-t border-t-foreground ${cn(
             viewMode === "editor"
               ? "hidden md:hidden"
               : viewMode === "split"
-              ? "h-1/2 md:h-auto md:w-1/2"
-              : "h-full w-full"
+              ? "h-[30%] resize-y"
+              : "h-full"
           )}`}
         >
           {isWebLanguage ? (

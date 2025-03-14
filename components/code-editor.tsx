@@ -14,6 +14,7 @@ interface CodeEditorProps {
   editorRef?: React.MutableRefObject<any>;
   height?: string;
   options?: Record<string, any>;
+  className?: string;
 }
 
 export default function CodeEditor({
@@ -22,6 +23,7 @@ export default function CodeEditor({
   onChange,
   editorRef,
   height = "100%",
+  className = "",
   options = {},
 }: CodeEditorProps) {
   const { theme } = useTheme();
@@ -58,7 +60,7 @@ export default function CodeEditor({
 
     // Set editor options
     editor.updateOptions({
-      fontSize: 14,
+      fontSize: 16,
       minimap: { enabled: false },
       scrollBeyondLastLine: false,
       automaticLayout: true,
@@ -118,14 +120,17 @@ export default function CodeEditor({
         onChange={(value) => onChange(value || "")}
         onMount={handleEditorDidMount}
         theme={theme === "dark" ? "vs-dark" : "vs"}
+        className={className}
         options={{
-          fontSize: 14,
+          fontSize: 16,
           minimap: { enabled: false },
           scrollBeyondLastLine: false,
           automaticLayout: true,
           tabSize: 2,
           wordWrap: "on",
           padding: { top: 16 },
+          fontFamily: "JetBrains Mono",
+          fontWeight: "600",
           ...options,
         }}
         loading={<Skeleton className="h-full w-full" />}

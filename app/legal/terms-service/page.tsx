@@ -78,10 +78,10 @@ export default function TermsPage() {
             The Service and its original content (excluding Content provided by
             users), features, and functionality are and will remain the
             exclusive property of Syntax Spring and its licensors. The Service
-            is protected by copyright, trademark, and other laws of both the
-            United States and foreign countries. Our trademarks and trade dress
-            may not be used in connection with any product or service without
-            the prior written consent of Syntax Spring.
+            is protected by copyright, trademark, and other laws of both
+            Cameroon and foreign countries. Our trademarks and trade dress may
+            not be used in connection with any product or service without the
+            prior written consent of Syntax Spring.
           </p>
 
           <h2>6. User Code and Solutions</h2>
