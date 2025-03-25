@@ -1,0 +1,283 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication and profile information
+model User {
+  id            String    @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  name          String?
+  username      String    @unique
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  bio           String?
+  role          UserRole  @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  submissions        Submission[]
+  comments           Comment[]
+  progress           Progress[]
+  achievements       UserAchievement[]
+  authoredChallenges Challenge[]         @relation("ChallengeAuthor")
+  likes              ChallengeLike[]
+  bookmarks          ChallengeBookmark[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+// Challenge model for coding challenges
+model Challenge {
+  id           String     @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  title        String
+  slug         String     @unique
+  description  String
+  difficulty   Difficulty
+  starterCode  String
+  solutionCode String
+  timeLimit    Int        @default(5000) // Time limit in milliseconds
+  memoryLimit  Int        @default(128) // Memory limit in MB
+  isPublished  Boolean    @default(false)
+  publishedAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  author      User                @relation("ChallengeAuthor", fields: [authorId], references: [id])
+  authorId    String
+  testCases   TestCase[]
+  submissions Submission[]
+  tags        ChallengeTag[]
+  comments    Comment[]
+  progress    Progress[]
+  likes       ChallengeLike[]
+  bookmarks   ChallengeBookmark[]
+
+  @@map("challenges")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+  EXPERT
+}
+
+// TestCase model for challenge validation
+model TestCase {
+  id             String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  input          String
+  expectedOutput String
+  isHidden       Boolean  @default(false)
+  order          Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  challengeId String
+
+  @@map("test_cases")
+}
+
+// Submission model for tracking user submissions
+model Submission {
+  id        String           @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  code      String
+  language  String
+  status    SubmissionStatus
+  runtime   Int? // Runtime in milliseconds
+  memory    Int? // Memory usage in KB
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  // Relations
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
+  challenge   Challenge    @relation(fields: [challengeId], references: [id])
+  challengeId String
+  testResults TestResult[]
+
+  @@map("submissions")
+}
+
+enum SubmissionStatus {
+  PENDING
+  ACCEPTED
+  WRONG_ANSWER
+  TIME_LIMIT_EXCEEDED
+  MEMORY_LIMIT_EXCEEDED
+  RUNTIME_ERROR
+  COMPILATION_ERROR
+}
+
+// TestResult model for individual test case results
+model TestResult {
+  id        String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  passed    Boolean
+  output    String?
+  error     String?
+  runtime   Int? // Runtime in milliseconds
+  memory    Int? // Memory usage in KB
+  createdAt DateTime @default(now())
+
+  // Relations
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  submissionId String
+  testCaseId   String // We don't create a direct relation to TestCase to preserve results even if test cases change
+
+  @@map("test_results")
+}
+
+// Progress model for tracking user progress on challenges
+model Progress {
+  id            String         @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  status        ProgressStatus
+  lastAttemptAt DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId String
+
+  @@unique([userId, challengeId])
+  @@map("progress")
+}
+
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+// Tag model for categorizing challenges
+model Tag {
+  id          String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  name        String   @unique
+  description String?
+  color       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  challenges ChallengeTag[]
+
+  @@map("tags")
+}
+
+// Junction table for many-to-many relationship between Challenge and Tag
+model ChallengeTag {
+  id        String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  createdAt DateTime @default(now())
+
+  // Relations
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  challengeId String
+  tag         Tag       @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId       String
+
+  @@unique([challengeId, tagId])
+  @@map("challenge_tags")
+}
+
+// Comment model for discussions
+model Comment {
+  id        String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId String
+
+  // Self-relation for nested comments - Fixed with proper referential actions
+  parentId String? // For nested comments
+  parent   Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies  Comment[] @relation("CommentToComment")
+
+  @@map("comments")
+}
+
+// Achievement model for gamification
+model Achievement {
+  id          String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  name        String   @unique
+  description String
+  icon        String?
+  points      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  users UserAchievement[]
+
+  @@map("achievements")
+}
+
+// Junction table for many-to-many relationship between User and Achievement
+model UserAchievement {
+  id         String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  unlockedAt DateTime @default(now())
+
+  // Relations
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  achievementId String
+
+  @@unique([userId, achievementId])
+  @@map("user_achievements")
+}
+
+// Model for tracking challenge likes
+model ChallengeLike {
+  id        String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  createdAt DateTime @default(now())
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  challengeId String
+
+  @@unique([userId, challengeId])
+  @@map("challenge_likes")
+}
+
+// Model for tracking challenge bookmarks
+model ChallengeBookmark {
+  id        String   @id @default(cuid()) @map("_id") // Use cuid for unique IDs
+  createdAt DateTime @default(now())
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  challengeId String
+
+  @@unique([userId, challengeId])
+  @@map("challenge_bookmarks")
+}

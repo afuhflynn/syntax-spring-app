@@ -61,9 +61,15 @@ export default function HowItWorks() {
 
         <div className="flex justify-center mt-12">
           <Button size="lg" asChild>
-            <Link href="/platform/challenges">
-              Start Your First Challenge <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <span>
+              <Link
+                href="/platform/challenges"
+                className="flex flex-row items-center justify-center"
+              >
+                Start Your First Challenge{" "}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </span>
           </Button>
         </div>
       </div>

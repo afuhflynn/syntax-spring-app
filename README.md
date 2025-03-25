@@ -147,7 +147,7 @@ We thrive on community. Join our channels to:
 
 ## 📄 License
 
-Syntax Spring is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
+Syntax Spring is licensed under the **GNU GENERAL PUBLIC LICENSE**. See the [LICENSE](./LICENSE) file for details.
 
 ## Contributing
 

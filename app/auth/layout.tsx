@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,16 +17,5 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className={inter.className}>{children}</body>
-      </ThemeProvider>
-    </html>
-  );
+  return <div className={inter.className}>{children}</div>;
 }

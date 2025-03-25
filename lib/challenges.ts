@@ -1652,141 +1652,1968 @@ public:
       "C++": "https://example.com/icons/cpp.png",
     },
   },
-  // ... (Challenges 27 to 140 would follow in the same format.)
-  // For example, here are the titles with their ids and difficulties:
-  // 27. Find the Duplicate Number (Medium)
-  // 28. First Missing Positive (Hard)
-  // 29. Trapping Rain Water (Hard)
-  // 30. Jump Game (Medium)
-  // 31. Gas Station (Medium)
-  // 32. Longest Consecutive Sequence (Hard)
-  // 33. Word Search (Hard)
-  // 34. Combination Sum (Medium)
-  // 35. Permutations (Medium)
-  // 36. Rotate Image (Medium)
-  // 37. Spiral Matrix (Medium)
-  // 38. Set Matrix Zeroes (Medium)
-  // 39. Game of Life (Medium)
-  // 40. Kth Largest Element in an Array (Medium)
-  // 41. Find Median from Data Stream (Hard)
-  // 42. Top K Frequent Elements (Medium)
-  // 43. Valid Anagram (Easy)
-  // 44. Group Anagrams (Medium)
-  // 45. Happy Number (Easy)
-  // 46. Intersection of Two Arrays (Easy)
-  // 47. Implement strStr() (Easy)
-  // 48. Roman to Integer (Easy)
-  // 49. Integer to Roman (Medium)
-  // 50. Longest Common Prefix (Easy)
-  // 51. Count and Say (Easy)
-  // 52. Remove Duplicates from Sorted Array (Easy)
-  // 53. Remove Element (Easy)
-  // 54. Search Insert Position (Easy)
-  // 55. Length of Last Word (Easy)
-  // 56. Plus One (Easy)
-  // 57. Add Binary (Easy)
-  // 58. Sqrt(x) (Medium)
-  // 59. Reverse Integer (Easy)
-  // 60. Palindrome Number (Easy)
-  // 61. Excel Sheet Column Title (Easy)
-  // 62. Excel Sheet Column Number (Easy)
-  // 63. Path Sum (Easy)
-  // 64. Binary Tree Paths (Medium)
-  // 65. Sum Root to Leaf Numbers (Medium)
-  // 66. House Robber II (Medium)
-  // 67. Delete Node in a Linked List (Easy)
-  // 68. Remove Nth Node From End of List (Medium)
-  // 69. Reverse Linked List (Easy)
-  // 70. Reorder List (Medium)
-  // 71. Partition List (Medium)
-  // 72. Merge k Sorted Lists (Hard)
-  // 73. Swap Nodes in Pairs (Easy)
-  // 74. Reverse Nodes in k-Group (Hard)
-  // 75. Copy List with Random Pointer (Medium)
-  // 76. LRU Cache (Hard)
-  // 77. Min Stack (Easy)
-  // 78. Implement Queue using Stacks (Easy)
-  // 79. Implement Stack using Queues (Easy)
-  // 80. Design Linked List (Medium)
-  // 81. Design HashMap (Easy)
-  // 82. Design HashSet (Easy)
-  // 83. Find Minimum in Rotated Sorted Array (Medium)
-  // 84. Search in Rotated Sorted Array (Medium)
-  // 85. Find Peak Element (Medium)
-  // 86. Find First and Last Position of Element in Sorted Array (Medium)
-  // 87. Search a 2D Matrix (Medium)
-  // 88. Word Ladder (Hard)
-  // 89. Course Schedule (Medium)
-  // 90. Course Schedule II (Medium)
-  // 91. Alien Dictionary (Hard)
-  // 92. Minimum Window Substring (Hard)
-  // 93. Longest Substring with At Most Two Distinct Characters (Medium)
-  // 94. Substring with Concatenation of All Words (Hard)
-  // 95. Minimum Window Subsequence (Hard)
-  // 96. Number of Islands (Medium)
-  // 97. Surrounded Regions (Medium)
-  // 98. Walls and Gates (Medium)
-  // 99. Rotting Oranges (Medium)
-  // 100. Pacific Atlantic Water Flow (Medium)
-  // 101. Word Search II (Hard)
-  // 102. Maximal Rectangle (Hard)
-  // 103. Largest Rectangle in Histogram (Hard)
-  // 104. Maximal Square (Medium)
-  // 105. Coin Change 2 (Medium)
-  // 106. Combination Sum IV (Medium)
-  // 107. Decode Ways (Medium)
-  // 108. Unique Paths (Medium)
-  // 109. Unique Paths II (Medium)
-  // 110. Dungeon Game (Hard)
-  // 111. Minimum Path Sum (Medium)
-  // 112. Triangle (Medium)
-  // 113. Edit Distance (Hard)
-  // 114. Longest Common Subsequence (Medium)
-  // 115. Distinct Subsequences (Hard)
-  // 116. Interleaving String (Medium)
-  // 117. Scramble String (Hard)
-  // 118. Regular Expression Matching (Hard)
-  // 119. Wildcard Matching (Hard)
-  // 120. Word Break II (Hard)
-  // 121. Combination Sum III (Medium)
-  // 122. Palindrome Partitioning (Medium)
-  // 123. Restore IP Addresses (Medium)
-  // 124. Valid Sudoku (Medium)
-  // 125. Sudoku Solver (Hard)
-  // 126. N-Queens (Hard)
-  // 127. N-Queens II (Hard)
-  // 128. Count N-Queens Solutions (Hard)
-  // 129. Minesweeper (Medium)
-  // 130. Design Tic-Tac-Toe (Medium)
-  // 131. Design Snake Game (Medium)
-  // 132. Design Twitter (Hard)
-  // 133. Insert Interval (Medium)
-  // 134. Merge Intervals (Medium)
-  // 135. Non-overlapping Intervals (Medium)
-  // 136. Meeting Rooms (Easy)
-  // 137. Meeting Rooms II (Medium)
-  // 138. Employee Free Time (Medium)
-  // 139. Subsets (Medium)
-  // 140. Subsets II (Medium)
+  {
+    id: "12",
+    title: "Create a Responsive Navigation Bar",
+    description:
+      "Build a responsive navigation bar using HTML, CSS, and JavaScript. The navbar should collapse into a hamburger menu on smaller screens and expand on larger screens.",
+    difficulty: "Easy",
+    languages: ["HTML", "CSS", "JavaScript"],
+    slug: "responsive-navbar",
+    category: "Web Development",
+    examples: [
+      {
+        input: "Clicking the menu icon should toggle the navigation links.",
+        output: "Navigation links expand or collapse based on screen size.",
+        explanation:
+          "Use CSS media queries for responsiveness and JavaScript for toggling visibility.",
+      },
+    ],
+    constraints: [
+      "Navigation bar must be fully responsive.",
+      "Use semantic HTML elements.",
+      "Avoid using third-party CSS frameworks like Bootstrap.",
+    ],
+    defaultCode: {
+      html: `<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+    <nav class='navbar'>
+        <div class='logo'>Brand</div>
+        <div class='menu-toggle' onclick='toggleMenu()'>☰</div>
+        <ul class='nav-links'>
+            <li><a href='#'>Home</a></li>
+            <li><a href='#'>About</a></li>
+            <li><a href='#'>Contact</a></li>
+        </ul>
+    </nav>
+    <script src='script.js'></script>
+</body>
+</html>`,
+      css: `.navbar { display: flex; justify-content: space-between; align-items: center; }`,
+      javascript: `function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }`,
+    },
+  },
 
-  // Each of the above would be expanded into a full object following the same structure as challenges 1-24.
-  // For example, a challenge object for "Find the Duplicate Number" (id "27") would look like:
-  /*
+  {
+    id: "13",
+    title: "Build a To-Do List App (React)",
+    description:
+      "Create a simple To-Do list app using React. The app should allow users to add, delete, and mark tasks as complete.",
+    difficulty: "Medium",
+    languages: ["React", "TypeScript"],
+    slug: "todo-list-app",
+    category: "Web Development",
+    examples: [
+      {
+        input: "User adds 'Buy groceries'.",
+        output: "Item appears in the task list.",
+        explanation: "State should update when a new task is added.",
+      },
+    ],
+    constraints: [
+      "Use React functional components and hooks.",
+      "State should be managed using React's useState hook.",
+      "Use TypeScript for type safety.",
+    ],
+    defaultCode: {
+      react_tsx: `import React, { useState } from 'react';
+
+const ToDoApp: React.FC = () => {
+  const [tasks, setTasks] = useState<string[]>([]);
+  const addTask = (task: string) => setTasks([...tasks, task]);
+
+  return (
+    <div>
+      <h1>To-Do List</h1>
+      <button onClick={() => addTask('New Task')}>Add Task</button>
+      <ul>{tasks.map((task, index) => <li key={index}>{task}</li>)}</ul>
+    </div>
+  );
+};
+export default ToDoApp;`,
+    },
+  },
+
+  {
+    id: "14",
+    title: "Implement a RESTful API in Node.js",
+    description:
+      "Build a simple RESTful API using Express.js that handles CRUD operations for a list of users.",
+    difficulty: "Medium",
+    languages: ["JavaScript", "Node.js", "Express"],
+    slug: "restful-api-nodejs",
+    category: "Backend Development",
+    examples: [
+      {
+        input: "GET /users",
+        output: "Returns a list of users as JSON.",
+        explanation: "The API should follow RESTful principles.",
+      },
+    ],
+    constraints: [
+      "Use Express.js to handle routes.",
+      "Data should be stored in an in-memory array for simplicity.",
+      "Use JSON as the response format.",
+    ],
+    defaultCode: {
+      javascript: `const express = require('express');
+const app = express();
+app.use(express.json());
+let users = [{ id: 1, name: 'John Doe' }];
+
+app.get('/users', (req, res) => res.json(users));
+app.listen(3000, () => console.log('Server running on port 3000'));
+`,
+    },
+  },
+  // Additional challenges from 15 to 22
+  {
+    id: "15",
+    title: "Design a CSS Grid Layout for a Portfolio",
+    description:
+      "Create a responsive portfolio grid layout using HTML and CSS. The layout should display portfolio items in a grid that adjusts the number of columns based on the screen width.",
+    difficulty: "Medium",
+    languages: ["HTML", "CSS"],
+    slug: "portfolio-grid-layout",
+    category: "Web Development",
+    examples: [
+      {
+        input: "Resize the browser window",
+        output:
+          "Grid adjusts from 3 columns on large screens to 1 column on small screens",
+        explanation:
+          "Use CSS Grid properties like grid-template-columns and media queries to adjust the layout dynamically.",
+      },
+    ],
+    constraints: [
+      "Use CSS Grid for layout",
+      "Implement responsive design with media queries",
+      "Ensure semantic HTML structure",
+    ],
+    defaultCode: {
+      html: `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section class="portfolio">
+    <div class="item">Project 1</div>
+    <div class="item">Project 2</div>
+    <div class="item">Project 3</div>
+    <div class="item">Project 4</div>
+  </section>
+</body>
+</html>`,
+      css: `.portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.item {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}`,
+    },
+  },
+
+  {
+    id: "16",
+    title: "Implement Dark Mode Toggle",
+    description:
+      "Create a dark mode toggle feature using HTML, CSS, and JavaScript. Users should be able to switch between light and dark themes, with the preference persisting across sessions.",
+    difficulty: "Medium",
+    languages: ["HTML", "CSS", "JavaScript"],
+    slug: "dark-mode-toggle",
+    category: "Web Development",
+    examples: [
+      {
+        input: "User clicks the dark mode button",
+        output: "The website theme switches to dark mode",
+        explanation:
+          "Toggle a CSS class on the body and store the user's choice in localStorage.",
+      },
+    ],
+    constraints: [
+      "Must use vanilla JavaScript",
+      "Theme preference should persist using localStorage",
+      "Ensure accessibility of the toggle button",
+    ],
+    defaultCode: {
+      html: `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <button id="toggle">Toggle Dark Mode</button>
+  <script src="script.js"></script>
+</body>
+</html>`,
+      css: `body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}`,
+      javascript: `const toggleButton = document.getElementById('toggle');
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+  document.body.classList.add('dark');
+}
+toggleButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+  localStorage.setItem('theme', theme);
+});`,
+    },
+  },
+
+  {
+    id: "17",
+    title: "Build a Simple Calculator App (Vanilla JS)",
+    description:
+      "Develop a basic calculator using HTML, CSS, and JavaScript. The calculator should support addition, subtraction, multiplication, and division.",
+    difficulty: "Easy",
+    languages: ["HTML", "CSS", "JavaScript"],
+    slug: "simple-calculator",
+    category: "Web Development",
+    examples: [
+      {
+        input: "User enters 2 + 3",
+        output: "5",
+        explanation:
+          "The calculator computes the result of the arithmetic operation correctly.",
+      },
+    ],
+    constraints: [
+      "Support basic arithmetic operations",
+      "Build UI with semantic HTML and style with CSS",
+      "Implement functionality using vanilla JavaScript",
+    ],
+    defaultCode: {
+      html: `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="calculator.css">
+  <script></style> <!-- Don't remove this line it connects to the css file -->
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="operate('+')">+</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="clearDisplay()">C</button>
+    </div>
+  </div>
+  <script></script> <!-- Don't remove this line it connects to the js file -->
+</body>
+</html>`,
+      css: `.calculator { width: 200px; margin: auto; }
+#display { width: 100%; height: 40px; text-align: right; padding: 5px; }`,
+      javascript: `let expression = '';
+function append(value) {
+  expression += value;
+  document.getElementById('display').value = expression;
+}
+function operate(operator) {
+  expression += operator;
+  document.getElementById('display').value = expression;
+}
+function calculate() {
+  try {
+    const result = eval(expression);
+    document.getElementById('display').value = result;
+    expression = result.toString();
+  } catch (e) {
+    document.getElementById('display').value = 'Error';
+    expression = '';
+  }
+}
+function clearDisplay() {
+  expression = '';
+  document.getElementById('display').value = '';
+}`,
+    },
+  },
+
+  {
+    id: "18",
+    title: "Fetch and Display API Data (React)",
+    description:
+      "Create a React component using TypeScript that fetches data from a public API and displays it in a list. Include loading and error states for a robust user experience.",
+    difficulty: "Medium",
+    languages: ["React", "TypeScript"],
+    slug: "fetch-api-data-react",
+    category: "Web Development",
+    examples: [
+      {
+        input: "Component mounts",
+        output:
+          "Displays a list of data items fetched from the API with a loading indicator initially",
+        explanation:
+          "Use useEffect for fetching data and useState for managing data, loading, and error states.",
+      },
+    ],
+    constraints: [
+      "Use functional components with React hooks",
+      "Implement type checking with TypeScript",
+      "Handle both loading and error scenarios",
+    ],
+    defaultCode: {
+      react_tsx: `import React, { useState, useEffect } from 'react';
+
+interface DataItem {
+  id: number;
+  title: string;
+}
+
+const DataList: React.FC = () => {
+  const [data, setData] = useState<DataItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(res => res.json())
+      .then(data => { setData(data); setLoading(false); })
+      .catch(err => { setError('Failed to fetch data'); setLoading(false); });
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <ul>
+      {data.slice(0, 10).map(item => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default DataList;`,
+    },
+  },
+
+  {
+    id: "19",
+    title: "Implement Form Validation (HTML, CSS, JS)",
+    description:
+      "Create an interactive form with client-side validation. Validate inputs like email and password, displaying appropriate error messages when validations fail.",
+    difficulty: "Easy",
+    languages: ["HTML", "CSS", "JavaScript"],
+    slug: "form-validation",
+    category: "Web Development",
+    examples: [
+      {
+        input: "User submits form with an invalid email",
+        output: "Error message appears next to the email field",
+        explanation:
+          "Use JavaScript to validate the email format and display an error if it doesn't match the required pattern.",
+      },
+    ],
+    constraints: [
+      "All validation must be performed on the client side",
+      "Display clear and concise error messages",
+      "Use semantic HTML for form elements",
+    ],
+    defaultCode: {
+      html: `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="form.css">
+</head>
+<body>
+  <form id="myForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span class="error" id="emailError"></span>
+    <button type="submit">Submit</button>
+  </form>
+  <script src="form.js"></script>
+</body>
+</html>`,
+      css: `.error { color: red; font-size: 0.8em; }`,
+      javascript: `document.getElementById('myForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const emailError = document.getElementById('emailError');
+  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+  if (!emailRegex.test(email)) {
+    emailError.textContent = 'Please enter a valid email address.';
+  } else {
+    emailError.textContent = '';
+    alert('Form submitted successfully!');
+  }
+});`,
+    },
+  },
+
+  {
+    id: "20",
+    title: "Build a Chat Application (WebSocket)",
+    description:
+      "Develop a real-time chat application using WebSockets with Node.js, Express, and Socket.IO. Users should be able to join chat rooms and exchange messages in real time.",
+    difficulty: "Hard",
+    languages: ["JavaScript", "Node.js", "Express", "Socket.IO"],
+    slug: "chat-app-websocket",
+    category: "Backend Development",
+    examples: [
+      {
+        input: "User sends a message in a chat room",
+        output: "All users in that chat room receive the message instantly",
+        explanation:
+          "Implement real-time communication using Socket.IO to broadcast messages.",
+      },
+    ],
+    constraints: [
+      "Utilize Socket.IO for WebSocket communication",
+      "Support multiple chat rooms",
+      "Ensure real-time message delivery",
+    ],
+    defaultCode: {
+      javascript: `const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  socket.on('joinRoom', (room) => {
+    socket.join(room);
+  });
+  socket.on('message', (data) => {
+    io.to(data.room).emit('message', data.message);
+  });
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
+server.listen(3000, () => console.log('Server is running on port 3000'));
+`,
+    },
+  },
+
+  {
+    id: "21",
+    title: "Implement a Progressive Web App (PWA)",
+    description:
+      "Convert a simple website into a Progressive Web App by adding a service worker and a manifest file. The app should work offline and be installable on mobile devices.",
+    difficulty: "Medium",
+    languages: ["HTML", "CSS", "JavaScript"],
+    slug: "pwa-implementation",
+    category: "Web Development",
+    examples: [
+      {
+        input: "User opens the app offline",
+        output: "The app loads using cached assets",
+        explanation:
+          "Utilize a service worker to cache assets and a manifest.json file to define the app's metadata.",
+      },
+    ],
+    constraints: [
+      "Register a service worker",
+      "Include a valid manifest.json file",
+      "Ensure offline functionality through proper caching",
+    ],
+    defaultCode: {
+      javascript: `// service-worker.js
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('v1').then((cache) => {
+      return cache.addAll([
+        '/',
+        '/index.html',
+        '/styles.css',
+        '/script.js'
+      ]);
+    })
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+// In your main JS file
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js').then(() => {
+    console.log('Service Worker Registered');
+  });
+}
+
+/* manifest.json example:
+{
+  \"name\": \"My PWA\",
+  \"short_name\": \"PWA\",
+  \"start_url\": \"/\",
+  \"display\": \"standalone\",
+  \"background_color\": \"#ffffff\",
+  \"theme_color\": \"#000000\",
+  \"icons\": [
+    {
+      \"src\": \"/icon-192x192.png\",
+      \"sizes\": \"192x192\",
+      \"type\": \"image/png\"
+    },
+    {
+      \"src\": \"/icon-512x512.png\",
+      \"sizes\": \"512x512\",
+      \"type\": \"image/png\"
+    }
+  ]
+}
+*/`,
+    },
+  },
+
+  {
+    id: "22",
+    title: "GraphQL API Integration",
+    description:
+      "Create a GraphQL API using Apollo Server in Node.js that supports querying and mutating data for a list of products.",
+    difficulty: "Hard",
+    languages: ["JavaScript", "Node.js", "GraphQL"],
+    slug: "graphql-api-integration",
+    category: "Backend Development",
+    examples: [
+      {
+        input: "Query for products",
+        output: "Returns a list of products in JSON format",
+        explanation:
+          "The API should allow fetching and updating product data using GraphQL queries and mutations.",
+      },
+    ],
+    constraints: [
+      "Use Apollo Server with Node.js",
+      "Define a GraphQL schema for products",
+      "Support both queries and mutations",
+    ],
+    defaultCode: {
+      javascript: `const { ApolloServer, gql } = require('apollo-server');
+
+const typeDefs = gql\`
+  type Product {
+    id: ID!
+    name: String!
+    price: Float!
+  }
+
+  type Query {
+    products: [Product]
+  }
+
+  type Mutation {
+    addProduct(name: String!, price: Float!): Product
+  }
+\`;
+
+let products = [{ id: '1', name: 'Sample Product', price: 19.99 }];
+
+const resolvers = {
+  Query: {
+    products: () => products,
+  },
+  Mutation: {
+    addProduct: (_, { name, price }) => {
+      const product = { id: String(products.length + 1), name, price };
+      products.push(product);
+      return product;
+    }
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+server.listen().then(({ url }) => {
+  console.log(\`Server ready at \${url}\`);
+});
+`,
+    },
+  },
+  // Additional 13 challenges focusing on native languages (IDs 23 to 35)
+  {
+    id: "23",
+    title: "Implement Binary Search",
+    description:
+      "Given a sorted array and a target value, implement the binary search algorithm to return the index of the target, or -1 if not found.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "binary-search",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "array = [1, 2, 3, 4, 5], target = 3",
+        output: "2",
+        explanation: "Binary search returns index 2 for the target value 3.",
+      },
+    ],
+    constraints: [
+      "Array is sorted in ascending order.",
+      "Time complexity should be O(log n).",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+int binarySearch(int arr[], int n, int target) {
+    int low = 0, high = n - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int index = binarySearch(arr, 5, 3);
+    printf("%d\\n", index);
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+int binarySearch(const vector<int>& arr, int target) {
+    int low = 0, high = arr.size() - 1;
+    while(low <= high){
+        int mid = low + (high - low) / 2;
+        if(arr[mid] == target) return mid;
+        else if(arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+int main(){
+    vector<int> arr = {1,2,3,4,5};
+    cout << binarySearch(arr, 3);
+    return 0;
+}`,
+      java: `public class BinarySearch {
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0, high = arr.length - 1;
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            if(arr[mid] == target) return mid;
+            else if(arr[mid] < target) low = mid + 1;
+            else high = mid - 1;
+        }
+        return -1;
+    }
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5};
+        System.out.println(binarySearch(arr, 3));
+    }
+}`,
+      python: `def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = low + (high - low) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+if __name__ == '__main__':
+    arr = [1,2,3,4,5]
+    print(binary_search(arr, 3))`,
+    },
+  },
+
+  {
+    id: "24",
+    title: "Stack Implementation",
+    description:
+      "Implement a stack data structure using an array. Support operations such as push, pop, and peek.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "stack-implementation",
+    category: "Data Structures",
+    examples: [
+      {
+        input: "Push 1, push 2, then pop",
+        output: "2",
+        explanation: "Stack operations should follow LIFO order.",
+      },
+    ],
+    constraints: [
+      "Use an array for storage.",
+      "Implement push, pop, and peek operations.",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+#define MAX 100
+int stack[MAX];
+int top = -1;
+void push(int value) {
+    if(top < MAX - 1) stack[++top] = value;
+}
+int pop() {
+    return (top >= 0) ? stack[top--] : -1;
+}
+int peek() {
+    return (top >= 0) ? stack[top] : -1;
+}
+int main() {
+    push(1); push(2);
+    printf("%d\\n", pop());
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+class Stack {
+    vector<int> data;
+public:
+    void push(int x) { data.push_back(x); }
+    int pop() { int x = data.back(); data.pop_back(); return x; }
+    int peek() { return data.back(); }
+};
+int main() {
+    Stack s;
+    s.push(1); s.push(2);
+    cout << s.pop() << endl;
+    return 0;
+}`,
+      java: `import java.util.Stack;
+public class StackImpl {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        System.out.println(stack.pop());
+    }
+}`,
+      python: `class Stack:
+    def __init__(self):
+        self.data = []
+    def push(self, x):
+        self.data.append(x)
+    def pop(self):
+        return self.data.pop() if self.data else None
+    def peek(self):
+        return self.data[-1] if self.data else None
+
+if __name__ == '__main__':
+    s = Stack()
+    s.push(1)
+    s.push(2)
+    print(s.pop())`,
+    },
+  },
+
+  {
+    id: "25",
+    title: "Queue Implementation",
+    description:
+      "Implement a queue data structure using an array. Support operations such as enqueue, dequeue, and front.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "queue-implementation",
+    category: "Data Structures",
+    examples: [
+      {
+        input: "Enqueue 1, enqueue 2, then dequeue",
+        output: "1",
+        explanation: "Queue operations should follow FIFO order.",
+      },
+    ],
+    constraints: [
+      "Use an array for storage.",
+      "Implement enqueue, dequeue, and front operations.",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+#define MAX 100
+int queue[MAX];
+int front = 0, rear = -1;
+void enqueue(int value) {
+    if(rear < MAX - 1) queue[++rear] = value;
+}
+int dequeue() {
+    return (front <= rear) ? queue[front++] : -1;
+}
+int main() {
+    enqueue(1); enqueue(2);
+    printf("%d\\n", dequeue());
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <queue>
+using namespace std;
+int main() {
+    queue<int> q;
+    q.push(1);
+    q.push(2);
+    cout << q.front() << endl;
+    q.pop();
+    return 0;
+}`,
+      java: `import java.util.LinkedList;
+import java.util.Queue;
+public class QueueImpl {
+    public static void main(String[] args) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(1);
+        queue.offer(2);
+        System.out.println(queue.poll());
+    }
+}`,
+      python: `from collections import deque
+q = deque()
+q.append(1)
+q.append(2)
+print(q.popleft())`,
+    },
+  },
+
+  {
+    id: "26",
+    title: "Merge Sort",
+    description:
+      "Implement the merge sort algorithm to sort an array of numbers.",
+    difficulty: "Medium",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "merge-sort",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "array = [3, 1, 4, 1, 5, 9]",
+        output: "[1, 1, 3, 4, 5, 9]",
+        explanation:
+          "Merge sort recursively divides the array and merges sorted subarrays.",
+      },
+    ],
+    constraints: ["Time complexity should be O(n log n)."],
+    defaultCode: {
+      c: `#include <stdio.h>
+void merge(int arr[], int l, int m, int r) {
+    int i, j, k;
+    int n1 = m - l + 1, n2 = r - m;
+    int L[n1], R[n2];
+    for(i = 0; i < n1; i++) L[i] = arr[l + i];
+    for(j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+    i = 0, j = 0, k = l;
+    while(i < n1 && j < n2) {
+        if(L[i] <= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+    while(i < n1) arr[k++] = L[i++];
+    while(j < n2) arr[k++] = R[j++];
+}
+void mergeSort(int arr[], int l, int r) {
+    if(l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+int main() {
+    int arr[] = {3, 1, 4, 1, 5, 9};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    mergeSort(arr, 0, n-1);
+    for(int i = 0; i < n; i++) printf("%d ", arr[i]);
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+void merge(vector<int>& arr, int l, int m, int r) {
+    int n1 = m - l + 1, n2 = r - m;
+    vector<int> L(arr.begin() + l, arr.begin() + m + 1);
+    vector<int> R(arr.begin() + m + 1, arr.begin() + r + 1);
+    int i = 0, j = 0, k = l;
+    while(i < n1 && j < n2) {
+        if(L[i] <= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+    while(i < n1) arr[k++] = L[i++];
+    while(j < n2) arr[k++] = R[j++];
+}
+void mergeSort(vector<int>& arr, int l, int r) {
+    if(l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+int main(){
+    vector<int> arr = {3, 1, 4, 1, 5, 9};
+    mergeSort(arr, 0, arr.size()-1);
+    for(auto num : arr) cout << num << " ";
+    return 0;
+}`,
+      java: `public class MergeSort {
+    public static void mergeSort(int[] arr, int l, int r) {
+        if(l < r) {
+            int m = l + (r - l) / 2;
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
+    }
+    public static void merge(int[] arr, int l, int m, int r) {
+        int n1 = m - l + 1, n2 = r - m;
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+        for(int i = 0; i < n1; i++) L[i] = arr[l + i];
+        for(int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+        int i = 0, j = 0, k = l;
+        while(i < n1 && j < n2) {
+            if(L[i] <= R[j]) arr[k++] = L[i++];
+            else arr[k++] = R[j++];
+        }
+        while(i < n1) arr[k++] = L[i++];
+        while(j < n2) arr[k++] = R[j++];
+    }
+    public static void main(String[] args) {
+        int[] arr = {3, 1, 4, 1, 5, 9};
+        mergeSort(arr, 0, arr.length - 1);
+        for (int num : arr) System.out.print(num + " ");
+    }
+}`,
+      python: `def merge(arr, l, m, r):
+    L = arr[l:m+1]
+    R = arr[m+1:r+1]
+    i = j = 0
+    k = l
+    while i < len(L) and j < len(R):
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+        k += 1
+    while i < len(L):
+        arr[k] = L[i]
+        i += 1; k += 1
+    while j < len(R):
+        arr[k] = R[j]
+        j += 1; k += 1
+def merge_sort(arr, l, r):
+    if l < r:
+        m = l + (r - l) // 2
+        merge_sort(arr, l, m)
+        merge_sort(arr, m+1, r)
+        merge(arr, l, m, r)
+if __name__ == '__main__':
+    arr = [3, 1, 4, 1, 5, 9]
+    merge_sort(arr, 0, len(arr)-1)
+    print(arr)`,
+    },
+  },
+
   {
     id: "27",
-    title: "Find the Duplicate Number",
-    slug: "find-the-duplicate-number",
-    category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
-    description: "Solve problem: Find the Duplicate Number. Find the duplicate number in an array of n + 1 integers.",
+    title: "Quick Sort",
+    description:
+      "Implement the quick sort algorithm to sort an array of numbers.",
     difficulty: "Medium",
-    examples: [ ... ],
-    constraints: [ ... ],
-    defaultCode: { ... },
-    languageIcons: { ... },
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "quick-sort",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "array = [3, 1, 4, 1, 5, 9]",
+        output: "[1, 1, 3, 4, 5, 9]",
+        explanation:
+          "Quick sort partitions the array and recursively sorts the subarrays.",
+      },
+    ],
+    constraints: ["Average time complexity should be O(n log n)."],
+    defaultCode: {
+      c: `#include <stdio.h>
+void swap(int *a, int *b) { int t = *a; *a = *b; *b = t; }
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high], i = low - 1;
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+int main() {
+    int arr[] = {3, 1, 4, 1, 5, 9};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    quickSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[high], i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) { i++; swap(arr[i], arr[j]); }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+void quickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+int main(){
+    vector<int> arr = {3, 1, 4, 1, 5, 9};
+    quickSort(arr, 0, arr.size()-1);
+    for(auto num : arr) cout << num << " ";
+    return 0;
+}`,
+      java: `public class QuickSort {
+    public static void quickSort(int[] arr, int low, int high) {
+        if(low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for(int j = low; j < high; j++) {
+            if(arr[j] < pivot) {
+                i++;
+                int temp = arr[i]; arr[i] = arr[j]; arr[j] = temp;
+            }
+        }
+        int temp = arr[i+1]; arr[i+1] = arr[high]; arr[high] = temp;
+        return i+1;
+    }
+    public static void main(String[] args) {
+        int[] arr = {3, 1, 4, 1, 5, 9};
+        quickSort(arr, 0, arr.length - 1);
+        for (int num : arr) System.out.print(num + " ");
+    }
+}`,
+      python: `def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+if __name__ == '__main__':
+    arr = [3, 1, 4, 1, 5, 9]
+    print(quick_sort(arr))`,
+    },
   },
-  */
-  // and so on for challenges 27 to 140.
+
+  {
+    id: "28",
+    title: "Dijkstra's Algorithm",
+    description:
+      "Implement Dijkstra's algorithm to find the shortest path from a starting node to all other nodes in a weighted graph.",
+    difficulty: "Hard",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "dijkstras-algorithm",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "Graph as adjacency list, start node = 0",
+        output: "Shortest path distances from node 0",
+        explanation:
+          "Dijkstra's algorithm calculates the minimum distance to each node from the start.",
+      },
+    ],
+    constraints: [
+      "Graph is represented as an adjacency list.",
+      "Edge weights are non-negative.",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+#include <limits.h>
+#define V 5
+int minDistance(int dist[], int sptSet[]) {
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++)
+        if (!sptSet[v] && dist[v] <= min)
+            min = dist[v], min_index = v;
+    return min_index;
+}
+void dijkstra(int graph[V][V], int src) {
+    int dist[V], sptSet[V] = {0};
+    for (int i = 0; i < V; i++) dist[i] = INT_MAX;
+    dist[src] = 0;
+    for (int count = 0; count < V - 1; count++) {
+        int u = minDistance(dist, sptSet);
+        sptSet[u] = 1;
+        for (int v = 0; v < V; v++)
+            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+    }
+    for (int i = 0; i < V; i++) printf("%d ", dist[i]);
+}
+int main() {
+    int graph[V][V] = {
+        {0, 9, 0, 0, 0},
+        {9, 0, 6, 0, 0},
+        {0, 6, 0, 5, 0},
+        {0, 0, 5, 0, 2},
+        {0, 0, 0, 2, 0}
+    };
+    dijkstra(graph, 0);
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <vector>
+#include <limits>
+using namespace std;
+int minDistance(const vector<int>& dist, const vector<bool>& sptSet) {
+    int min = numeric_limits<int>::max(), min_index;
+    for (int v = 0; v < dist.size(); v++) {
+        if (!sptSet[v] && dist[v] <= min) {
+            min = dist[v], min_index = v;
+        }
+    }
+    return min_index;
+}
+void dijkstra(const vector<vector<int>>& graph, int src) {
+    int V = graph.size();
+    vector<int> dist(V, numeric_limits<int>::max());
+    vector<bool> sptSet(V, false);
+    dist[src] = 0;
+    for (int count = 0; count < V - 1; count++) {
+        int u = minDistance(dist, sptSet);
+        sptSet[u] = true;
+        for (int v = 0; v < V; v++) {
+            if (!sptSet[v] && graph[u][v] && dist[u] != numeric_limits<int>::max() && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+        }
+    }
+    for (int i = 0; i < V; i++) cout << dist[i] << " ";
+}
+int main(){
+    vector<vector<int>> graph = {
+        {0, 9, 0, 0, 0},
+        {9, 0, 6, 0, 0},
+        {0, 6, 0, 5, 0},
+        {0, 0, 5, 0, 2},
+        {0, 0, 0, 2, 0}
+    };
+    dijkstra(graph, 0);
+    return 0;
+}`,
+      java: `import java.util.*;
+public class DijkstrasAlgorithm {
+    static final int V = 5;
+    int minDistance(int[] dist, Boolean[] sptSet) {
+        int min = Integer.MAX_VALUE, min_index = -1;
+        for (int v = 0; v < V; v++) {
+            if (!sptSet[v] && dist[v] <= min) {
+                min = dist[v];
+                min_index = v;
+            }
+        }
+        return min_index;
+    }
+    void dijkstra(int[][] graph, int src) {
+        int[] dist = new int[V];
+        Boolean[] sptSet = new Boolean[V];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        Arrays.fill(sptSet, false);
+        dist[src] = 0;
+        for (int count = 0; count < V - 1; count++) {
+            int u = minDistance(dist, sptSet);
+            sptSet[u] = true;
+            for (int v = 0; v < V; v++) {
+                if (!sptSet[v] && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + graph[u][v] < dist[v])
+                    dist[v] = dist[u] + graph[u][v];
+            }
+        }
+        for (int i = 0; i < V; i++) System.out.print(dist[i] + " ");
+    }
+    public static void main(String[] args) {
+        int[][] graph = {
+            {0, 9, 0, 0, 0},
+            {9, 0, 6, 0, 0},
+            {0, 6, 0, 5, 0},
+            {0, 0, 5, 0, 2},
+            {0, 0, 0, 2, 0}
+        };
+        new DijkstrasAlgorithm().dijkstra(graph, 0);
+    }
+}`,
+      python: `import sys
+def dijkstra(graph, src):
+    V = len(graph)
+    dist = [sys.maxsize] * V
+    dist[src] = 0
+    sptSet = [False] * V
+    for _ in range(V - 1):
+        u = min((i for i in range(V) if not sptSet[i]), key=lambda i: dist[i])
+        sptSet[u] = True
+        for v in range(V):
+            if (not sptSet[v] and graph[u][v] and dist[u] != sys.maxsize and dist[u] + graph[u][v] < dist[v]):
+                dist[v] = dist[u] + graph[u][v]
+    print(dist)
+if __name__ == '__main__':
+    graph = [
+        [0, 9, 0, 0, 0],
+        [9, 0, 6, 0, 0],
+        [0, 6, 0, 5, 0],
+        [0, 0, 5, 0, 2],
+        [0, 0, 0, 2, 0]
+    ]
+    dijkstra(graph, 0)`,
+    },
+  },
+
+  {
+    id: "29",
+    title: "Fibonacci Number",
+    description:
+      "Implement a function to compute the nth Fibonacci number using both recursive and iterative approaches.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "fibonacci-number",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "n = 10",
+        output: "55",
+        explanation: "The 10th Fibonacci number is 55.",
+      },
+    ],
+    constraints: ["Implement both recursive and iterative methods."],
+    defaultCode: {
+      c: `#include <stdio.h>
+int fib_recursive(int n) {
+    if (n <= 1) return n;
+    return fib_recursive(n - 1) + fib_recursive(n - 2);
+}
+int fib_iterative(int n) {
+    int a = 0, b = 1, c, i;
+    if(n == 0) return a;
+    for(i = 2; i <= n; i++){
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+int main() {
+    int n = 10;
+    printf("Recursive: %d\\n", fib_recursive(n));
+    printf("Iterative: %d\\n", fib_iterative(n));
+    return 0;
+}`,
+      cpp: `#include <iostream>
+using namespace std;
+int fib_recursive(int n) {
+    if(n <= 1) return n;
+    return fib_recursive(n-1) + fib_recursive(n-2);
+}
+int fib_iterative(int n) {
+    if(n == 0) return 0;
+    int a = 0, b = 1, c;
+    for(int i = 2; i <= n; i++) {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+int main(){
+    int n = 10;
+    cout << "Recursive: " << fib_recursive(n) << endl;
+    cout << "Iterative: " << fib_iterative(n) << endl;
+    return 0;
+}`,
+      java: `public class Fibonacci {
+    public static int fibRecursive(int n) {
+        if(n <= 1) return n;
+        return fibRecursive(n-1) + fibRecursive(n-2);
+    }
+    public static int fibIterative(int n) {
+        if(n == 0) return 0;
+        int a = 0, b = 1, c;
+        for(int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+    public static void main(String[] args) {
+        int n = 10;
+        System.out.println("Recursive: " + fibRecursive(n));
+        System.out.println("Iterative: " + fibIterative(n));
+    }
+}`,
+      python: `def fib_recursive(n):
+    if n <= 1:
+        return n
+    return fib_recursive(n-1) + fib_recursive(n-2)
+def fib_iterative(n):
+    if n == 0:
+        return 0
+    a, b = 0, 1
+    for _ in range(2, n+1):
+        a, b = b, a+b
+    return b
+if __name__ == '__main__':
+    n = 10
+    print("Recursive:", fib_recursive(n))
+    print("Iterative:", fib_iterative(n))`,
+    },
+  },
+
+  {
+    id: "30",
+    title: "Matrix Multiplication",
+    description:
+      "Implement matrix multiplication for two 2D arrays representing matrices.",
+    difficulty: "Medium",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "matrix-multiplication",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "Matrix A: [[1,2],[3,4]], Matrix B: [[5,6],[7,8]]",
+        output: "[[19,22],[43,50]]",
+        explanation:
+          "Multiply corresponding rows and columns to compute the product.",
+      },
+    ],
+    constraints: [
+      "Ensure the number of columns in A equals the number of rows in B.",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+void multiply(int A[2][2], int B[2][2], int C[2][2]) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            C[i][j] = 0;
+            for (int k = 0; k < 2; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+int main() {
+    int A[2][2] = {{1,2},{3,4}};
+    int B[2][2] = {{5,6},{7,8}};
+    int C[2][2];
+    multiply(A, B, C);
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {\n            printf("%d ", C[i][j]);\n        }\n        printf("\\n");\n    }\n    return 0;\n}`,
+      cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+vector<vector<int>> multiply(const vector<vector<int>>& A, const vector<vector<int>>& B) {
+    int rows = A.size(), cols = B[0].size(), K = A[0].size();
+    vector<vector<int>> C(rows, vector<int>(cols, 0));
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            for(int k = 0; k < K; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    return C;
+}
+int main(){
+    vector<vector<int>> A = {{1,2}, {3,4}};
+    vector<vector<int>> B = {{5,6}, {7,8}};
+    vector<vector<int>> C = multiply(A, B);
+    for(auto &row : C) {
+        for(auto num : row) cout << num << " ";
+        cout << endl;
+    }
+    return 0;
+}`,
+      java: `public class MatrixMultiplication {
+    public static int[][] multiply(int[][] A, int[][] B) {
+        int rows = A.length, cols = B[0].length, K = A[0].length;
+        int[][] C = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                for (int k = 0; k < K; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+        return C;
+    }
+    public static void main(String[] args) {
+        int[][] A = {{1,2},{3,4}};
+        int[][] B = {{5,6},{7,8}};
+        int[][] C = multiply(A, B);
+        for (int[] row : C) {
+            for (int num : row) System.out.print(num + " ");
+            System.out.println();
+        }
+    }
+}`,
+      python: `def multiply(A, B):
+    rows, cols, K = len(A), len(B[0]), len(A[0])
+    C = [[0 for _ in range(cols)] for _ in range(rows)]
+    for i in range(rows):
+        for j in range(cols):
+            for k in range(K):
+                C[i][j] += A[i][k] * B[k][j]
+    return C
+if __name__ == '__main__':
+    A = [[1,2],[3,4]]
+    B = [[5,6],[7,8]]
+    C = multiply(A, B)
+    print(C)`,
+    },
+  },
+
+  {
+    id: "31",
+    title: "Reverse a Linked List",
+    description:
+      "Given a singly linked list, reverse it and return the new head.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "reverse-linked-list",
+    category: "Data Structures",
+    examples: [
+      {
+        input: "Linked list: 1 -> 2 -> 3 -> null",
+        output: "Linked list: 3 -> 2 -> 1 -> null",
+        explanation: "The linked list is reversed in place.",
+      },
+    ],
+    constraints: [
+      "Implement in-place reversal.",
+      "Time complexity should be O(n).",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+struct Node* reverse(struct Node* head) {
+    struct Node *prev = NULL, *curr = head, *next = NULL;
+    while (curr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+int main() {
+    // Example usage; node creation omitted for brevity
+    return 0;
+}`,
+      cpp: `#include <iostream>
+using namespace std;
+struct Node {
+    int data;
+    Node* next;
+};
+Node* reverse(Node* head) {
+    Node *prev = nullptr, *curr = head, *next = nullptr;
+    while (curr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+int main() {
+    // Example usage; node creation omitted for brevity
+    return 0;
+}`,
+      java: `class Node {
+    int data;
+    Node next;
+    Node(int data) { this.data = data; }
+}
+class Solution {
+    public Node reverse(Node head) {
+        Node prev = null, curr = head, next = null;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    public static void main(String[] args) {
+        // Example usage; node creation omitted for brevity
+    }
+}`,
+      python: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+def reverse(head):
+    prev = None
+    curr = head
+    while curr:
+        nxt = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nxt
+    return prev
+if __name__ == '__main__':
+    # Example usage; node creation omitted for brevity
+    pass`,
+    },
+  },
+
+  {
+    id: "32",
+    title: "Binary Search Tree Implementation",
+    description:
+      "Implement a Binary Search Tree (BST) with methods for insertion, search, and in-order traversal.",
+    difficulty: "Medium",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "binary-search-tree",
+    category: "Data Structures",
+    examples: [
+      {
+        input: "Insert values: 5, 3, 7, 2, 4, 6, 8",
+        output: "In-order traversal returns: 2, 3, 4, 5, 6, 7, 8",
+        explanation: "BST in-order traversal yields sorted order.",
+      },
+    ],
+    constraints: [
+      "No duplicate values allowed.",
+      "Implement insertion, search, and in-order traversal.",
+    ],
+    defaultCode: {
+      c: `#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->left = node->right = NULL;
+    return node;
+}
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) return newNode(data);
+    if (data < root->data)
+        root->left = insert(root->left, data);
+    else if (data > root->data)
+        root->right = insert(root->right, data);
+    return root;
+}
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+int main() {
+    struct Node* root = NULL;
+    root = insert(root, 5);
+    insert(root, 3);
+    insert(root, 7);
+    insert(root, 2);
+    insert(root, 4);
+    insert(root, 6);
+    insert(root, 8);
+    inorder(root);
+    return 0;
+}`,
+      cpp: `#include <iostream>
+using namespace std;
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int data): data(data), left(nullptr), right(nullptr) {}
+};
+Node* insert(Node* root, int data) {
+    if (!root) return new Node(data);
+    if (data < root->data)
+        root->left = insert(root->left, data);
+    else if (data > root->data)
+        root->right = insert(root->right, data);
+    return root;
+}
+void inorder(Node* root) {
+    if (root) {
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 5);
+    insert(root, 3);
+    insert(root, 7);
+    insert(root, 2);
+    insert(root, 4);
+    insert(root, 6);
+    insert(root, 8);
+    inorder(root);
+    return 0;
+}`,
+      java: `class Node {
+    int data;
+    Node left, right;
+    Node(int data) { this.data = data; }
+}
+class BST {
+    Node insert(Node root, int data) {
+        if (root == null) return new Node(data);
+        if (data < root.data)
+            root.left = insert(root.left, data);
+        else if (data > root.data)
+            root.right = insert(root.right, data);
+        return root;
+    }
+    void inorder(Node root) {
+        if (root != null) {
+            inorder(root.left);
+            System.out.print(root.data + " ");
+            inorder(root.right);
+        }
+    }
+    public static void main(String[] args) {
+        BST tree = new BST();
+        Node root = null;
+        root = tree.insert(root, 5);
+        tree.insert(root, 3);
+        tree.insert(root, 7);
+        tree.insert(root, 2);
+        tree.insert(root, 4);
+        tree.insert(root, 6);
+        tree.insert(root, 8);
+        tree.inorder(root);
+    }
+}`,
+      python: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+def insert(root, data):
+    if root is None:
+        return Node(data)
+    if data < root.data:
+        root.left = insert(root.left, data)
+    elif data > root.data:
+        root.right = insert(root.right, data)
+    return root
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data, end=' ')
+        inorder(root.right)
+if __name__ == '__main__':
+    root = None
+    for val in [5, 3, 7, 2, 4, 6, 8]:
+        root = insert(root, val)
+    inorder(root)`,
+    },
+  },
+
+  {
+    id: "33",
+    title: "Find Min and Max in an Array",
+    description:
+      "Write a function that finds the minimum and maximum elements in an unsorted array in a single pass.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "min-max-array",
+    category: "Algorithms",
+    examples: [
+      {
+        input: "array = [3, 1, 4, 1, 5, 9]",
+        output: "{min: 1, max: 9}",
+        explanation:
+          "Traverse the array once to determine the min and max values.",
+      },
+    ],
+    constraints: ["Traverse the array only once."],
+    defaultCode: {
+      c: `#include <stdio.h>
+void findMinMax(int arr[], int n, int *min, int *max) {
+    *min = *max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < *min) *min = arr[i];
+        if (arr[i] > *max) *max = arr[i];
+    }
+}
+int main() {
+    int arr[] = {3, 1, 4, 1, 5, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int min, max;
+    findMinMax(arr, n, &min, &max);
+    printf("min = %d, max = %d\\n", min, max);
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+pair<int, int> findMinMax(const vector<int>& arr) {
+    int minVal = arr[0], maxVal = arr[0];
+    for (int num : arr) {
+        if (num < minVal) minVal = num;
+        if (num > maxVal) maxVal = num;
+    }
+    return {minVal, maxVal};
+}
+int main(){
+    vector<int> arr = {3, 1, 4, 1, 5, 9};
+    auto result = findMinMax(arr);
+    cout << "min = " << result.first << ", max = " << result.second << endl;
+    return 0;
+}`,
+      java: `public class MinMaxArray {
+    public static int[] findMinMax(int[] arr) {
+        int min = arr[0], max = arr[0];
+        for (int num : arr) {
+            if (num < min) min = num;
+            if (num > max) max = num;
+        }
+        return new int[]{min, max};
+    }
+    public static void main(String[] args) {
+        int[] arr = {3, 1, 4, 1, 5, 9};
+        int[] result = findMinMax(arr);
+        System.out.println("min = " + result[0] + ", max = " + result[1]);
+    }
+}`,
+      python: `def find_min_max(arr):
+    min_val = max_val = arr[0]
+    for num in arr:
+        if num < min_val:
+            min_val = num
+        if num > max_val:
+            max_val = num
+    return min_val, max_val
+if __name__ == '__main__':
+    arr = [3, 1, 4, 1, 5, 9]
+    print(find_min_max(arr))`,
+    },
+  },
+
+  {
+    id: "34",
+    title: "Cycle Detection in Linked List",
+    description:
+      "Determine if a given singly linked list contains a cycle using Floyd's Tortoise and Hare algorithm.",
+    difficulty: "Medium",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "cycle-detection-linked-list",
+    category: "Data Structures",
+    examples: [
+      {
+        input: "Linked list with cycle",
+        output: "true",
+        explanation:
+          "Floyd's algorithm detects the cycle by using two pointers moving at different speeds.",
+      },
+    ],
+    constraints: ["Use constant extra space."],
+    defaultCode: {
+      c: `#include <stdio.h>
+#include <stdbool.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+bool hasCycle(struct Node* head) {
+    struct Node *slow = head, *fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) return true;
+    }
+    return false;
+}
+int main() {
+    // Example usage; linked list creation omitted
+    return 0;
+}`,
+      cpp: `#include <iostream>
+using namespace std;
+struct Node {
+    int data;
+    Node* next;
+};
+bool hasCycle(Node* head) {
+    Node *slow = head, *fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) return true;
+    }
+    return false;
+}
+int main() {
+    // Example usage; linked list creation omitted
+    return 0;
+}`,
+      java: `class Node {
+    int data;
+    Node next;
+    Node(int data) { this.data = data; }
+}
+class Solution {
+    public boolean hasCycle(Node head) {
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) return true;
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        // Example usage; linked list creation omitted
+    }
+}`,
+      python: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+def has_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
+if __name__ == '__main__':
+    # Example usage; linked list creation omitted
+    pass`,
+    },
+  },
+
+  {
+    id: "35",
+    title: "Balanced Parentheses Checker",
+    description:
+      "Write a function to check if a given string of parentheses is balanced.",
+    difficulty: "Easy",
+    languages: ["C", "C++", "Java", "Python"],
+    slug: "balanced-parentheses",
+    category: "Algorithms",
+    examples: [
+      {
+        input: '"(()())"',
+        output: "true",
+        explanation: "The parentheses are properly balanced.",
+      },
+      {
+        input: '"(()"',
+        output: "false",
+        explanation: "The parentheses are not balanced.",
+      },
+    ],
+    constraints: ["Only consider parentheses characters."],
+    defaultCode: {
+      c: `#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+bool isBalanced(char* str) {
+    int count = 0;
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] == '(') count++;
+        else if (str[i] == ')') count--;
+        if (count < 0) return false;
+    }
+    return count == 0;
+}
+int main() {
+    char str1[] = "(()())";
+    char str2[] = "(()";
+    printf("%d\\n", isBalanced(str1));
+    printf("%d\\n", isBalanced(str2));
+    return 0;
+}`,
+      cpp: `#include <iostream>
+#include <string>
+using namespace std;
+bool isBalanced(const string &str) {
+    int count = 0;
+    for (char c : str) {
+        if (c == '(') count++;
+        else if (c == ')') count--;
+        if (count < 0) return false;
+    }
+    return count == 0;
+}
+int main() {
+    cout << isBalanced("(()())") << endl;
+    cout << isBalanced("(()") << endl;
+    return 0;
+}`,
+      java: `public class BalancedParentheses {
+    public static boolean isBalanced(String str) {
+        int count = 0;
+        for (char c : str.toCharArray()) {
+            if (c == '(') count++;
+            else if (c == ')') count--;
+            if (count < 0) return false;
+        }
+        return count == 0;
+    }
+    public static void main(String[] args) {
+        System.out.println(isBalanced("(()())"));
+        System.out.println(isBalanced("(()"));
+    }
+}`,
+      python: `def is_balanced(s):
+    count = 0
+    for c in s:
+        if c == '(': count += 1
+        elif c == ')': count -= 1
+        if count < 0:
+            return False
+    return count == 0
+if __name__ == '__main__':
+    print(is_balanced("(()())"))
+    print(is_balanced("(()"))`,
+    },
+  },
 ];
 
 export function getChallengeBySlug(slug: string): Challenge | undefined {

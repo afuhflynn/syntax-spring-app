@@ -130,10 +130,14 @@ export default function Navbar() {
                 asChild
                 className="hidden md:flex"
               >
-                <Link href="/auth/log-in">Log in</Link>
+                <span>
+                  <Link href="/auth/log-in">Log in</Link>
+                </span>
               </Button>
               <Button asChild className="hidden md:flex">
-                <Link href="/auth/sign-up">Get started for free</Link>
+                <span>
+                  <Link href="/auth/sign-up">Get started for free</Link>
+                </span>
               </Button>
             </>
           )}
@@ -187,10 +191,14 @@ export default function Navbar() {
                     asChild
                     className="hidden md:flex"
                   >
-                    <Link href="/auth/log-in">Log in</Link>
+                    <span>
+                      <Link href="/auth/log-in">Log in</Link>
+                    </span>
                   </Button>
                   <Button asChild className="hidden md:flex">
-                    <Link href="/auth/sign-up">Get Started</Link>
+                    <span>
+                      <Link href="/auth/sign-up">Get Started</Link>
+                    </span>
                   </Button>
                 </>
               )}

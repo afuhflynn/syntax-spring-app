@@ -92,7 +92,7 @@ export const categoryFilter = [
   },
   {
     id: 2,
-    data: "Web/Mobile",
+    data: "Web",
   },
   {
     id: 3,

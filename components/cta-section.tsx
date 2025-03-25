@@ -15,9 +15,14 @@ export default function CTA() {
             Syntax Spring. Start coding today and see the difference.
           </p>
           <Button size="lg" asChild>
-            <Link href="/platform/challenges">
-              Get Started Now <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <span>
+              <Link
+                href="/platform/challenges"
+                className="flex flex-row items-center justify-center"
+              >
+                Get Started Now <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </span>
           </Button>
         </div>
       </div>

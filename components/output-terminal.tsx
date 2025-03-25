@@ -25,11 +25,11 @@ export default function OutputTerminal({
     <div
       ref={terminalRef}
       className={cn(
-        "h-full w-full bg-black text-green-400 font-mono text-sm p-1 overflow-auto terminal",
+        "h-full w-full bg-black text-green-400 font-mono text-sm p-1 overflow-auto terminal border-none resize-y",
         className
       )}
     >
-      <pre className="whitespace-pre-wrap">
+      <pre className="whitespace-pre-wrap resize-y">
         {output || "Run your code to see output here..."}
       </pre>
     </div>

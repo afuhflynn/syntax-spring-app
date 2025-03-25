@@ -30,7 +30,7 @@ interface ChallengeEditorProps {
 
 export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
-    Object.keys(challenge.defaultCode || {})[0] || "javascript"
+    Object.keys(challenge.defaultCode || {})[0]
   );
 
   const storageKey = `code-${challenge.slug}-${selectedLanguage}`;
@@ -38,6 +38,9 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
     storageKey,
     challenge.defaultCode?.[selectedLanguage] || ""
   );
+  const html = challenge.defaultCode && challenge.defaultCode["html"];
+  const css = challenge.defaultCode && challenge.defaultCode["css"];
+  const js = challenge.defaultCode && challenge.defaultCode["javascript"];
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [output, setOutput] = useState<string>("");
@@ -93,9 +96,7 @@ Execution completed successfully.`);
   };
 
   const isWebLanguage =
-    selectedLanguage === "html" ||
-    selectedLanguage === "css" ||
-    selectedLanguage === "javascript";
+    selectedLanguage === "html" || selectedLanguage === "css";
 
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     editorRef.current = editor;
@@ -178,45 +179,80 @@ Execution completed successfully.`);
           </Button>
         </div>
       </div>
+      {isWebLanguage ? (
+        <div className="flex flex-row h-[420px]">
+          <div
+            className={`h-full ${cn(
+              viewMode === "output"
+                ? "hidden md:hidden"
+                : viewMode === "split"
+                ? "w-1/2"
+                : "w-full",
+              "border-r"
+            )}`}
+          >
+            <CodeEditor
+              language={selectedLanguage}
+              value={code}
+              onChange={setCode}
+              editorRef={editorRef}
+              className="resize-x"
+            />
+          </div>
 
-      <div className="flex flex-col h-[500px]">
-        <div
-          className={`w-full ${cn(
-            viewMode === "output"
-              ? "hidden md:hidden"
-              : viewMode === "split"
-              ? "h-[70%]"
-              : "h-full",
-            "border-r"
-          )}`}
-        >
-          <CodeEditor
-            language={selectedLanguage}
-            value={code}
-            onChange={setCode}
-            editorRef={editorRef}
-            className="resize-x"
-          />
+          <div
+            className={`w-full border-none resize-x ${cn(
+              viewMode === "editor"
+                ? "hidden md:hidden"
+                : viewMode === "split"
+                ? "w-1/2"
+                : "h-full"
+            )}`}
+          >
+            <WebPreview
+              language={selectedLanguage}
+              html={html}
+              js={js}
+              css={css}
+            />
+          </div>
         </div>
+      ) : (
+        <div className="flex flex-col h-[500px]">
+          <div
+            className={`w-full ${cn(
+              viewMode === "output"
+                ? "hidden md:hidden"
+                : viewMode === "split"
+                ? "h-[70%]"
+                : "h-full",
+              "border-r"
+            )}`}
+          >
+            <CodeEditor
+              language={selectedLanguage}
+              value={code}
+              onChange={setCode}
+              editorRef={editorRef}
+              className="resize-x"
+            />
+          </div>
 
-        <div
-          className={`w-full border-t border-t-foreground ${cn(
-            viewMode === "editor"
-              ? "hidden md:hidden"
-              : viewMode === "split"
-              ? "h-[30%] resize-y"
-              : "h-full"
-          )}`}
-        >
-          {isWebLanguage ? (
-            <WebPreview code={code} language={selectedLanguage} />
-          ) : (
+          <div
+            className={`w-full border-none resize-y ${cn(
+              viewMode === "editor"
+                ? "hidden md:hidden"
+                : viewMode === "split"
+                ? "h-[30%] "
+                : "h-full"
+            )}`}
+          >
             <OutputTerminal output={output} />
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="px-4 py-2 flex border-t border-t-foreground justify-between items-center">
+      <div className="px-4 py-2 flex border-t border-white border-opacity-20 justify-between items-center">
         <Button variant="outline" onClick={handleAIHelp}>
           <HelpCircle className="h-4 w-4 mr-2" />
           Ask AI for Help

@@ -12,7 +12,5 @@ export default function ChallengePage() {
   if (!challenge) {
     notFound();
   }
-  document.title = `${challenge.title} | Syntax Spring`;
-
   return <ChallengeClient challenge={challenge} />;
 }

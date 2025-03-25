@@ -1,6 +1,3 @@
-[] Add the tooltip package from mui lib and zustand
-[] Add search and filter tab at the top of challenges view page.
-[] Add fix the monaco error
 [] Add a button to ask users if they are ready to start coding. And after wards add one to minimize the coding env.
 [] Add intellisense for all current available langs and vb.net
 [] Modify the footer to include correct data
@@ -12,3 +9,8 @@
 [] Add other code samples (data)
 [] convert fav-icon.svg to fav-icon.png
 [] Add next auth for authentication
+
+[] Add button for minimize/expand code editor and details (optional)
+[] Add button to take the editor into full screen
+[] Enable resize of different editor parts and make it responsive as required
+[] Style the terminal and add minimize, hide and resize controls

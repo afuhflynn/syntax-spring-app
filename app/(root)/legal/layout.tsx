@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Organization | Syntax Spring",
+  title: "Legal Info | Syntax Spring",
   description: "Syntax Spring auth section",
 };
 

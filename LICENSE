@@ -1,12 +1,16 @@
-                    GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+# GNU GENERAL PUBLIC LICENSE
 
+## Version 3, 29 June 2007
+
+```bash
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
+ ```
 
-                            Preamble
+## Preamble
 
+```text
   The GNU General Public License is a free, copyleft license for
 software and other kinds of works.
 
@@ -67,9 +71,11 @@ patents cannot be used to render the program non-free.
 
   The precise terms and conditions for copying, distribution and
 modification follow.
+```
 
-                       TERMS AND CONDITIONS
+## TERMS AND CONDITIONS
 
+```text
   0. Definitions.
 
   "This License" refers to version 3 of the GNU General Public License.
@@ -617,11 +623,13 @@ reviewing courts shall apply local law that most closely approximates
 an absolute waiver of all civil liability in connection with the
 Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
+```
 
-                     END OF TERMS AND CONDITIONS
+## END OF TERMS AND CONDITIONS
 
-            How to Apply These Terms to Your New Programs
+### How to Apply These Terms to Your New Programs
 
+```text
   If you develop a new program, and you want it to be of the greatest
 possible use to the public, the best way to achieve this is to make it
 free software which everyone can redistribute and change under these terms.
@@ -672,3 +680,4 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
+```

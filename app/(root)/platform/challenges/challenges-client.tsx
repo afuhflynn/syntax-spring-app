@@ -12,12 +12,19 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, ChevronUp, Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Challenge } from "@/TYPES";
 import { categoryFilter, difficultyFilter } from "@/constants/constants";
 import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
+import { MainLoader } from "@/components/loader";
 
 const initialCategoryFilterQuery = "Filter By Category";
 const initialDifficultyFilterQuery = "Filter By Difficulty";
@@ -84,7 +91,7 @@ export default function ChallengesClient({
   }, [router]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Or a more sophisticated loading component
+    return <MainLoader />;
   }
 
   if (!isAuthenticated) {
@@ -115,7 +122,7 @@ export default function ChallengesClient({
           Search or filter Challenges
         </h1>
         {/* Search bar and filter bar */}
-        <div className="w-full md:w-full h-auto grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 items-center justify-center md:gap-4 gap-3 md:my-8">
+        <div className="w-full md:w-full h-auto grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 items-center justify-center md:gap-8 gap-4 md:my-8">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
             <Input
@@ -126,62 +133,77 @@ export default function ChallengesClient({
               onChange={(e) => handleSearchFilter(e.target.value)}
             />
           </div>
-          <div className="w-full grid grid-cols-2 grid-rows-1 items-center gap-4 md:gap-6">
+          <div className="w-full grid grid-cols-2 grid-rows-1 items-center justify-center gap-4 md:gap-12">
             <div className="w-full flex flex-col items-center gap-2 h-auto relative">
-              <Button
-                variant="secondary"
-                onClick={() => setIsCategoryFilterDropDown((prev) => !prev)}
-                className="w-full card flex flex-row gap-2 items-center my-0 bg-card border-black border-[1px] shadow-md"
-              >
-                {categoryFilterQuery}{" "}
-                {!isCategoryFilterDropdown ? <ChevronDown /> : <ChevronUp />}
-              </Button>
-              {isCategoryFilterDropdown && (
-                <ul className="absolute top-14 bg-popover w-full h-auto rounded-md border-black border-opacity-20 border-[1px] shadow-md flex flex-col items-center justify-start gap-[0.1rem]">
-                  {categoryFilter.map((item, index) => (
-                    <li
-                      className={`cursor-pointer hover:bg-gray-100 hover:bg-opacity-60 py-3 x-4 w-full h-auto rounded-md`}
-                      key={`item-${item.id}-${index}-${item.data}`}
-                      onClick={() => {
-                        setIsCategoryFilterDropDown((prev) => !prev);
-                        setCategoryFilterQuery(item.data);
-                        setDifficultyFilterQuery(initialDifficultyFilterQuery);
-                        handleFilterToggle(item.data);
-                      }}
-                    >
-                      {item.data}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild className="border-white border">
+                  <Button
+                    onClick={() => setIsCategoryFilterDropDown((prev) => !prev)}
+                    className="w-full bg-white dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 hover:bg-opacity-60 text-black dark:text-white card flex flex-row gap-2 items-center my-0 dark:border-white border-black border-opacity-20 dark:border-opacity-10 border-[1px] shadow-md"
+                  >
+                    {categoryFilterQuery}{" "}
+                  </Button>
+                </DropdownMenuTrigger>
+                {isCategoryFilterDropdown && (
+                  <DropdownMenuContent
+                    className="bg-popover w-[12rem] h-auto rounded-md dark:border-white border-black border-opacity-20 dark:border-opacity-10 border-[1px] shadow-md flex flex-col items-center justify-start gap-[0.1rem] mt-2"
+                    align="center"
+                  >
+                    {categoryFilter.map((item, index) => (
+                      <DropdownMenuItem
+                        className={`cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:bg-opacity-60 py-3 x-4 w-full h-auto rounded-md`}
+                        key={`item-${item.id}-${index}-${item.data}`}
+                        onClick={() => {
+                          setIsCategoryFilterDropDown((prev) => !prev);
+                          setCategoryFilterQuery(item.data);
+                          setDifficultyFilterQuery(
+                            initialDifficultyFilterQuery
+                          );
+                          handleFilterToggle(item.data);
+                        }}
+                      >
+                        {item.data}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                )}
+              </DropdownMenu>
             </div>
             <div className="w-full flex flex-col items-center gap-2 h-auto relative">
-              <Button
-                variant="secondary"
-                onClick={() => setIsDifficultyFilterDropDown((prev) => !prev)}
-                className="w-full card flex flex-row gap-2 items-center my-0 bg-card border-black border-[1px] shadow-md"
-              >
-                {difficultyFilterQuery}{" "}
-                {!isDifficultyFilterDropdown ? <ChevronDown /> : <ChevronUp />}
-              </Button>
-              {isDifficultyFilterDropdown && (
-                <ul className="absolute top-14 bg-popover w-full h-auto rounded-md border-black border-opacity-20 border-[1px] shadow-md flex flex-col items-center justify-start gap-[0.1rem]">
-                  {difficultyFilter.map((item, index) => (
-                    <li
-                      className="cursor-pointer hover:bg-gray-100 hover:bg-opacity-60 py-3 x-4 w-full h-auto rounded-md"
-                      key={`item-${item.id}-${index}-${item.data}`}
-                      onClick={() => {
-                        setIsDifficultyFilterDropDown((prev) => !prev);
-                        setDifficultyFilterQuery(item.data);
-                        setCategoryFilterQuery(initialCategoryFilterQuery);
-                        handleFilterToggle(item.data);
-                      }}
-                    >
-                      {item.data}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    onClick={() =>
+                      setIsDifficultyFilterDropDown((prev) => !prev)
+                    }
+                    className="w-full bg-white dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 hover:bg-opacity-60 text-black dark:text-white card flex flex-row gap-2 items-center my-0 dark:border-white border-black border-opacity-20 dark:border-opacity-10 border-[1px] shadow-md"
+                  >
+                    {difficultyFilterQuery}{" "}
+                  </Button>
+                </DropdownMenuTrigger>
+                {isDifficultyFilterDropdown && (
+                  <DropdownMenuContent
+                    className="bg-popover w-[12rem] h-auto rounded-md dark:border-white border-black border-opacity-20 dark:border-opacity-10 border-[1px] shadow-md flex flex-col items-center justify-start gap-[0.1rem] mt-2"
+                    align="center"
+                  >
+                    {difficultyFilter.map((item, index) => (
+                      <DropdownMenuItem
+                        className={`cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:bg-opacity-60 py-3 x-4 w-full h-auto rounded-md`}
+                        key={`item-${item.id}-${index}-${item.data}`}
+                        onClick={() => {
+                          setIsDifficultyFilterDropDown((prev) => !prev);
+                          setDifficultyFilterQuery(item.data);
+                          setCategoryFilterQuery(initialCategoryFilterQuery);
+                          handleFilterToggle(item.data);
+                        }}
+                      >
+                        {item.data}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                )}
+              </DropdownMenu>
             </div>
           </div>
         </div>
@@ -202,9 +224,9 @@ export default function ChallengesClient({
             </p>
           </div>
         ) : (
-          filteredChallenges.map((challenge) => (
+          filteredChallenges.map((challenge, index) => (
             <Card
-              key={challenge.id}
+              key={`${challenge.id}-${index}-${challenge.title}`}
               onClick={() => handleRouting(challenge.slug)}
               className="flex flex-col h-full hover:shadow-md transition-shadow cursor-pointer"
             >

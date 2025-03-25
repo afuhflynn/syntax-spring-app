@@ -1,10 +1,8 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
@@ -47,9 +45,12 @@ export const metadata: Metadata = {
     creator: "@syntaxspring",
   },
   generator: "afuhflynn",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
-export default function RootLayout({
+export default function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -63,16 +64,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
+          <div className="flex min-h-screen flex-col">{children}</div>
           <Toaster />
         </ThemeProvider>
       </body>
     </html>
   );
 }
-
-import "./globals.css";

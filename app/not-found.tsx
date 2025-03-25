@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -11,12 +11,13 @@ export default function NotFound() {
         The page you're looking for doesn't exist or has been moved.
       </p>
       <Button asChild>
-        <Link href="/">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Link>
+        <span>
+          <Link href="/" className="flex flex-row items-center justify-center">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Link>
+        </span>
       </Button>
     </div>
-  )
+  );
 }
-
