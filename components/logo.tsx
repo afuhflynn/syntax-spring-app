@@ -7,7 +7,7 @@ const Logo = () => {
     <div className="flex items-center gap-2">
       <Link href="/" className="flex items-center space-x-2">
         <Image
-          src={"./logo/fav-icon.png"}
+          src={"https://res.cloudinary.com/duzg7l0eo/image/upload/v1742920199/fav-icon_mnoce0.png"}
           alt="Syntax spring logo"
           width={40}
           height={40}

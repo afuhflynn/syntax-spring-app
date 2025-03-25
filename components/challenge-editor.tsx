@@ -173,19 +173,21 @@ Execution completed successfully.`);
             <span className="hidden sm:inline">Split</span>
             <span className="sm:hidden">⚌</span>
           </Button>
-          <Button onClick={runCode} disabled={isRunning}>
-            {isRunning ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Running...
-              </>
-            ) : (
-              <>
-                <Play className="h-4 w-4 mr-2" />
-                Run Code
-              </>
-            )}
-          </Button>
+          {!isWebChallenge && (
+            <Button onClick={runCode} disabled={isRunning}>
+              {isRunning ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Running...
+                </>
+              ) : (
+                <>
+                  <Play className="h-4 w-4 mr-2" />
+                  Run Code
+                </>
+              )}
+            </Button>
+          )}
         </div>
       </div>
       {isWebChallenge ? (

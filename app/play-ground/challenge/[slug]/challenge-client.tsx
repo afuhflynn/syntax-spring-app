@@ -36,7 +36,7 @@ export default function ChallengeClient({
 
   return (
     <div className="container pb-6 relative">
-      <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[65px]pt-1 overflow-hidden">
+      <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[65px]pt-1">
         <Logo />
         <div className="flex items-center gap-4 h-auto">
           <Tooltip title={"Return to challenges"} arrow placement="top">
