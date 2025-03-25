@@ -32,6 +32,7 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
     Object.keys(challenge.defaultCode || {})[0]
   );
+  const [isWebChallenge, setIsWebChallenge] = useState<null | boolean>(null);
 
   const storageKey = `code-${challenge.slug}-${selectedLanguage}`;
   const [code, setCode] = useLocalStorage<string>(
@@ -95,8 +96,16 @@ Execution completed successfully.`);
     setIsAIHelpOpen(true);
   };
 
-  const isWebLanguage =
-    selectedLanguage === "html" || selectedLanguage === "css";
+  const challengeLanguages = Object.keys(challenge.defaultCode || {});
+  useEffect(() => {
+    challengeLanguages.forEach((lang) => {
+      if (lang.toLowerCase() === "cpp") {
+        setIsWebChallenge(false);
+      } else {
+        setIsWebChallenge(true);
+      }
+    });
+  }, [challengeLanguages]);
 
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     editorRef.current = editor;
@@ -147,7 +156,7 @@ Execution completed successfully.`);
             className={cn(viewMode === "output" ? "bg-muted" : "")}
             aria-label="Output view"
           >
-            {isWebLanguage ? (
+            {isWebChallenge ? (
               <Layout className="h-4 w-4 mr-1" />
             ) : (
               <Terminal className="h-4 w-4 mr-1" />
@@ -179,16 +188,15 @@ Execution completed successfully.`);
           </Button>
         </div>
       </div>
-      {isWebLanguage ? (
+      {isWebChallenge ? (
         <div className="flex flex-row h-[420px]">
           <div
-            className={`h-full ${cn(
-              viewMode === "output"
-                ? "hidden md:hidden"
+            className={`border-none resize-x ${cn(
+              viewMode === "editor"
+                ? "w-full"
                 : viewMode === "split"
                 ? "w-1/2"
-                : "w-full",
-              "border-r"
+                : "hidden"
             )}`}
           >
             <CodeEditor
@@ -201,12 +209,12 @@ Execution completed successfully.`);
           </div>
 
           <div
-            className={`w-full border-none resize-x ${cn(
+            className={`border-none resize-x ${cn(
               viewMode === "editor"
                 ? "hidden md:hidden"
                 : viewMode === "split"
                 ? "w-1/2"
-                : "h-full"
+                : "w-full"
             )}`}
           >
             <WebPreview

@@ -10,6 +10,7 @@ import { ArrowLeftCircle, SliceIcon, Text } from "lucide-react";
 import { Challenge } from "@/TYPES";
 import { useState } from "react";
 import { Tooltip } from "@mui/material";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function ChallengeClient({
   challenge,
@@ -35,14 +36,20 @@ export default function ChallengeClient({
 
   return (
     <div className="container pb-6 relative">
-      <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[50px]pt-1">
+      <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[65px]pt-1 overflow-hidden">
         <Logo />
-        <Button
-          className="flex flex-row items-center gap-2 py-3"
-          onClick={() => router.back()}
-        >
-          <ArrowLeftCircle /> Return to Challenges.
-        </Button>
+        <div className="flex items-center gap-4 h-auto">
+          <Tooltip title={"Return to challenges"} arrow placement="top">
+            <Button
+              className="flex flex-row items-center gap-2 py-1"
+              onClick={() => router.back()}
+              variant="outline"
+            >
+              <ArrowLeftCircle />
+            </Button>
+          </Tooltip>
+          <ThemeToggle />
+        </div>
       </header>
       {/* Challenge details */}
       {isDetails && (
