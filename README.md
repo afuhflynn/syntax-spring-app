@@ -114,26 +114,6 @@ A: We're constantly expanding, but you'll find popular languages like JavaScript
 **Q: How does AI assistance work?**  
 A: Our integrated AI provides hints and guidance based on your code, helping you overcome tricky challenges.
 
-## 📸 Screenshots
-
-Below are some snapshots of Syntax Spring in action:
-
-- **Home Screen**: Overview of challenges and progress.
-
- Light Mode ![Home page](./public/home_page_light.png)
-
- Dark mode ![Home page](./public/home_page_dark.png)
-
-- **Challenges View**: A modern grid layout with search and filter functionalities.
-
- Light Mode ![Challenges page](./public/challenges_page_light.png)
-
- Dark mode ![Challenges page](./public/Challenges_page_dark.png)
-
-- **Challenge View**: Interactive coding editor with live execution.
-- **Leaderboard**: See where you stand among peers.
-- **User Profile**: Manage your account, achievements, and settings.
-
 ## 🤝 Community & Support
 
 We thrive on community. Join our channels to:
