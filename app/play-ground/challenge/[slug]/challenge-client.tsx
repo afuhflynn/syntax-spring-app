@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftCircle, SliceIcon, Text } from "lucide-react";
+import { ArrowLeftCircle, Settings, SliceIcon, Text } from "lucide-react";
 import { Challenge } from "@/TYPES";
 import { useState } from "react";
 import { Tooltip } from "@mui/material";
@@ -38,7 +38,8 @@ export default function ChallengeClient({
     <div className="container pb-6 relative">
       <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[65px]pt-1">
         <Logo />
-        <div className="flex items-center gap-4 h-auto">
+        {/* Code Editor controls */}
+        <div className="flex flex-row items-center justify-between py-2 gap-2">
           <Tooltip title={"Return to challenges"} arrow placement="top">
             <Button
               className="flex flex-row items-center gap-2 py-1"
@@ -48,13 +49,38 @@ export default function ChallengeClient({
               <ArrowLeftCircle />
             </Button>
           </Tooltip>
+          <Tooltip title={"Settings"} arrow placement="bottom">
+            <Button
+              className="flex flex-row items-center gap-2 py-1"
+              variant="outline"
+              size="sm"
+            >
+              <Settings />
+            </Button>
+          </Tooltip>
           <ThemeToggle />
+          <Tooltip
+            title={
+              isDetails ? "Hide challenge details." : "Show challenge details."
+            }
+            arrow
+            placement="bottom"
+          >
+            <Button
+              className="flex flex-row items-center gap-2 py-1 ml-2"
+              onClick={() => setIsDetails((prev) => !prev)}
+              variant="outline"
+              size="sm"
+            >
+              {isDetails ? <SliceIcon /> : <Text />}
+            </Button>
+          </Tooltip>
         </div>
       </header>
       {/* Challenge details */}
       {isDetails && (
         <div>
-          <h1 className="text-3xl font-bold tracking-tighter mb-4">
+          <h1 className="text-3xl font-bold tracking-tighter mb-4 mt-3">
             {challenge.title}
           </h1>
           <div className="flex items-center gap-2 mb-4">
@@ -100,22 +126,7 @@ export default function ChallengeClient({
           </div>
         </div>
       )}
-      {/* Code Editor controls */}
-      <div className="mb-2 flex flex-row items-center justify-between">
-        <Tooltip
-          title={isDetails ? "Hide details." : "Show details."}
-          arrow
-          placement="top"
-        >
-          <Button
-            className="flex flex-row items-center gap-2 py-1"
-            onClick={() => setIsDetails((prev) => !prev)}
-            variant="secondary"
-          >
-            {isDetails ? <SliceIcon /> : <Text />}
-          </Button>
-        </Tooltip>
-      </div>
+
       <ChallengeEditor challenge={challenge} />
     </div>
   );

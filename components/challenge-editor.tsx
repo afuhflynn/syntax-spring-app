@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import * as monaco_editor from "monaco-editor";
 import { useState, useRef, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,7 +15,6 @@ import {
   CheckCircleIcon,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import CodeEditor from "@/components/code-editor";
 import OutputTerminal from "@/components/output-terminal";
 import WebPreview from "@/components/web-preview";
 import AIHelpModal from "@/components/ai-help-modal";
@@ -24,6 +24,9 @@ import { configureMonacoLanguages } from "@/utils/monaco-languages";
 import type { Monaco } from "@monaco-editor/react";
 import { Challenge } from "@/TYPES";
 
+const CodeEditor = dynamic(() => import("@/components/code-editor"), {
+  ssr: false,
+});
 interface ChallengeEditorProps {
   challenge: Challenge;
 }
@@ -39,9 +42,15 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
     storageKey,
     challenge.defaultCode?.[selectedLanguage] || ""
   );
-  const html = challenge.defaultCode && challenge.defaultCode["html"];
-  const css = challenge.defaultCode && challenge.defaultCode["css"];
-  const js = challenge.defaultCode && challenge.defaultCode["javascript"];
+  const [html, setHtml] = useState(
+    challenge.defaultCode && challenge.defaultCode["html"]
+  );
+  const [css, setCss] = useState(
+    challenge.defaultCode && challenge.defaultCode["css"]
+  );
+  const [js, setJs] = useState(
+    challenge.defaultCode && challenge.defaultCode["javascript"]
+  );
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [output, setOutput] = useState<string>("");
@@ -120,9 +129,20 @@ Execution completed successfully.`);
     handleEditorDidMount(editorRef, monaco_editor);
   }, []);
 
+  // Update the web view components based on lang type and if code changes
+  useEffect(() => {
+    if (selectedLanguage === "html") {
+      setHtml(code);
+    } else if (selectedLanguage === "css") {
+      setCss(code);
+    } else if (selectedLanguage === "javascript") {
+      setJs(code);
+    }
+  }, [code]);
+
   return (
-    <div className="border rounded-lg overflow-hidden bg-card shadow-sm w-full h-full p-0">
-      <div className="px-4 py-2 flex justify-between items-center border-b">
+    <div className="border rounded-lg overflow-hidden bg-card shadow-sm w-full h-full py-1 mt-4">
+      <div className="px-4 py-2 h-auto flex justify-between items-center border-border">
         <div className="flex items-center gap-2">
           <Tabs
             value={selectedLanguage}
@@ -228,7 +248,7 @@ Execution completed successfully.`);
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-[500px]">
+        <div className="flex flex-col h-[420px]">
           <div
             className={`w-full ${cn(
               viewMode === "output"

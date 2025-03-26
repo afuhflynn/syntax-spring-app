@@ -1898,8 +1898,7 @@ toggleButton.addEventListener('click', () => {
       html: `<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="calculator.css">
-  <script></style> <!-- Don't remove this line it connects to the css file -->
+  <style></style> <!-- Do not remove this line it connects to the css file -->
 </head>
 <body>
   <div class="calculator">
@@ -1913,7 +1912,7 @@ toggleButton.addEventListener('click', () => {
       <button onclick="clearDisplay()">C</button>
     </div>
   </div>
-  <script></script> <!-- Don't remove this line it connects to the js file -->
+  <script></style> <!-- Do not remove this line it connects to the js file -->
 </body>
 </html>`,
       css: `.calculator { width: 200px; margin: auto; }
