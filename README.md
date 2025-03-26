@@ -1,6 +1,6 @@
 # Syntax Spring
 
-![Syntax Spring Banner](public/SyntaxSpringBanner.png)
+![Home page](./public/home_page_dark.png)
 
 Syntax Spring is a modern, interactive coding challenge platform designed to help developers improve their programming skills through hands-on practice. Built with Next.js, TypeScript, and Tailwind CSS, this platform offers a comprehensive learning experience with features like in-browser code execution, AI assistance, and community interaction.
 
