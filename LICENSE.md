@@ -48,4 +48,4 @@ Repository: [https://github.com/afuhflynn/syntax-spring-app](https://github.com/
 
 ---
 
-© [Year] Afuh Flynn Tembeng. All Rights Reserved.
+© 2025 Afuh Flynn Tembeng. All Rights Reserved.
