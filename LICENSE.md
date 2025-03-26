@@ -2,7 +2,7 @@
 
 ## 1. Grant of License
 
-This software ("Syntax Spring App") is licensed, not sold, and is the exclusive property of Afuh Flynn Tembeng ("Licensor"). By accessing, downloading, or using this software, you ("Licensee") agree to the terms of this license.
+This software ("Syntax Spring") is licensed, not sold, and is the exclusive property of Afuh Flynn Tembeng ("Licensor"). By accessing, downloading, or using this software, you ("Licensee") agree to the terms of this license.
 
 ## 2. Restrictions
 
