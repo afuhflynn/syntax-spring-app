@@ -103,8 +103,9 @@ export default function TermsPage() {
           <p>
             Some aspects of the Service may be provided for a fee. You will be
             required to select a payment plan and provide accurate information
-            regarding your billing method. You agree to pay all fees at the
-            prices then in effect for your subscription.
+            regarding your billing method in{" "}
+            <span className="font-bold">future updates</span>. You agree to pay
+            all fees at the prices then in effect for your subscription.
           </p>
           <p>
             Automatic Renewal: Unless you notify us before the end of the
@@ -186,7 +187,10 @@ export default function TermsPage() {
           <h2>14. Contact Us</h2>
           <p>
             If you have any questions about these Terms, please contact us at{" "}
-            <a href="mailto:legal@syntaxspring.com">legal@syntaxspring.com</a>.
+            <a href="mailto:syntaxspring1516@gmail.com">
+              syntaxspring1516@gmail.com
+            </a>
+            .
           </p>
 
           <div className="mt-8">

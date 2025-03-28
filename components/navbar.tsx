@@ -4,17 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Logo from "./logo";
+import { UserButton } from "./user-button";
 
 // This is a mock function. Replace it with your actual authentication logic.
 const useAuth = () => {
@@ -63,13 +58,6 @@ export default function Navbar() {
     { name: "About", path: "/platform/about" },
   ];
 
-  const handleLogout = () => {
-    // Implement logout logic here
-    setIsAuthenticated(false);
-    localStorage.removeItem("isAuthenticated");
-    // Redirect to home page or login page
-  };
-
   return (
     <header
       className={cn(
@@ -110,18 +98,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <ThemeToggle />
           {isAuthenticated ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onSelect={() => handleLogout()}>
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <UserButton />
           ) : (
             <>
               <Button
@@ -182,7 +159,7 @@ export default function Navbar() {
                 </Link>
               ))}
               {isAuthenticated ? (
-                <Button onClick={handleLogout}>Log out</Button>
+                <Button>Log out</Button>
               ) : (
                 <>
                   <Button

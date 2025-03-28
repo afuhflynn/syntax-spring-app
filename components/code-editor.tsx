@@ -1,18 +1,18 @@
 "use client";
 
-// Use Next.js dynamic import to prevent SSR of Monaco Editor
-import dynamic from "next/dynamic";
-// Import types (this is safe since it's compile-time only)
+// Remove static import of the Editor component to avoid SSR issues.
+// Import types only (these will not cause server-side issues)
 import type { Monaco } from "@monaco-editor/react";
-
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { MainLoader } from "./loader";
 
-// Dynamically import the Editor component so it only runs in the browser
-const Editor = dynamic(() => import("@monaco-editor/react"), {
-  ssr: false, // Disable server-side rendering for Monaco Editor
-  loading: () => <MainLoader />, // Optional: Show a loader while the component loads
+// Dynamically import the Editor component only on the client-side.
+// We extract the default export from @monaco-editor/react.
+const Editor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.default), {
+  ssr: false, // Disable SSR for Monaco Editor
+  loading: () => <MainLoader />, // Show a loader while Monaco loads
 });
 
 // Define the props for the CodeEditor component
@@ -27,16 +27,15 @@ interface CodeEditorProps {
 }
 
 /**
- * Define custom themes for the Monaco Editor.
- * This function only runs in the browser (client-side)
- * because it checks for the window object.
+ * Define custom themes for Monaco Editor.
+ * This function is safe because it runs only in the browser.
  */
 const defineMonacoThemes = () => {
   if (typeof window !== "undefined") {
-    // Import the loader from the Monaco Editor package
+    // Dynamically import the loader and initialize custom themes.
     import("@monaco-editor/react").then(({ loader }) => {
       loader.init().then((monaco) => {
-        // Define the GitHub theme
+        // GitHub theme
         monaco.editor.defineTheme("github", {
           base: "vs",
           inherit: true,
@@ -52,7 +51,7 @@ const defineMonacoThemes = () => {
           },
         });
 
-        // Define the GitHub Dark theme
+        // GitHub Dark theme
         monaco.editor.defineTheme("github-dark", {
           base: "vs-dark",
           inherit: true,
@@ -68,7 +67,7 @@ const defineMonacoThemes = () => {
           },
         });
 
-        // Define the Monokai theme
+        // Monokai theme
         monaco.editor.defineTheme("monokai", {
           base: "vs-dark",
           inherit: true,
@@ -88,7 +87,7 @@ const defineMonacoThemes = () => {
           },
         });
 
-        // Define the Material Ocean theme
+        // Material Ocean theme
         monaco.editor.defineTheme("material-ocean", {
           base: "vs-dark",
           inherit: true,
@@ -108,7 +107,7 @@ const defineMonacoThemes = () => {
           },
         });
 
-        // Define the Dracula theme
+        // Dracula theme
         monaco.editor.defineTheme("dracula", {
           base: "vs-dark",
           inherit: true,
@@ -128,7 +127,7 @@ const defineMonacoThemes = () => {
           },
         });
 
-        // Define the Nord theme
+        // Nord theme
         monaco.editor.defineTheme("nord", {
           base: "vs-dark",
           inherit: true,
@@ -155,9 +154,8 @@ const defineMonacoThemes = () => {
 /**
  * CodeEditor Component
  *
- * This component wraps the Monaco Editor and dynamically loads
- * custom themes. It also adapts to the system theme (dark/light)
- * using the next-themes package.
+ * This component wraps the Monaco Editor, dynamically loads custom themes,
+ * and adapts to the system theme using next-themes.
  */
 export default function CodeEditor({
   language,
@@ -169,14 +167,14 @@ export default function CodeEditor({
   options = {},
 }: CodeEditorProps) {
   const { theme } = useTheme();
-  // Reference to hold the Monaco instance for theme updates
+  // Reference to store the Monaco instance for dynamic updates
   const monacoRef = useRef<Monaco | null>(null);
-  // State to ensure the editor is loaded (client-side)
+  // State flag to confirm editor has loaded on the client
   const [editorLoaded, setEditorLoaded] = useState(false);
 
   /**
-   * Maps a generic language string to Monaco Editor's specific language identifier.
-   * If the language is not in our map, it defaults to the passed language.
+   * Map generic language strings to Monaco language identifiers.
+   * Falls back to the provided language if no match is found.
    */
   const getMonacoLanguage = (lang: string) => {
     const languageMap: Record<string, string> = {
@@ -193,13 +191,12 @@ export default function CodeEditor({
       css: "css",
       rust: "rust",
     };
-
     return languageMap[lang.toLowerCase()] || lang;
   };
 
   /**
-   * Callback for when the editor mounts.
-   * This sets up the editor reference and applies default options.
+   * Callback triggered when the editor mounts.
+   * It sets up the editor reference and applies initial options.
    */
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     if (editorRef) {
@@ -207,7 +204,7 @@ export default function CodeEditor({
     }
     monacoRef.current = monaco;
 
-    // Set editor options such as font size, layout, and more
+    // Set up default editor options, merge with custom options if provided.
     editor.updateOptions({
       fontSize: 16,
       minimap: { enabled: false },
@@ -221,7 +218,7 @@ export default function CodeEditor({
   };
 
   /**
-   * (Optional) Configure language features for enhanced IntelliSense.
+   * (Optional) Configure additional language features for enhanced IntelliSense.
    * Uncomment and extend as needed.
    */
   const configureLanguageFeatures = (monaco: Monaco) => {
@@ -238,7 +235,6 @@ export default function CodeEditor({
       typeRoots: ["node_modules/@types"],
     });
 
-    // Add extra lib definitions for better IntelliSense
     monaco.languages.typescript.javascriptDefaults.addExtraLib(
       `
       declare class Console {
@@ -253,14 +249,14 @@ export default function CodeEditor({
     );
   };
 
-  // Update the editor's theme whenever the system theme changes
+  // Update the Monaco Editor's theme when the system theme changes.
   useEffect(() => {
     if (monacoRef.current) {
       monacoRef.current.editor.setTheme(theme === "dark" ? "vs-dark" : "vs");
     }
   }, [theme]);
 
-  // Initialize custom themes on the client when the component mounts
+  // Initialize custom themes and mark the editor as loaded when the component mounts.
   useEffect(() => {
     defineMonacoThemes();
     setEditorLoaded(true);
@@ -289,7 +285,7 @@ export default function CodeEditor({
           ...options,
         }}
         beforeMount={(monaco) => {
-          // Optional: register additional languages or load services here
+          // Optionally, register additional languages or services here.
         }}
       />
     </div>

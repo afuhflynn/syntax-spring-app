@@ -24,15 +24,15 @@ export default function WebPreview({
     // For HTML, directly use the code
     if (html && css && js) {
       setPreviewHtml(`
-      ${html.replace("<style></style>", css).replace("<script></script>", js)}
+      ${html.replace("<style></style>", `<style>${css}</style>`).replace("<script></script>", `<script>${js}</script>`)}
       `);
     } else if (html && css) {
       setPreviewHtml(`
-      ${html.replace("<style></style>", css)}
+      ${html.replace("<style></style>", `<style>${css}</style>`)}
       `);
     } else if (html && js) {
       setPreviewHtml(`
-      ${html.replace("<script></script>", js)}
+      ${html.replace("<script></script>", `<script>${js}</script>`)}
       `);
     } else if (html) {
       setPreviewHtml(`

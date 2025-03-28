@@ -58,7 +58,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           <Card className="flex flex-col items-center justify-center p-6">
             <Image
-              src="/placeholder.svg?height=60&width=60"
+              src="/react-seeklogo.svg"
               alt="React.js Logo"
               width={60}
               height={60}
@@ -67,20 +67,20 @@ export default function AboutPage() {
             <span className="font-medium">React.js v19</span>
           </Card>
 
-          <Card className="flex flex-col items-center justify-center p-6">
+          <Card className="flex flex-col items-center justify-center p-6 hover:shadow-md">
             <Image
-              src="/placeholder.svg?height=60&width=60"
+              src="/next-js-seeklogo.svg"
               alt="Next.js Logo"
               width={60}
               height={60}
-              className="mb-4"
+              className="mb-4 bg-white rounded-full"
             />
             <span className="font-medium">Next.js</span>
           </Card>
 
           <Card className="flex flex-col items-center justify-center p-6">
             <Image
-              src="/placeholder.svg?height=60&width=60"
+              src="/typescript-seeklogo.svg"
               alt="TypeScript Logo"
               width={60}
               height={60}
@@ -91,7 +91,7 @@ export default function AboutPage() {
 
           <Card className="flex flex-col items-center justify-center p-6">
             <Image
-              src="/placeholder.svg?height=60&width=60"
+              src="/tailwind-css-seeklogo.svg"
               alt="Tailwind CSS Logo"
               width={60}
               height={60}
@@ -102,7 +102,7 @@ export default function AboutPage() {
 
           <Card className="flex flex-col items-center justify-center p-6">
             <Image
-              src="/placeholder.svg?height=60&width=60"
+              src="/framer-motion-seeklogo.svg"
               alt="Framer Motion Logo"
               width={60}
               height={60}

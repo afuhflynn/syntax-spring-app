@@ -6,11 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftCircle, Settings, SliceIcon, Text } from "lucide-react";
+import { ArrowLeftCircle, SliceIcon, Text } from "lucide-react";
 import { Challenge } from "@/TYPES";
 import { useState } from "react";
 import { Tooltip } from "@mui/material";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Settings } from "@/components/settings";
 
 export default function ChallengeClient({
   challenge,

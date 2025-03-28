@@ -18,29 +18,45 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, MessageSquare, Send } from "lucide-react";
+import Link from "next/link";
 
 /**
  * maxLength: number - max message input length
  */
-const maxLength = 350;
+const maxLength = 200;
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  subject: z.string().min(5, {
-    message: "Subject must be at least 5 characters.",
-  }),
+  name: z
+    .string({
+      message: "Please provide your name (e.g JohnDoe).",
+    })
+    .min(2, {
+      message: "Name must be at least 2 characters.",
+    }),
+  email: z
+    .string({
+      message: "Please provide an email.",
+    })
+    .email({
+      message: "Please enter a valid email address.",
+    })
+    .min(4, {
+      message: "A valid email cannot be less than 4 characters.",
+    }),
+  subject: z
+    .string({
+      message:
+        "Please provide a subject. This can be the reason for your message.",
+    })
+    .min(5, {
+      message: "Subject must be at least 5 characters.",
+    }),
   message: z
-    .string()
+    .string({
+      message: "Please provide a message.",
+    })
     .min(10, {
       message: "Message must be at least 10 characters.",
-    })
-    .max(maxLength, {
-      message: `Message must not be more than ${maxLength} characters.`,
     }),
 });
 
@@ -108,9 +124,12 @@ export default function ContactPage() {
                 <Mail className="h-6 w-6 text-primary mt-1" />
                 <div>
                   <h3 className="font-medium">Email</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <Link
+                    className="text-sm text-muted-foreground mt-1"
+                    href="mailto:syntaxspring1516@gmail.com"
+                  >
                     syntaxspring1516@gmail.com
-                  </p>
+                  </Link>
                 </div>
               </div>
 
@@ -190,19 +209,23 @@ export default function ContactPage() {
                           placeholder="Your message"
                           className="min-h-[150px] resize-none"
                           {...field}
+                          disabled={field.value.length > maxLength}
                         />
                       </FormControl>
                       <FormMessage />
+                      <div
+                        className={`flex flex-row items-center justify-between w-full h-auto ${
+                          field.value.length >= maxLength ? "text-red" : ""
+                        }`}
+                      >
+                        <span>Max</span>
+                        <span>
+                          {field.value.length} / {maxLength}
+                        </span>
+                      </div>
                     </FormItem>
                   )}
                 />
-
-                <div className="flex flex-row items-center justify-between w-full h-auto">
-                  <span>Max</span>
-                  <span>
-                    {"0"} / {maxLength}
-                  </span>
-                </div>
 
                 <Button
                   type="submit"

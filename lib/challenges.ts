@@ -359,9 +359,6 @@ public:
       "C++": "https://example.com/icons/cpp.png",
     },
   },
-  // --------------------------------------------------------------------
-  // Additional challenges 6 to 140
-  // --------------------------------------------------------------------
   {
     id: "6",
     title: "Merge Sorted Array",
@@ -1678,7 +1675,7 @@ public:
       html: `<!DOCTYPE html>
 <html>
 <head>
-    <link rel='stylesheet' href='styles.css'>
+    <style></style> <!-- Do not remove this line it is used to link to your css style -->
 </head>
 <body>
     <nav class='navbar'>
@@ -1690,51 +1687,11 @@ public:
             <li><a href='#'>Contact</a></li>
         </ul>
     </nav>
-    <script src='script.js'></script>
+    <script></script><!-- Do not remove this line it is used to link to your js script -->
 </body>
 </html>`,
       css: `.navbar { display: flex; justify-content: space-between; align-items: center; }`,
       javascript: `function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }`,
-    },
-  },
-
-  {
-    id: "13",
-    title: "Build a To-Do List App (React)",
-    description:
-      "Create a simple To-Do list app using React. The app should allow users to add, delete, and mark tasks as complete.",
-    difficulty: "Medium",
-    languages: ["React", "TypeScript"],
-    slug: "todo-list-app",
-    category: "Web Development",
-    examples: [
-      {
-        input: "User adds 'Buy groceries'.",
-        output: "Item appears in the task list.",
-        explanation: "State should update when a new task is added.",
-      },
-    ],
-    constraints: [
-      "Use React functional components and hooks.",
-      "State should be managed using React's useState hook.",
-      "Use TypeScript for type safety.",
-    ],
-    defaultCode: {
-      react_tsx: `import React, { useState } from 'react';
-
-const ToDoApp: React.FC = () => {
-  const [tasks, setTasks] = useState<string[]>([]);
-  const addTask = (task: string) => setTasks([...tasks, task]);
-
-  return (
-    <div>
-      <h1>To-Do List</h1>
-      <button onClick={() => addTask('New Task')}>Add Task</button>
-      <ul>{tasks.map((task, index) => <li key={index}>{task}</li>)}</ul>
-    </div>
-  );
-};
-export default ToDoApp;`,
     },
   },
 
@@ -1798,7 +1755,7 @@ app.listen(3000, () => console.log('Server running on port 3000'));
       html: `<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="styles.css">
+  <style></style><!-- Do not remove this line it is used to link to your css style -->
 </head>
 <body>
   <section class="portfolio">
@@ -1848,11 +1805,11 @@ app.listen(3000, () => console.log('Server running on port 3000'));
       html: `<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="styles.css">
+  <style></style><!-- Do not remove this line it is used to link to your css style -->
 </head>
 <body>
   <button id="toggle">Toggle Dark Mode</button>
-  <script src="script.js"></script>
+  <script></script><!-- Do not remove this line it is used to link to your js script -->
 </body>
 </html>`,
       css: `body.dark {
@@ -1898,7 +1855,7 @@ toggleButton.addEventListener('click', () => {
       html: `<!DOCTYPE html>
 <html>
 <head>
-  <style></style> <!-- Do not remove this line it connects to the css file -->
+  <style></style> <!-- Do not remove this line it is used to link to your css style -->
 </head>
 <body>
   <div class="calculator">
@@ -1912,7 +1869,7 @@ toggleButton.addEventListener('click', () => {
       <button onclick="clearDisplay()">C</button>
     </div>
   </div>
-  <script></style> <!-- Do not remove this line it connects to the js file -->
+  <script></style> <!-- Do not remove this line it is used to link to your js script -->
 </body>
 </html>`,
       css: `.calculator { width: 200px; margin: auto; }
@@ -1944,65 +1901,6 @@ function clearDisplay() {
   },
 
   {
-    id: "18",
-    title: "Fetch and Display API Data (React)",
-    description:
-      "Create a React component using TypeScript that fetches data from a public API and displays it in a list. Include loading and error states for a robust user experience.",
-    difficulty: "Medium",
-    languages: ["React", "TypeScript"],
-    slug: "fetch-api-data-react",
-    category: "Web Development",
-    examples: [
-      {
-        input: "Component mounts",
-        output:
-          "Displays a list of data items fetched from the API with a loading indicator initially",
-        explanation:
-          "Use useEffect for fetching data and useState for managing data, loading, and error states.",
-      },
-    ],
-    constraints: [
-      "Use functional components with React hooks",
-      "Implement type checking with TypeScript",
-      "Handle both loading and error scenarios",
-    ],
-    defaultCode: {
-      react_tsx: `import React, { useState, useEffect } from 'react';
-
-interface DataItem {
-  id: number;
-  title: string;
-}
-
-const DataList: React.FC = () => {
-  const [data, setData] = useState<DataItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(res => res.json())
-      .then(data => { setData(data); setLoading(false); })
-      .catch(err => { setError('Failed to fetch data'); setLoading(false); });
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-
-  return (
-    <ul>
-      {data.slice(0, 10).map(item => (
-        <li key={item.id}>{item.title}</li>
-      ))}
-    </ul>
-  );
-};
-
-export default DataList;`,
-    },
-  },
-
-  {
     id: "19",
     title: "Implement Form Validation (HTML, CSS, JS)",
     description:
@@ -2028,7 +1926,7 @@ export default DataList;`,
       html: `<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="form.css">
+  <style></style><!-- Do not remove this line it is used to link to your css style -->
 </head>
 <body>
   <form id="myForm">
@@ -2037,7 +1935,7 @@ export default DataList;`,
     <span class="error" id="emailError"></span>
     <button type="submit">Submit</button>
   </form>
-  <script src="form.js"></script>
+  <script></script><!-- Do not remove this line it is used to link to your js script -->
 </body>
 </html>`,
       css: `.error { color: red; font-size: 0.8em; }`,

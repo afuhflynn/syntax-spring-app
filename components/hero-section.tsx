@@ -32,10 +32,6 @@ export default function Hero() {
       color:
         "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300",
     },
-    {
-      name: "React",
-      color: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300",
-    },
   ];
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">

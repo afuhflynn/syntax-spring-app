@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, Send } from "lucide-react";
@@ -9,22 +7,32 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import axios from "axios";
 import Image from "next/image";
 
 interface AIHelpModalProps {
   isOpen: boolean;
   onClose: () => void;
-  challenge: any;
   code: string;
   language: string;
+  examples: any;
+  constraints: any;
+  title: string;
+  description: string;
+  difficulty: string;
 }
 
+const maxLength = 100;
 export default function AIHelpModal({
   isOpen,
   onClose,
-  challenge,
   code,
   language,
+  examples,
+  constraints,
+  title,
+  description,
+  difficulty,
 }: AIHelpModalProps) {
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,7 +41,7 @@ export default function AIHelpModal({
   >([
     {
       role: "assistant",
-      content: `Hi there! I'm your AI coding assistant. I can help you with the "${challenge.title}" challenge. What specific help do you need?`,
+      content: `Hi there! I'm your AI coding assistant. I can help you with the "${title}" challenge. What specific help do you need?`,
     },
   ]);
 
@@ -52,27 +60,17 @@ export default function AIHelpModal({
     setIsLoading(true);
 
     try {
-      // Simulate AI response
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      let aiResponse = "";
-
-      // Generate different responses based on the challenge and language
-      if (challenge.slug === "two-sum") {
-        if (language === "javascript") {
-          aiResponse =
-            "For the Two Sum problem in JavaScript, consider using a hash map (object) to store numbers you've seen and their indices. As you iterate through the array, for each number, check if the target minus the current number exists in your hash map. If it does, you've found your pair!";
-        } else if (language === "python") {
-          aiResponse =
-            "In Python, you can solve the Two Sum problem efficiently using a dictionary. As you iterate through the list, check if the complement (target - current number) is already in your dictionary. If it is, return the indices. If not, add the current number and its index to the dictionary.";
-        } else {
-          aiResponse =
-            "The key to solving the Two Sum problem efficiently is using a hash table (map/dictionary) to store numbers you've seen so far. This gives you O(1) lookup time to check if the complement (target - current number) exists.";
-        }
-      } else {
-        aiResponse =
-          "I can help you with this challenge! Let's break it down step by step. What specific part are you struggling with?";
-      }
+      const res = await axios.post<{ response: string }>("/api/ai-assistance", {
+        question,
+        code,
+        language,
+        examples,
+        constraints,
+        title,
+        description,
+        difficulty,
+      });
+      const aiResponse = res.data.response;
 
       // Add AI response to conversation
       setConversation([
@@ -80,7 +78,18 @@ export default function AIHelpModal({
         { role: "user", content: question },
         { role: "assistant", content: aiResponse },
       ]);
-    } catch (error) {
+    } catch (error: any) {
+      let err = "";
+      if (error.response.data.message) {
+        err = error.response.data.message;
+      } else {
+        err = error.message;
+      }
+      setConversation([
+        ...conversation,
+        { role: "user", content: question },
+        { role: "assistant", content: err },
+      ]);
       console.error("Error getting AI response:", error);
     } finally {
       setIsLoading(false);
@@ -151,7 +160,7 @@ export default function AIHelpModal({
 
               {isLoading && (
                 <div className="flex gap-3 mb-4 items-start">
-                  <Avatar className="h-8 w-8 bg-primary">
+                  <Avatar className="h-8 w-8 bg-primary flex flex-row items-center justify-center">
                     <span className="text-xs font-medium text-primary-foreground">
                       AI
                     </span>
@@ -170,8 +179,20 @@ export default function AIHelpModal({
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder="Ask for help with your code..."
-                  className="flex-1 min-h-[80px] resize-none"
+                  className={`flex-1 min-h-[80px] resize-none ${
+                    question.length >= maxLength ? "text-red-400" : ""
+                  }`}
                 />
+                <div
+                  className={`flex flex-row items-center justify-between w-full h-auto ${
+                    question.length >= maxLength ? "text-red-400" : ""
+                  }`}
+                >
+                  <span>Max</span>
+                  <span>
+                    {question.length} / {maxLength}
+                  </span>
+                </div>
                 <Button
                   type="submit"
                   size="icon"

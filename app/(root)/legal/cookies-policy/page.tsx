@@ -136,17 +136,15 @@ export default function CookiesPage() {
           <p>
             We may update our Cookies Policy from time to time. We will notify
             you of any changes by posting the new policy on this page and
-            updating the "Last updated" date.
+            updating the{" "}
+            <span className="font-bold">"Last updated"</span> date.
           </p>
 
           <h2>Contact us</h2>
           <p>
             If you have any questions about our Cookies Policy, please contact
             us at{" "}
-            <a href="mailto:privacy@syntaxspring.com">
-              privacy@syntaxspring.com
-            </a>
-            .
+            <a href="mailto:syntaxspring@gmail.com">syntaxspring@gmail.com</a>.
           </p>
 
           <div className="mt-8">

@@ -130,15 +130,16 @@ Execution completed successfully.`);
   }, []);
 
   // Update the web view components based on lang type and if code changes
-  useEffect(() => {
-    if (selectedLanguage === "html") {
-      setHtml(code);
-    } else if (selectedLanguage === "css") {
-      setCss(code);
-    } else if (selectedLanguage === "javascript") {
-      setJs(code);
+  const handleCodeChange = (value: string) => {
+    if (selectedLanguage.toLowerCase() === "html") {
+      setHtml(value);
+    } else if (selectedLanguage.toLowerCase() === "css") {
+      setCss(value);
+    } else if (selectedLanguage.toLowerCase() === "javascript") {
+      setJs(value);
     }
-  }, [code]);
+    setCode(value);
+  };
 
   return (
     <div className="border rounded-lg overflow-hidden bg-card shadow-sm w-full h-full py-1 mt-4">
@@ -224,7 +225,7 @@ Execution completed successfully.`);
             <CodeEditor
               language={selectedLanguage}
               value={code}
-              onChange={setCode}
+              onChange={handleCodeChange}
               editorRef={editorRef}
               className="resize-x"
             />
@@ -262,7 +263,7 @@ Execution completed successfully.`);
             <CodeEditor
               language={selectedLanguage}
               value={code}
-              onChange={setCode}
+              onChange={handleCodeChange}
               editorRef={editorRef}
               className="resize-x"
             />
@@ -297,7 +298,11 @@ Execution completed successfully.`);
       <AIHelpModal
         isOpen={isAIHelpOpen}
         onClose={() => setIsAIHelpOpen(false)}
-        challenge={challenge}
+        examples={challenge.examples}
+        constraints={challenge.constraints}
+        difficulty={challenge.difficulty}
+        title={challenge.title}
+        description={challenge.description}
         code={code}
         language={selectedLanguage}
       />

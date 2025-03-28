@@ -1,12 +1,4 @@
-import { Inter } from "next/font/google";
 import { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Dashboard | Syntax Spring",
@@ -18,16 +10,5 @@ export default function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className={inter.className}>{children}</body>
-      </ThemeProvider>
-    </html>
-  );
+  return <div className={`w-screen h-screen`}>{children}</div>;
 }
