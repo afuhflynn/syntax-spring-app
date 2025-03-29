@@ -14,7 +14,7 @@
     "@emotion/is-prop-valid": "latest",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@google/generative-ai": "^0.24.0",
+    "@google/genai": "^0.7.0",
     "@hookform/resolvers": "latest",
     "@monaco-editor/react": "latest",
     "@mui/material": "^6.4.7",

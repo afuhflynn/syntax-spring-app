@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
 // Allow longer processing time for AI responses
@@ -18,10 +18,8 @@ export async function POST(req: Request) {
     } = await req.json();
 
     // Initialize the Google Generative AI with the API key
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const genAI = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY!});
 
-    // Get the generative model (Gemini Pro)
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     // Create a system prompt that includes context about the code
     const systemPrompt = `You are an AI coding assistant for the Syntax Spring a modern, interactive coding challenge platform designed to help developers improve their programming skills through hands-on practice. 
@@ -49,9 +47,9 @@ export async function POST(req: Request) {
     `;
 
     // Generate content using the Gemini model
-    const result = await model.generateContent(systemPrompt);
-    const response = result.response;
-    const text = response.text();
+    const result = await genAI.models.generateContent({
+model: "gemini-2.0-flash", contents: systemPrompt});
+    const text = Object.values(result.candidates[0].content.parts[0])[0];
 
     return NextResponse.json({
       response: text,

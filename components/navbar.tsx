@@ -58,6 +58,12 @@ export default function Navbar() {
     { name: "About", path: "/platform/about" },
   ];
 
+   const dummyUser = {
+    name: "afuhflynn",
+    email: "flyinnsafuh@gmail.com",
+    image: "",
+  };
+
   return (
     <header
       className={cn(
@@ -98,7 +104,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <ThemeToggle />
           {isAuthenticated ? (
-            <UserButton />
+            <UserButton user={dummyUser} />
           ) : (
             <>
               <Button

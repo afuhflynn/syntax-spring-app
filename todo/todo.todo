@@ -1,18 +1,3 @@
-[] Add a button to ask users if they are ready to start coding. And after wards add one to minimize the coding env.
-[] Add intellisense for all current available langs and vb.net
-[] Modify the footer to include correct data
-[] Download (React, Nextj, Tailwindcss, Typescript, Framer-motion) logos
-[] Hide home page link from logged in users and always redirect to the dashboard
-[] Access dashboard by clicking user icon on navbar not link.
-[] Generate dashboard title dynamically based on user data.
-[] Streaks, leaderboard, leagues and points visible on dashboard only.
-[] Add other code samples (data)
-[] convert fav-icon.svg to fav-icon.png
-[] Add next auth for authentication
-
-[] Add button for minimize/expand code editor and details (optional)
-[] Add button to take the editor into full screen
-[] Enable resize of different editor parts and make it responsive as required
-[] Style the terminal and add minimize, hide and resize controls
-
-[] Create usefull good looking, and amazing and appropriate dashboard with a custom dasboard navbar for the users of syntax tailored to their, needs (badges, laeaderboard, streaks and more), and tailored to syntax)
+[] Add a button for users to copy chatbot responses
+[] Auto scroll to bottom on new chat input.
+[] Press enter to submit chat input or press ctrl + enter

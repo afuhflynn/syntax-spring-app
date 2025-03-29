@@ -17,7 +17,7 @@ export const DashboardNavBar = () => {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="What do you need to learn today?"
+            placeholder="Have a challenge in mind?"
             className="h-9 w-[300px] rounded-md border border-input bg-background pl-8 pr-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
         </div>

@@ -151,7 +151,7 @@ export default function AIHelpModal({
                         : "bg-primary text-primary-foreground ml-auto"
                     )}
                   >
-                    <p className="whitespace-pre-wrap text-sm">
+                    <p className="whitespace-pre-wrap text-sm response">
                       {message.content}
                     </p>
                   </div>
@@ -166,7 +166,7 @@ export default function AIHelpModal({
                     </span>
                   </Avatar>
                   <div className="rounded-lg p-3 bg-muted">
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Is Thinking... <Loader2 className="h-4 w-4 animate-spin" />
                   </div>
                 </div>
               )}
@@ -183,16 +183,7 @@ export default function AIHelpModal({
                     question.length >= maxLength ? "text-red-400" : ""
                   }`}
                 />
-                <div
-                  className={`flex flex-row items-center justify-between w-full h-auto ${
-                    question.length >= maxLength ? "text-red-400" : ""
-                  }`}
-                >
-                  <span>Max</span>
-                  <span>
-                    {question.length} / {maxLength}
-                  </span>
-                </div>
+               
                 <Button
                   type="submit"
                   size="icon"

@@ -5,10 +5,10 @@ export const metadata: Metadata = {
   description: "User dashboard @ syntax spring",
 };
 
-export default function DashboardLayout({
+export default function MainDashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className={`w-screen h-screen`}>{children}</div>;
+  return <div className={`w-full h-full overflow-hidden`}>{children}</div>;
 }

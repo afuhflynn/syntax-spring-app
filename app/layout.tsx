@@ -64,7 +64,9 @@ export default function MainLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">{children}</div>
+          <div className="flex min-h-screen h-screen w-screen flex-col">
+            {children}
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>

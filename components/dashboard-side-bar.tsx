@@ -42,7 +42,7 @@ export const DashboardSideBar = () => {
 
           <Link
             href={`/dashboard/${dummyUser}/learning-paths`}
-            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors ${
+            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
               path.trim() === "learning-paths" ? "bg-muted" : ""
             } hover:bg-muted hover:text-foreground`}
           >
@@ -69,7 +69,7 @@ export const DashboardSideBar = () => {
 
           <Link
             href={`/dashboard/${dummyUser}/challenges`}
-            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground ${
+            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground ${
               path.trim() === "challenges" ? "bg-muted" : ""
             }`}
           >
@@ -91,13 +91,11 @@ export const DashboardSideBar = () => {
           </Link>
         </nav>
         <div className="py-4 mt-2">
-          <h3 className="px-3 text-xs font-medium text-muted-foreground">
-            Practice
-          </h3>
+          <h3 className="px-3 text-xs font-medium">Practice</h3>
           <nav className="mt-2 space-y-1">
             <Link
               href="/platform/challenges"
-              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground `}
+              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +117,7 @@ export const DashboardSideBar = () => {
 
             <Link
               href="/play-ground/editor"
-              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground`}
+              className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

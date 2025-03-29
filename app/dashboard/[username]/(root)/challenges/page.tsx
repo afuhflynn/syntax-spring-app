@@ -1,10 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Code, Award, MessageSquare, GitBranch, Star } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import {
+  CheckCircle,
+  Clock,
+  Code,
+  Award,
+  MessageSquare,
+  GitBranch,
+  Star,
+} from "lucide-react";
 
 // Mock data - replace with actual API calls
 const activityData = [
@@ -77,80 +91,90 @@ const activityData = [
     date: "2023-12-14T08:30:00Z",
     points: 10,
   },
-]
+];
 
 export default function ActivityPage() {
-  const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState("all");
 
   const challengeActivities = activityData.filter(
-    (activity) => activity.type === "challenge_completed" || activity.type === "challenge_attempted",
-  )
+    (activity) =>
+      activity.type === "challenge_completed" ||
+      activity.type === "challenge_attempted"
+  );
 
-  const badgeActivities = activityData.filter((activity) => activity.type === "badge_earned")
+  const badgeActivities = activityData.filter(
+    (activity) => activity.type === "badge_earned"
+  );
 
   const otherActivities = activityData.filter(
     (activity) =>
       activity.type !== "challenge_completed" &&
       activity.type !== "challenge_attempted" &&
-      activity.type !== "badge_earned",
-  )
+      activity.type !== "badge_earned"
+  );
 
   const displayActivities =
     activeTab === "all"
       ? activityData
       : activeTab === "challenges"
-        ? challengeActivities
-        : activeTab === "badges"
-          ? badgeActivities
-          : otherActivities
+      ? challengeActivities
+      : activeTab === "badges"
+      ? badgeActivities
+      : otherActivities;
 
   const getActivityIcon = (type: string) => {
     switch (type) {
       case "challenge_completed":
-        return <CheckCircle className="h-5 w-5 text-green-500" />
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
       case "challenge_attempted":
-        return <Code className="h-5 w-5 text-primary" />
+        return <Code className="h-5 w-5 text-primary" />;
       case "badge_earned":
-        return <Award className="h-5 w-5 text-yellow-500" />
+        return <Award className="h-5 w-5 text-yellow-500" />;
       case "comment_posted":
-        return <MessageSquare className="h-5 w-5 text-blue-500" />
+        return <MessageSquare className="h-5 w-5 text-blue-500" />;
       case "learning_path_progress":
-        return <GitBranch className="h-5 w-5 text-purple-500" />
+        return <GitBranch className="h-5 w-5 text-purple-500" />;
       default:
-        return <Star className="h-5 w-5 text-primary" />
+        return <Star className="h-5 w-5 text-primary" />;
     }
-  }
+  };
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    const now = new Date()
-    const diffInMs = now.getTime() - date.getTime()
-    const diffInSecs = Math.floor(diffInMs / 1000)
-    const diffInMins = Math.floor(diffInSecs / 60)
-    const diffInHours = Math.floor(diffInMins / 60)
-    const diffInDays = Math.floor(diffInHours / 24)
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMs = now.getTime() - date.getTime();
+    const diffInSecs = Math.floor(diffInMs / 1000);
+    const diffInMins = Math.floor(diffInSecs / 60);
+    const diffInHours = Math.floor(diffInMins / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
 
     if (diffInSecs < 60) {
-      return `${diffInSecs} seconds ago`
+      return `${diffInSecs} seconds ago`;
     } else if (diffInMins < 60) {
-      return `${diffInMins} minutes ago`
+      return `${diffInMins} minutes ago`;
     } else if (diffInHours < 24) {
-      return `${diffInHours} hours ago`
+      return `${diffInHours} hours ago`;
     } else if (diffInDays < 7) {
-      return `${diffInDays} days ago`
+      return `${diffInDays} days ago`;
     } else {
-      return date.toLocaleDateString()
+      return date.toLocaleDateString();
     }
-  }
+  };
 
   return (
     <div className="space-y-6 p-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Activity Log</h1>
-        <p className="text-muted-foreground">Track your recent actions and achievements on the platform.</p>
+        <p className="text-muted-foreground">
+          Track your recent actions and achievements on the platform.
+        </p>
       </div>
 
-      <Tabs defaultValue="all" className="w-[400px]" onValueChange={setActiveTab}>
+      <Tabs
+        defaultValue="all"
+        className="w-[400px]"
+        onValueChange={setActiveTab}
+      >
         <TabsList>
           <TabsTrigger value="all">All Activity</TabsTrigger>
           <TabsTrigger value="challenges">Challenges</TabsTrigger>
@@ -162,7 +186,9 @@ export default function ActivityPage() {
       <Card>
         <CardHeader>
           <CardTitle>Recent Activity</CardTitle>
-          <CardDescription>Your latest actions and achievements on the platform</CardDescription>
+          <CardDescription>
+            Your latest actions and achievements on the platform
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
@@ -184,16 +210,22 @@ export default function ActivityPage() {
                           activity.difficulty === "Easy"
                             ? "text-difficulty-easy"
                             : activity.difficulty === "Medium"
-                              ? "text-difficulty-medium"
-                              : "text-difficulty-hard"
+                            ? "text-difficulty-medium"
+                            : "text-difficulty-hard"
                         }`}
                       >
                         {activity.difficulty}
                       </Badge>
                     )}
-                    {activity.points > 0 && <Badge className="ml-2 bg-primary">+{activity.points} points</Badge>}
+                    {activity.points > 0 && (
+                      <Badge className="ml-2 bg-primary">
+                        +{activity.points} points
+                      </Badge>
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground">{activity.description}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.description}
+                  </p>
                   <div className="flex items-center pt-1 text-xs text-muted-foreground">
                     <Clock className="mr-1 h-3 w-3" />
                     <span>{formatDate(activity.date)}</span>
@@ -205,6 +237,5 @@ export default function ActivityPage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-
