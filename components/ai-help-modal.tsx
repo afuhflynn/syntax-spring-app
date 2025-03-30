@@ -9,6 +9,8 @@ import { Avatar } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import Image from "next/image";
+import { Tooltip } from "@mui/material";
+import Logo from "./logo";
 
 interface AIHelpModalProps {
   isOpen: boolean;
@@ -36,12 +38,13 @@ export default function AIHelpModal({
 }: AIHelpModalProps) {
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const username = "afuhflynn"; // TODO: Change to real user name
   const [conversation, setConversation] = useState<
-    Array<{ role: "user" | "assistant"; content: string }>
+    Array<{ role: "user" | "bot"; content: string }>
   >([
     {
-      role: "assistant",
-      content: `Hi there! I'm your AI coding assistant. I can help you with the "${title}" challenge. What specific help do you need?`,
+      role: "bot",
+      content: `Hi ${username}! I'm SyntaxSpring Code Assist.\nHow can I help you with "${title}" challenge. What specific help do you need?`,
     },
   ]);
 
@@ -69,6 +72,7 @@ export default function AIHelpModal({
         title,
         description,
         difficulty,
+        chatHistory: conversation,
       });
       const aiResponse = res.data.response;
 
@@ -76,7 +80,7 @@ export default function AIHelpModal({
       setConversation([
         ...conversation,
         { role: "user", content: question },
-        { role: "assistant", content: aiResponse },
+        { role: "bot", content: aiResponse },
       ]);
     } catch (error: any) {
       let err = "";
@@ -88,7 +92,7 @@ export default function AIHelpModal({
       setConversation([
         ...conversation,
         { role: "user", content: question },
-        { role: "assistant", content: err },
+        { role: "bot", content: err },
       ]);
       console.error("Error getting AI response:", error);
     } finally {
@@ -111,11 +115,15 @@ export default function AIHelpModal({
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b p-4">
-              <h2 className="text-lg font-semibold">AI Coding Assistant</h2>
-              <Button variant="ghost" size="icon" onClick={onClose}>
-                <X className="h-4 w-4" />
-                <span className="sr-only">Close</span>
-              </Button>
+              <h2 className="text-lg font-semibold">
+                <Logo /> Code Assist
+              </h2>
+              <Tooltip title="close" placement="top-end" arrow>
+                <Button variant="ghost" size="icon" onClick={onClose}>
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Close</span>
+                </Button>
+              </Tooltip>
             </div>
 
             {/* Conversation */}
@@ -125,12 +133,12 @@ export default function AIHelpModal({
                   key={index}
                   className={cn(
                     "flex gap-3 mb-4",
-                    message.role === "assistant"
+                    message.role === "bot"
                       ? "items-start"
                       : "items-start flex-row-reverse"
                   )}
                 >
-                  {message.role === "assistant" && (
+                  {message.role === "bot" && (
                     <Avatar className="h-8 w-8 bg-secondary">
                       <Image
                         src={
@@ -146,26 +154,32 @@ export default function AIHelpModal({
                   <div
                     className={cn(
                       "rounded-lg p-3 max-w-[80%]",
-                      message.role === "assistant"
+                      message.role === "bot"
                         ? "bg-muted"
                         : "bg-primary text-primary-foreground ml-auto"
                     )}
                   >
-                    <p className="whitespace-pre-wrap text-sm response">
+                    <div className="whitespace-pre-wrap text-sm response">
                       {message.content}
-                    </p>
+                    </div>
                   </div>
                 </div>
               ))}
 
               {isLoading && (
                 <div className="flex gap-3 mb-4 items-start">
-                  <Avatar className="h-8 w-8 bg-primary flex flex-row items-center justify-center">
-                    <span className="text-xs font-medium text-primary-foreground">
-                      AI
-                    </span>
+                  <Avatar className="h-8 w-8 bg-secondary">
+                    <Image
+                      src={
+                        "https://res.cloudinary.com/duzg7l0eo/image/upload/v1742920199/fav-icon_mnoce0.png"
+                      }
+                      alt="Syntax spring logo"
+                      width={40}
+                      height={40}
+                      className="text-xs font-medium text-primary-foreground"
+                    />
                   </Avatar>
-                  <div className="rounded-lg p-3 bg-muted">
+                  <div className="rounded-lg p-3 bg-muted flex flex-row items-center gap-2">
                     Is Thinking... <Loader2 className="h-4 w-4 animate-spin" />
                   </div>
                 </div>
@@ -178,20 +192,22 @@ export default function AIHelpModal({
                 <Textarea
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  placeholder="Ask for help with your code..."
+                  placeholder="Add a message to tailore the response..."
                   className={`flex-1 min-h-[80px] resize-none ${
                     question.length >= maxLength ? "text-red-400" : ""
                   }`}
                 />
-               
-                <Button
-                  type="submit"
-                  size="icon"
-                  disabled={!question.trim() || isLoading}
-                >
-                  <Send className="h-4 w-4" />
-                  <span className="sr-only">Send</span>
-                </Button>
+
+                <Tooltip title="Send" placement="right-end" arrow>
+                  <Button
+                    type="submit"
+                    size="icon"
+                    disabled={!question.trim() || isLoading}
+                  >
+                    <Send className="h-4 w-4" />
+                    <span className="sr-only">Send</span>
+                  </Button>
+                </Tooltip>
               </div>
             </form>
           </motion.div>

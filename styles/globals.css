@@ -247,235 +247,365 @@
   .animation-delay-700 {
     animation-delay: 700ms;
   }
-}
 
-/* Chat bot response styles */
-/* Container for rendered Markdown */
-.response {
-  font-family: 'Inter', sans-serif;
-  color: #e4e4e7;
-  background-color: #121212;
-  line-height: 1.8;
-  padding: 1.5rem;
-  border-radius: 10px;
-  max-width: 800px;
-  margin: 2rem auto;
-}
+  .terminal::-webkit-scrollbar {
+    @apply appearance-none w-2 bg-background;
+  }
 
-/* Headings */
-.response h1,
-.response h2,
-.response h3,
-.response h4,
-.response h5,
-.response h6 {
-  margin-top: 1.2rem;
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-}
-.response h1 { font-size: 2.2rem; color: #facc15; }
-.response h2 { font-size: 2rem; color: #fbbf24; }
-.response h3 { font-size: 1.8rem; color: #38bdf8; }
-.response h4 { font-size: 1.6rem; color: #7dd3fc; }
-.response h5 { font-size: 1.4rem; color: #a78bfa; }
-.response h6 { font-size: 1.2rem; color: #c4b5fd; }
+  .terminal::-webkit-scrollbar-thumb {
+    @apply appearance-none w-full bg-muted;
+  }
 
-/* Paragraphs */
-.response p {
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
+  /* Chat bot response styles */
+  .response {
+    appearance: none;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    line-height: 1.8;
+    border-radius: 10px;
+    max-width: 800px;
+  }
 
-/* Bold and Italic */
-.response strong { font-weight: bold; color: #facc15; }
-.response em { font-style: italic; color: #a78bfa; }
-.response strong em,
-.response em strong { font-weight: bolder; }
+  /* Headings */
+  .response h1,
+  .response h2,
+  .response h3,
+  .response h4,
+  .response h5,
+  .response h6 {
+    appearance: none;
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
 
-/* Inline Code */
-.response code {
-  font-family: 'Fira Code', monospace;
-  background-color: #27272a;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.95rem;
-}
+  .response h1 {
+    appearance: none;
+    font-size: 2.2rem;
+    color: #facc15;
+  }
 
-/* Fenced Code Blocks & Preformatted Text */
-.response pre {
-  background-color: #1e1e1e;
-  color: #f8f8f2;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  margin-bottom: 1rem;
-}
-.response pre code {
-  background: none;
-  padding: 0;
-  font-size: 1rem;
-}
+  .response h2 {
+    appearance: none;
+    font-size: 2rem;
+    color: #fbbf24;
+  }
 
-/* Blockquotes */
-.response blockquote {
-  border-left: 4px solid #facc15;
-  padding-left: 1rem;
-  margin: 1rem 0;
-  font-style: italic;
-  color: #eab308;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-}
+  .response h3 {
+    appearance: none;
+    font-size: 1.8rem;
+    color: #38bdf8;
+  }
 
-/* Horizontal Rules */
-.response hr {
-  border: none;
-  border-top: 1px solid #3f3f46;
-  margin: 1.5rem 0;
-  opacity: 0.6;
-}
+  .response h4 {
+    appearance: none;
+    font-size: 1.6rem;
+    color: #7dd3fc;
+  }
 
-/* Lists */
-.response ul,
-.response ol {
-  margin-bottom: 1rem;
-  padding-left: 1.8rem;
-}
-.response ul { list-style-type: disc; }
-.response ol { list-style-type: decimal; }
-.response li { margin-bottom: 0.5rem; }
+  .response h5 {
+    appearance: none;
+    font-size: 1.4rem;
+    color: #a78bfa;
+  }
 
-/* Task Lists (GitHub Flavored Markdown) */
-.response ul.task-list {
-  list-style: none;
-  padding-left: 0;
-}
-.response ul.task-list li {
-  position: relative;
-  padding-left: 2rem;
-}
-.response ul.task-list li input[type="checkbox"] {
-  position: absolute;
-  left: 0;
-  top: 0.2rem;
-}
+  .response h6 {
+    appearance: none;
+    font-size: 1.2rem;
+    color: #c4b5fd;
+  }
 
-/* Tables */
-.response table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1rem;
-}
-.response th,
-.response td {
-  border: 1px solid #3f3f46;
-  padding: 0.75rem;
-  text-align: left;
-}
-.response th {
-  background-color: #1e1e1e;
-  font-weight: 600;
-}
+  /* Paragraphs */
+  .response p {
+    appearance: none;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
 
-/* Images */
-.response img {
-  max-width: 100%;
-  display: block;
-  margin: 1rem auto;
-  border-radius: 8px;
-}
+  /* Bold and Italic */
+  .response strong {
+    appearance: none;
+    font-weight: bold;
+    color: #facc15;
+  }
 
-/* Links */
-.response a {
-  color: #3b82f6;
-  text-decoration: underline;
-  font-weight: 600;
-}
-.response a:hover {
-  color: #2563eb;
-}
+  .response em {
+    appearance: none;
+    font-style: italic;
+    color: #a78bfa;
+  }
 
-/* Footnotes */
-.response .footnotes {
-  font-size: 0.9rem;
-  border-top: 1px solid #3f3f46;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-}
-.response .footnotes ol {
-  padding-left: 1.8rem;
-}
-.response .footnotes li {
-  margin-bottom: 0.5rem;
-}
+  .response strong em,
+  .response em strong {
+    appearance: none;
+    font-weight: bolder;
+  }
 
-/* Definition Lists (Markdown Extra) */
-.response dl { margin: 1rem 0; }
-.response dt { font-weight: bold; margin-top: 1rem; }
-.response dd { margin-left: 1rem; margin-bottom: 0.5rem; }
+  /* Inline Code */
+  .response code {
+    appearance: none;
+    font-family: 'Fira Code', monospace;
+    background-color: #27272a;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
 
-/* Superscript and Subscript */
-.response sup { font-size: 0.8em; vertical-align: super; }
-.response sub { font-size: 0.8em; vertical-align: sub; }
+  /* Fenced Code Blocks & Preformatted Text */
+  .response pre {
+    appearance: none;
+    background-color: #1e1e1e;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin-bottom: 1rem;
+  }
 
-/* Strikethrough (GFM) */
-.response del { text-decoration: line-through; }
+  .response pre code {
+    appearance: none;
+    background: none;
+    padding: 0;
+    font-size: 1rem;
+  }
 
-/* Highlight (Extended syntax) */
-.response mark {
-  background-color: #facc15;
-  color: #121212;
-  padding: 0 0.2em;
-}
+  /* Blockquotes */
+  .response blockquote {
+    appearance: none;
+    border-left: 4px solid #facc15;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #eab308;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
 
-/* Additional extended elements (if supported) */
-.response .math { font-family: 'Latin Modern Math', serif; }
+  /* Horizontal Rules */
+  .response hr {
+    appearance: none;
+    border: none;
+    border-top: 1px solid #3f3f46;
+    margin: 1.5rem 0;
+    opacity: 0.6;
+  }
 
-/* Bold (double asterisks) */
-.response strong {
-  color: #facc15 !important;
-  font-weight: bold !important;
-}
+  /* Lists */
+  .response ul,
+  .response ol {
+    appearance: none;
+    margin-bottom: 1rem;
+    padding-left: 1.8rem;
+  }
 
-/* Italic (single asterisks) */
-.response em {
-  color: #a78bfa !important;
-  font-style: italic !important;
-}
+  .response ul {
+    appearance: none;
+    list-style-type: disc;
+  }
 
-/* Inline Code */
-.response code {
-  font-family: 'Fira Code', monospace !important;
-  background-color: #27272a !important;
-  padding: 0.2rem 0.4rem !important;
-  border-radius: 4px !important;
-  font-size: 0.95rem !important;
-}
+  .response ol {
+    appearance: none;
+    list-style-type: decimal;
+  }
 
-/* Code Blocks */
-.response pre {
-  background-color: #1e1e1e !important;
-  color: #f8f8f2 !important;
-  padding: 1rem !important;
-  border-radius: 6px !important;
-  overflow-x: auto !important;
-  white-space: pre-wrap !important;
-  margin-bottom: 1rem !important;
-}
-.response pre code {
-  background: none !important;
-  padding: 0 !important;
-  font-size: 1rem !important;
-}
+  .response li {
+    appearance: none;
+    margin-bottom: 0.5rem;
+  }
 
-/* Blockquotes */
-.response blockquote {
-  border-left: 4px solid #facc15 !important;
-  padding-left: 1rem !important;
-  margin: 1rem 0 !important;
-  font-style: italic !important;
-  color: #eab308 !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  border-radius: 6px !important;
+  /* Task Lists (GitHub Flavored Markdown) */
+  .response ul.task-list {
+    appearance: none;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .response ul.task-list li {
+    appearance: none;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .response ul.task-list li input[type="checkbox"] {
+    appearance: none;
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+  }
+
+  /* Tables */
+  .response table {
+    appearance: none;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+
+  .response th,
+  .response td {
+    appearance: none;
+    border: 1px solid #3f3f46;
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  .response th {
+    appearance: none;
+    background-color: #1e1e1e;
+    font-weight: 600;
+  }
+
+  /* Images */
+  .response img {
+    appearance: none;
+    max-width: 100%;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+  }
+
+  /* Links */
+  .response a {
+    appearance: none;
+    color: #3b82f6;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .response a:hover {
+    appearance: none;
+    color: #2563eb;
+  }
+
+  /* Footnotes */
+  .response .footnotes {
+    appearance: none;
+    font-size: 0.9rem;
+    border-top: 1px solid #3f3f46;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .response .footnotes ol {
+    appearance: none;
+    padding-left: 1.8rem;
+  }
+
+  .response .footnotes li {
+    appearance: none;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Definition Lists (Markdown Extra) */
+  .response dl {
+    appearance: none;
+    margin: 1rem 0;
+  }
+
+  .response dt {
+    appearance: none;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+
+  .response dd {
+    appearance: none;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Superscript and Subscript */
+  .response sup {
+    appearance: none;
+    font-size: 0.8em;
+    vertical-align: super;
+  }
+
+  .response sub {
+    appearance: none;
+    font-size: 0.8em;
+    vertical-align: sub;
+  }
+
+  /* Strikethrough (GFM) */
+  .response del {
+    appearance: none;
+    text-decoration: line-through;
+  }
+
+  /* Highlight (Extended syntax) */
+  .response mark {
+    appearance: none;
+    background-color: #facc15;
+    color: #121212;
+    padding: 0 0.2em;
+  }
+
+  /* Additional extended elements (if supported) */
+  .response math {
+    appearance: none;
+    font-family: 'Latin Modern Math', serif;
+  }
+
+  /* Bold (double asterisks) */
+  .response strong {
+    appearance: none;
+    color: #facc15 !important;
+    font-weight: bold !important;
+  }
+
+  /* Italic (single asterisks) */
+  .response em {
+    appearance: none;
+    color: #a78bfa !important;
+    font-style: italic !important;
+  }
+
+  /* Inline Code */
+  .response code {
+    appearance: none;
+    font-family: 'Fira Code', monospace !important;
+    background-color: #27272a !important;
+    padding: 0.2rem 0.4rem !important;
+    border-radius: 4px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Code Blocks */
+  .response pre {
+    appearance: none;
+    background-color: #1e1e1e !important;
+    color: #f8f8f2 !important;
+    padding: 1rem !important;
+    border-radius: 6px !important;
+    overflow-x: auto !important;
+    white-space: pre-wrap !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .response pre code {
+    appearance: none;
+    background: none !important;
+    padding: 0 !important;
+    font-size: 1rem !important;
+  }
+
+  /* Blockquotes */
+  .response blockquote {
+    appearance: none;
+    border-left: 4px solid #facc15 !important;
+    padding-left: 1rem !important;
+    margin: 1rem 0 !important;
+    font-style: italic !important;
+    color: #eab308 !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 6px !important;
+  }
+
+  .response strong {
+    appearance: none;
+    font-weight: bold;
+  }
 }

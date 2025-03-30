@@ -15,7 +15,6 @@ import {
   CheckCircleIcon,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import OutputTerminal from "@/components/output-terminal";
 import WebPreview from "@/components/web-preview";
 import AIHelpModal from "@/components/ai-help-modal";
 import { useLocalStorage } from "@/hooks/use-local-storage";
@@ -23,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { configureMonacoLanguages } from "@/utils/monaco-languages";
 import type { Monaco } from "@monaco-editor/react";
 import { Challenge } from "@/TYPES";
+import { InteractiveTerminal } from "./interactive-terminal";
 
 const CodeEditor = dynamic(() => import("@/components/code-editor"), {
   ssr: false,
@@ -270,7 +270,7 @@ Execution completed successfully.`);
           </div>
 
           <div
-            className={`w-full border-none resize-y ${cn(
+            className={`w-full border-none relative ${cn(
               viewMode === "editor"
                 ? "hidden md:hidden"
                 : viewMode === "split"
@@ -278,7 +278,7 @@ Execution completed successfully.`);
                 : "h-full"
             )}`}
           >
-            <OutputTerminal output={output} />
+            <InteractiveTerminal />
           </div>
         </div>
       )}

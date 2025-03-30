@@ -43,7 +43,7 @@ export default function Hero() {
           animate="visible"
           variants={fadeIn}
         >
-          <Badge className="px-4 py-1.5 text-sm font-medium mb-2">
+          <Badge className="px-4 py-1.5 text-sm font-medium mb-2 cursor-default">
             Welcome to Syntax Spring
           </Badge>
           <motion.h1

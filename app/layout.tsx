@@ -25,6 +25,13 @@ export const metadata: Metadata = {
     "javascript",
     "python",
     "java",
+    "cpp",
+    "c++",
+    "c programming",
+    "c",
+    "c++ programming",
+    "cpp programming",
+    "programming challenges",
   ],
   authors: [{ name: "Syntax Spring Team" }],
   creator: "Syntax Spring",
@@ -44,7 +51,7 @@ export const metadata: Metadata = {
       "Master coding challenges in multiple languages with our interactive platform.",
     creator: "@syntaxspring",
   },
-  generator: "afuhflynn",
+  generator: "Tembeng Flynn Afuh",
   icons: {
     icon: "/favicon.ico",
   },
@@ -64,7 +71,7 @@ export default function MainLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen h-screen w-screen flex-col">
+          <div className="flex min-h-screen h-screen max-w-screen flex-col">
             {children}
           </div>
           <Toaster />
