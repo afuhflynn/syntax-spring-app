@@ -115,8 +115,8 @@ export default function AIHelpModal({
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b p-4">
-              <h2 className="text-lg font-semibold">
-                <Logo /> Code Assist
+              <h2 className="text-lg font-semibold flex flex-row items-center gap-1">
+                <Logo />
               </h2>
               <Tooltip title="close" placement="top-end" arrow>
                 <Button variant="ghost" size="icon" onClick={onClose}>

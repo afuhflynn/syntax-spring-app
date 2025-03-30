@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Settings } from "@/components/settings";
 import { languages } from "@/lib/languages";
 import { executeCode, mapLanguageToPiston } from "@/lib/api-service";
-import { Loader2, Play, FileCode, Globe } from "lucide-react";
+import { Loader2, Play, FileCode, Globe, ArrowLeftCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -23,6 +23,7 @@ import { InteractiveTerminal } from "@/components/interactive-terminal";
 import { MainLoader } from "./loader";
 import Logo from "./logo";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 // Dynamically import the CodeEditor component with no SSR
 const CodeEditor = dynamic(() => import("@/components/code-editor"), {
@@ -162,6 +163,8 @@ export function TestCodeEditor() {
   const [executionError, setExecutionError] = useState<boolean>(false);
   const [editorLoaded, setEditorLoaded] = useState(true);
 
+  const router = useRouter();
+
   const {
     currentFile,
     language,
@@ -265,6 +268,13 @@ export function TestCodeEditor() {
           </motion.div>
           <div className="flex items-center gap-2 md:gap-4">
             <div className="hidden md:flex items-center gap-4">
+              <Button
+                className="flex flex-row items-center gap-2 py-1"
+                onClick={() => router.back()}
+                variant="outline"
+              >
+                <ArrowLeftCircle /> Return to dashboard
+              </Button>
               <FileManagement />
               <Settings />
               <ThemeToggle />

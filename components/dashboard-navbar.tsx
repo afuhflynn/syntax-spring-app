@@ -12,7 +12,9 @@ export const DashboardNavBar = () => {
   return (
     <header className="flex h-14 items-center bg-background bg-opacity-40 z-10 border-b px-4 sticky top-0 left-0 right-0">
       <div className="flex items-center gap-4">
-        <span className="font-medium">Check out your achievements</span>
+        <span className="font-medium hidden md:block">
+          Check out your achievements
+        </span>
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -23,8 +25,8 @@ export const DashboardNavBar = () => {
         </div>
       </div>
       <div className="ml-auto flex items-center gap-4">
-        <UserButton user={dummyUser} />
         <ThemeToggle />
+        <UserButton user={dummyUser} />
       </div>
     </header>
   );

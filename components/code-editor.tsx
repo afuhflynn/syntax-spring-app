@@ -7,13 +7,17 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { MainLoader } from "./loader";
+import { useStore } from "@/lib/store";
 
 // Dynamically import the Editor component only on the client-side.
 // We extract the default export from @monaco-editor/react.
-const Editor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.default), {
-  ssr: false, // Disable SSR for Monaco Editor
-  loading: () => <MainLoader />, // Show a loader while Monaco loads
-});
+const Editor = dynamic(
+  () => import("@monaco-editor/react").then((mod) => mod.default),
+  {
+    ssr: false, // Disable SSR for Monaco Editor
+    loading: () => <MainLoader />, // Show a loader while Monaco loads
+  }
+);
 
 // Define the props for the CodeEditor component
 interface CodeEditorProps {
@@ -167,6 +171,7 @@ export default function CodeEditor({
   options = {},
 }: CodeEditorProps) {
   const { theme } = useTheme();
+  const { editorSettings } = useStore();
   // Reference to store the Monaco instance for dynamic updates
   const monacoRef = useRef<Monaco | null>(null);
   // State flag to confirm editor has loaded on the client
@@ -217,38 +222,6 @@ export default function CodeEditor({
     });
   };
 
-  /**
-   * (Optional) Configure additional language features for enhanced IntelliSense.
-   * Uncomment and extend as needed.
-   */
-  const configureLanguageFeatures = (monaco: Monaco) => {
-    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-      target: monaco.languages.typescript.ScriptTarget.ES2020,
-      allowNonTsExtensions: true,
-      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
-      module: monaco.languages.typescript.ModuleKind.CommonJS,
-      noEmit: true,
-      esModuleInterop: true,
-      jsx: monaco.languages.typescript.JsxEmit.React,
-      reactNamespace: "React",
-      allowJs: true,
-      typeRoots: ["node_modules/@types"],
-    });
-
-    monaco.languages.typescript.javascriptDefaults.addExtraLib(
-      `
-      declare class Console {
-        log(...data: any[]): void;
-        error(...data: any[]): void;
-        warn(...data: any[]): void;
-        info(...data: any[]): void;
-      }
-      declare const console: Console;
-      `,
-      "ts:browser.d.ts"
-    );
-  };
-
   // Update the Monaco Editor's theme when the system theme changes.
   useEffect(() => {
     if (monacoRef.current) {
@@ -270,15 +243,19 @@ export default function CodeEditor({
         value={value}
         onChange={(newValue) => onChange(newValue || "")}
         onMount={handleEditorDidMount}
-        theme={theme === "dark" ? "vs-dark" : "vs"}
         className={className}
         options={{
-          fontSize: 16,
-          minimap: { enabled: false },
+          theme: editorSettings.theme,
+          minimap: { enabled: editorSettings.minimap },
+          fontSize: editorSettings.fontSize,
+          wordWrap: editorSettings.wordWrap ? "on" : "off",
+          tabSize: editorSettings.tabSize,
+          lineNumbers: editorSettings.lineNumbers ? "on" : "off",
+          glyphMargin: true,
+          folding: true,
+          bracketPairColorization: { enabled: true },
           scrollBeyondLastLine: false,
           automaticLayout: true,
-          tabSize: 2,
-          wordWrap: "on",
           padding: { top: 16 },
           fontFamily: "JetBrains Mono",
           fontWeight: "600",

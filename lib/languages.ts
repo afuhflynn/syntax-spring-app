@@ -30,7 +30,7 @@ export const languages = [
     extensions: [".cs"],
   },
   {
-    id: "visual basic.net",
+    id: "visualbasic",
     name: "VB.Net",
     extensions: [".vb"],
   },
@@ -165,6 +165,16 @@ class Program {
         return $"Hello, {name}!";
     }
 }`,
+  visualbasic: `// VB.Net Example
+imports System;
+
+
+Module Main
+    Sub main()
+      Dim name As String = "AfuhFlynn"
+      Console.WriteLine("Hello, {0})
+    End Sub
+End Module`,
 
   go: `// Go Example
 package main

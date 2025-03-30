@@ -2,13 +2,14 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./logo";
+import devLog from "@/lib/devLog";
 
 export const DashboardSideBar = () => {
   const dummyUser = "afuhflynn";
   const pathName = usePathname();
   const pathNameArray = pathName.split("/");
   const path = pathNameArray[pathNameArray.length - 1];
-  console.log(path);
+  devLog(path);
   return (
     <aside className="hidden w-64 border-r bg-muted/10 md:block">
       <Logo />

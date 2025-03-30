@@ -1,30 +1,49 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
-import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { SettingsIcon } from "lucide-react"
-import { useStore } from "@/lib/store"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { SettingsIcon } from "lucide-react";
+import { useStore } from "@/lib/store";
 
 export function Settings() {
-  const { editorSettings, updateEditorSettings, aiSettings, updateAISettings } = useStore()
+  const { editorSettings, updateEditorSettings, aiSettings, updateAISettings } =
+    useStore();
 
   // Local state for settings
-  const [fontSize, setFontSize] = useState(editorSettings.fontSize)
-  const [tabSize, setTabSize] = useState(editorSettings.tabSize)
-  const [wordWrap, setWordWrap] = useState(editorSettings.wordWrap)
-  const [minimap, setMinimap] = useState(editorSettings.minimap)
-  const [lineNumbers, setLineNumbers] = useState(editorSettings.lineNumbers)
-  const [theme, setTheme] = useState(editorSettings.theme)
-  const [aiModel, setAIModel] = useState(aiSettings.model)
-  const [codeCompletion, setCodeCompletion] = useState(aiSettings.codeCompletion)
-  const [errorDetection, setErrorDetection] = useState(aiSettings.errorDetection)
-  const [codeSuggestions, setCodeSuggestions] = useState(aiSettings.codeSuggestions)
+  const [fontSize, setFontSize] = useState(editorSettings.fontSize);
+  const [tabSize, setTabSize] = useState(editorSettings.tabSize);
+  const [wordWrap, setWordWrap] = useState(editorSettings.wordWrap);
+  const [minimap, setMinimap] = useState(editorSettings.minimap);
+  const [lineNumbers, setLineNumbers] = useState(editorSettings.lineNumbers);
+  const [theme, setTheme] = useState(editorSettings.theme);
+  const [aiModel, setAIModel] = useState(aiSettings.model);
+  const [codeCompletion, setCodeCompletion] = useState(
+    aiSettings.codeCompletion
+  );
+  const [errorDetection, setErrorDetection] = useState(
+    aiSettings.errorDetection
+  );
+  const [codeSuggestions, setCodeSuggestions] = useState(
+    aiSettings.codeSuggestions
+  );
 
   // Update store when settings change
   useEffect(() => {
@@ -35,8 +54,16 @@ export function Settings() {
       minimap,
       lineNumbers,
       theme,
-    })
-  }, [fontSize, tabSize, wordWrap, minimap, lineNumbers, theme, updateEditorSettings])
+    });
+  }, [
+    fontSize,
+    tabSize,
+    wordWrap,
+    minimap,
+    lineNumbers,
+    theme,
+    updateEditorSettings,
+  ]);
 
   useEffect(() => {
     updateAISettings({
@@ -44,8 +71,14 @@ export function Settings() {
       codeCompletion,
       errorDetection,
       codeSuggestions,
-    })
-  }, [aiModel, codeCompletion, errorDetection, codeSuggestions, updateAISettings])
+    });
+  }, [
+    aiModel,
+    codeCompletion,
+    errorDetection,
+    codeSuggestions,
+    updateAISettings,
+  ]);
 
   return (
     <Dialog>
@@ -79,6 +112,18 @@ export function Settings() {
                   <SelectItem value="material-ocean">Material Ocean</SelectItem>
                   <SelectItem value="dracula">Dracula</SelectItem>
                   <SelectItem value="nord">Nord</SelectItem>
+                  <SelectItem value="abyss" disabled>
+                    Abyss-Not available
+                  </SelectItem>
+                  <SelectItem value="solarized-light" disabled>
+                    Solarized Light-Not available
+                  </SelectItem>
+                  <SelectItem value="quiet-light" disabled>
+                    Quiet Light-Not available
+                  </SelectItem>
+                  <SelectItem value="dark-modern" disabled>
+                    Dark Modern-Not available
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -111,15 +156,27 @@ export function Settings() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <Label htmlFor="word-wrap">Word Wrap</Label>
-                <Switch id="word-wrap" checked={wordWrap} onCheckedChange={setWordWrap} />
+                <Switch
+                  id="word-wrap"
+                  checked={wordWrap}
+                  onCheckedChange={setWordWrap}
+                />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="minimap">Minimap</Label>
-                <Switch id="minimap" checked={minimap} onCheckedChange={setMinimap} />
+                <Switch
+                  id="minimap"
+                  checked={minimap}
+                  onCheckedChange={setMinimap}
+                />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="line-numbers">Line Numbers</Label>
-                <Switch id="line-numbers" checked={lineNumbers} onCheckedChange={setLineNumbers} />
+                <Switch
+                  id="line-numbers"
+                  checked={lineNumbers}
+                  onCheckedChange={setLineNumbers}
+                />
               </div>
             </div>
           </TabsContent>
@@ -131,29 +188,43 @@ export function Settings() {
                   <SelectValue placeholder="Select AI model" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="gemini-flash">Gemini Flash</SelectItem>
                   <SelectItem value="gemini-pro">Gemini Pro</SelectItem>
-                  <SelectItem value="gemini-pro-vision">Gemini Pro Vision</SelectItem>
+                  <SelectItem value="gemini-pro-vision">
+                    Gemini Pro Vision
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <Label htmlFor="code-completion">Code Completion</Label>
-                <Switch id="code-completion" checked={codeCompletion} onCheckedChange={setCodeCompletion} />
+                <Switch
+                  id="code-completion"
+                  checked={codeCompletion}
+                  onCheckedChange={setCodeCompletion}
+                />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="error-detection">Error Detection</Label>
-                <Switch id="error-detection" checked={errorDetection} onCheckedChange={setErrorDetection} />
+                <Switch
+                  id="error-detection"
+                  checked={errorDetection}
+                  onCheckedChange={setErrorDetection}
+                />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="code-suggestions">Code Suggestions</Label>
-                <Switch id="code-suggestions" checked={codeSuggestions} onCheckedChange={setCodeSuggestions} />
+                <Switch
+                  id="code-suggestions"
+                  checked={codeSuggestions}
+                  onCheckedChange={setCodeSuggestions}
+                />
               </div>
             </div>
           </TabsContent>
         </Tabs>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-

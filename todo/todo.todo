@@ -1,3 +1,6 @@
 [] Add a button for users to copy chatbot responses
 [] Auto scroll to bottom on new chat input.
 [] Press enter to submit chat input or press ctrl + enter
+[] Enable the ai endpoint to accept an ai version and use it or use the default
+[] Complete compilation of code and execution with piston api
+[] Enable scroll in the terminal output

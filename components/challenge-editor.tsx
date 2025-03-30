@@ -13,6 +13,7 @@ import {
   Terminal,
   Layout,
   CheckCircleIcon,
+  Sparkles,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import WebPreview from "@/components/web-preview";
@@ -23,6 +24,7 @@ import { configureMonacoLanguages } from "@/utils/monaco-languages";
 import type { Monaco } from "@monaco-editor/react";
 import { Challenge } from "@/TYPES";
 import { InteractiveTerminal } from "./interactive-terminal";
+import { Tooltip } from "@mui/material";
 
 const CodeEditor = dynamic(() => import("@/components/code-editor"), {
   ssr: false,
@@ -284,10 +286,15 @@ Execution completed successfully.`);
       )}
 
       <div className="px-4 py-2 flex border-t border-white border-opacity-20 justify-between items-center">
-        <Button variant="outline" onClick={handleAIHelp}>
-          <HelpCircle className="h-4 w-4 mr-2" />
-          Ask AI for Help
-        </Button>
+        <Tooltip title="Ask AI for help" placement="top" arrow>
+          <Button
+            variant="outline"
+            onClick={handleAIHelp}
+            aria-label="Ask AI for help"
+          >
+            <Sparkles className="h-4 w-4 mr-2" />
+          </Button>
+        </Tooltip>
 
         <Button disabled={isRunning}>
           <CheckCircleIcon className="h-4 w-4 mr-2" />
