@@ -66,19 +66,15 @@ export default function Hero() {
             variants={fadeIn}
           >
             <Button size="lg" asChild>
-              <span>
-                <Link
-                  href="/platform/challenges"
-                  className="flex flex-row items-center justify-center"
-                >
-                  Start Coding <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </span>
+              <Link
+                href="/platform/challenges"
+                className="flex flex-row items-center justify-center"
+              >
+                Start Coding <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <span>
-                <Link href="/platform/about">Learn More</Link>
-              </span>
+              <Link href="/platform/about">Learn More</Link>
             </Button>
           </motion.div>
         </motion.div>

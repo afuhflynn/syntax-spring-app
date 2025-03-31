@@ -50,7 +50,7 @@ export default function VerifyEmailPage() {
               Verify your email
             </CardTitle>
             <CardDescription>
-              Click the button below to proceed and activate your email.
+              Click the button below to proceed and verify your email.
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>

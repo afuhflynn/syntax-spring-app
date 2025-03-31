@@ -42,10 +42,10 @@ export default function AIHelpModal({
   const { aiSettings } = useStore();
   const username = "afuhflynn"; // TODO: Change to real user name
   const [conversation, setConversation] = useState<
-    Array<{ role: "user" | "bot"; content: string }>
+    Array<{ role: "user" | "model"; content: string }>
   >([
     {
-      role: "bot",
+      role: "model",
       content: `Hi ${username}! I'm SyntaxSpring Code Assist.\nHow can I help you with "${title}" challenge. What specific help do you need?`,
     },
   ]);
@@ -83,7 +83,7 @@ export default function AIHelpModal({
       setConversation([
         ...conversation,
         { role: "user", content: question },
-        { role: "bot", content: aiResponse },
+        { role: "model", content: aiResponse },
       ]);
     } catch (error: any) {
       let err = "";
@@ -95,7 +95,7 @@ export default function AIHelpModal({
       setConversation([
         ...conversation,
         { role: "user", content: question },
-        { role: "bot", content: err },
+        { role: "model", content: err },
       ]);
       console.error("Error getting AI response:", error);
     } finally {
@@ -136,12 +136,12 @@ export default function AIHelpModal({
                   key={index}
                   className={cn(
                     "flex gap-3 mb-4",
-                    message.role === "bot"
+                    message.role === "model"
                       ? "items-start"
                       : "items-start flex-row-reverse"
                   )}
                 >
-                  {message.role === "bot" && (
+                  {message.role === "model" && (
                     <Avatar className="h-8 w-8 bg-secondary">
                       <Image
                         src={
@@ -157,7 +157,7 @@ export default function AIHelpModal({
                   <div
                     className={cn(
                       "rounded-lg p-3 max-w-[80%]",
-                      message.role === "bot"
+                      message.role === "model"
                         ? "bg-muted"
                         : "bg-primary text-primary-foreground ml-auto"
                     )}

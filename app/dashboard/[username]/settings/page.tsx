@@ -1,407 +1,259 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Switch } from "@/components/ui/switch"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
+import { useTheme } from "next-themes";
+import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AlertCircle, Copy, Download, Trash2, Upload } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-export default function SettingsPage() {
-  const { toast } = useToast()
-  const [activeTab, setActiveTab] = useState("profile")
+export default function AccountSettings() {
+  const { toast } = useToast();
+  const { theme } = useTheme();
 
   // Mock user data - replace with actual user data
   const [userData, setUserData] = useState({
     name: "John Doe",
     username: "johndoe",
     email: "john.doe@example.com",
-    bio: "Software engineer passionate about algorithms and web development.",
-    image: null,
-    notifications: {
-      email: true,
-      challenges: true,
-      achievements: true,
-      comments: false,
-      newsletter: true,
-    },
-    preferences: {
-      theme: "system",
-      codeEditorTheme: "vs-dark",
-      fontSize: "14",
-      tabSize: "2",
-      autoSave: true,
-      wordWrap: true,
-    },
-  })
+    createdAt: "January 15, 2023",
+    twoFactorEnabled: false,
+    image: "",
+  });
 
-  const handleProfileUpdate = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleAccountUpdate = (e: React.FormEvent) => {
+    e.preventDefault();
     toast({
-      title: "Profile updated",
-      description: "Your profile has been updated successfully.",
-    })
-  }
+      title: "Account updated",
+      description: "Your account has been updated successfully.",
+    });
+  };
 
-  const handlePasswordUpdate = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleCopyUsername = () => {
+    navigator.clipboard.writeText(userData.username);
     toast({
-      title: "Password updated",
-      description: "Your password has been updated successfully.",
-    })
-  }
+      title: "Username copied",
+      description: "Username has been copied to clipboard.",
+    });
+  };
 
-  const handleNotificationUpdate = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleExportData = () => {
     toast({
-      title: "Notification preferences updated",
-      description: "Your notification preferences have been updated successfully.",
-    })
-  }
-
-  const handlePreferencesUpdate = (e: React.FormEvent) => {
-    e.preventDefault()
-    toast({
-      title: "Preferences updated",
-      description: "Your preferences have been updated successfully.",
-    })
-  }
+      title: "Data export initiated",
+      description:
+        "Your data export has been initiated. You'll receive an email when it's ready.",
+    });
+  };
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-        <p className="text-muted-foreground">Manage your account settings and preferences.</p>
+        <h2 className="text-2xl font-bold tracking-tight">Account Settings</h2>
+        <p className="text-muted-foreground">
+          Manage your account information and preferences.
+        </p>
       </div>
 
-      <Tabs defaultValue="profile" className="w-full" onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
-          <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="preferences">Preferences</TabsTrigger>
-        </TabsList>
+      <Separator />
 
-        <TabsContent value="profile" className="mt-6">
-          <Card>
-            <form onSubmit={handleProfileUpdate}>
-              <CardHeader>
-                <CardTitle>Profile Information</CardTitle>
-                <CardDescription>Update your profile information and public details.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <div className="flex flex-col items-center space-y-2">
-                    <Avatar className="h-24 w-24">
-                      <AvatarImage src={userData.image || ""} alt={userData.name} />
-                      <AvatarFallback className="text-2xl">{userData.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <Button variant="outline" size="sm">
-                      Change Avatar
+      <Card>
+        <CardHeader>
+          <CardTitle>Account Information</CardTitle>
+          <CardDescription>
+            Update your account details and personal information.
+          </CardDescription>
+        </CardHeader>
+        <form onSubmit={handleAccountUpdate}>
+          <CardContent className="space-y-6">
+            <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 sm:items-center">
+              <div className="flex flex-col items-center space-y-2">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src={userData.image || ""} alt={userData.name} />
+                  <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
+                    {userData.name.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex space-x-2">
+                  <Button variant="outline" size="sm" type="button">
+                    <Upload className="mr-2 h-4 w-4" />
+                    Change
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    type="button"
+                    className="text-destructive hover:text-destructive"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">Remove</span>
+                  </Button>
+                </div>
+              </div>
+              <div className="flex-1 space-y-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    value={userData.name}
+                    onChange={(e) =>
+                      setUserData({ ...userData, name: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="username">Username</Label>
+                  <div className="flex">
+                    <Input
+                      id="username"
+                      value={userData.username}
+                      onChange={(e) =>
+                        setUserData({ ...userData, username: e.target.value })
+                      }
+                      className="rounded-r-none"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="rounded-l-none border-l-0"
+                      onClick={handleCopyUsername}
+                    >
+                      <Copy className="h-4 w-4" />
+                      <span className="sr-only">Copy</span>
                     </Button>
                   </div>
-                  <div className="flex-1 space-y-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="name">Name</Label>
-                      <Input
-                        id="name"
-                        value={userData.name}
-                        onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="username">Username</Label>
-                      <Input
-                        id="username"
-                        value={userData.username}
-                        onChange={(e) => setUserData({ ...userData, username: e.target.value })}
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={userData.email}
-                        onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="bio">Bio</Label>
-                      <Textarea
-                        id="bio"
-                        value={userData.bio}
-                        onChange={(e) => setUserData({ ...userData, bio: e.target.value })}
-                        className="min-h-[100px]"
-                      />
-                    </div>
-                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Your profile URL: https://syntaxspring.com/
+                    {userData.username}
+                  </p>
                 </div>
-              </CardContent>
-              <CardFooter>
-                <Button type="submit">Save Changes</Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </TabsContent>
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={userData.email}
+                    onChange={(e) =>
+                      setUserData({ ...userData, email: e.target.value })
+                    }
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    This email is used for notifications and account recovery.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-between border-t px-6 py-4">
+            <p className="text-sm text-muted-foreground">
+              Member since {userData.createdAt}
+            </p>
+            <Button type="submit">Save Changes</Button>
+          </CardFooter>
+        </form>
+      </Card>
 
-        <TabsContent value="password" className="mt-6">
-          <Card>
-            <form onSubmit={handlePasswordUpdate}>
-              <CardHeader>
-                <CardTitle>Password</CardTitle>
-                <CardDescription>Update your password to keep your account secure.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="current-password">Current Password</Label>
-                  <Input id="current-password" type="password" />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="new-password">New Password</Label>
-                  <Input id="new-password" type="password" />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="confirm-password">Confirm New Password</Label>
-                  <Input id="confirm-password" type="password" />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button type="submit">Update Password</Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </TabsContent>
+      <Card>
+        <CardHeader>
+          <CardTitle>Two-Factor Authentication</CardTitle>
+          <CardDescription>
+            Add an extra layer of security to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label htmlFor="two-factor">Two-Factor Authentication</Label>
+              <p className="text-sm text-muted-foreground">
+                Require a verification code when signing in.
+              </p>
+            </div>
+            <Switch
+              id="two-factor"
+              checked={userData.twoFactorEnabled}
+              onCheckedChange={(checked) => {
+                setUserData({ ...userData, twoFactorEnabled: checked });
+                toast({
+                  title: checked ? "2FA Enabled" : "2FA Disabled",
+                  description: checked
+                    ? "Two-factor authentication has been enabled."
+                    : "Two-factor authentication has been disabled.",
+                });
+              }}
+            />
+          </div>
+          {userData.twoFactorEnabled && (
+            <Alert>
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Two-factor authentication is enabled</AlertTitle>
+              <AlertDescription>
+                Your account is now more secure. You'll need to enter a
+                verification code when signing in.
+              </AlertDescription>
+            </Alert>
+          )}
+        </CardContent>
+      </Card>
 
-        <TabsContent value="notifications" className="mt-6">
-          <Card>
-            <form onSubmit={handleNotificationUpdate}>
-              <CardHeader>
-                <CardTitle>Notification Preferences</CardTitle>
-                <CardDescription>Configure how you receive notifications.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="email-notifications">Email Notifications</Label>
-                    <p className="text-sm text-muted-foreground">Receive notifications via email</p>
-                  </div>
-                  <Switch
-                    id="email-notifications"
-                    checked={userData.notifications.email}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        notifications: { ...userData.notifications, email: checked },
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="challenge-notifications">Challenge Updates</Label>
-                    <p className="text-sm text-muted-foreground">Get notified about new challenges and updates</p>
-                  </div>
-                  <Switch
-                    id="challenge-notifications"
-                    checked={userData.notifications.challenges}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        notifications: { ...userData.notifications, challenges: checked },
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="achievement-notifications">Achievement Notifications</Label>
-                    <p className="text-sm text-muted-foreground">Get notified when you earn badges and achievements</p>
-                  </div>
-                  <Switch
-                    id="achievement-notifications"
-                    checked={userData.notifications.achievements}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        notifications: { ...userData.notifications, achievements: checked },
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="comment-notifications">Comment Notifications</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Get notified when someone comments on your solutions
-                    </p>
-                  </div>
-                  <Switch
-                    id="comment-notifications"
-                    checked={userData.notifications.comments}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        notifications: { ...userData.notifications, comments: checked },
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="newsletter-notifications">Newsletter</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Receive our monthly newsletter with tips and updates
-                    </p>
-                  </div>
-                  <Switch
-                    id="newsletter-notifications"
-                    checked={userData.notifications.newsletter}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        notifications: { ...userData.notifications, newsletter: checked },
-                      })
-                    }
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button type="submit">Save Preferences</Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="preferences" className="mt-6">
-          <Card>
-            <form onSubmit={handlePreferencesUpdate}>
-              <CardHeader>
-                <CardTitle>Editor Preferences</CardTitle>
-                <CardDescription>Customize your coding environment.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="theme">Theme</Label>
-                  <select
-                    id="theme"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    value={userData.preferences.theme}
-                    onChange={(e) =>
-                      setUserData({
-                        ...userData,
-                        preferences: { ...userData.preferences, theme: e.target.value },
-                      })
-                    }
-                  >
-                    <option value="system">System</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                  </select>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="editor-theme">Code Editor Theme</Label>
-                  <select
-                    id="editor-theme"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    value={userData.preferences.codeEditorTheme}
-                    onChange={(e) =>
-                      setUserData({
-                        ...userData,
-                        preferences: { ...userData.preferences, codeEditorTheme: e.target.value },
-                      })
-                    }
-                  >
-                    <option value="vs-dark">VS Dark</option>
-                    <option value="vs-light">VS Light</option>
-                    <option value="hc-black">High Contrast Dark</option>
-                    <option value="hc-light">High Contrast Light</option>
-                  </select>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="font-size">Font Size</Label>
-                  <select
-                    id="font-size"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    value={userData.preferences.fontSize}
-                    onChange={(e) =>
-                      setUserData({
-                        ...userData,
-                        preferences: { ...userData.preferences, fontSize: e.target.value },
-                      })
-                    }
-                  >
-                    <option value="12">12px</option>
-                    <option value="14">14px</option>
-                    <option value="16">16px</option>
-                    <option value="18">18px</option>
-                  </select>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="tab-size">Tab Size</Label>
-                  <select
-                    id="tab-size"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    value={userData.preferences.tabSize}
-                    onChange={(e) =>
-                      setUserData({
-                        ...userData,
-                        preferences: { ...userData.preferences, tabSize: e.target.value },
-                      })
-                    }
-                  >
-                    <option value="2">2 spaces</option>
-                    <option value="4">4 spaces</option>
-                    <option value="8">8 spaces</option>
-                  </select>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="auto-save">Auto Save</Label>
-                    <p className="text-sm text-muted-foreground">Automatically save your code as you type</p>
-                  </div>
-                  <Switch
-                    id="auto-save"
-                    checked={userData.preferences.autoSave}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        preferences: { ...userData.preferences, autoSave: checked },
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="word-wrap">Word Wrap</Label>
-                    <p className="text-sm text-muted-foreground">Wrap long lines of code to fit in the editor</p>
-                  </div>
-                  <Switch
-                    id="word-wrap"
-                    checked={userData.preferences.wordWrap}
-                    onCheckedChange={(checked) =>
-                      setUserData({
-                        ...userData,
-                        preferences: { ...userData.preferences, wordWrap: checked },
-                      })
-                    }
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button type="submit">Save Preferences</Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </TabsContent>
-      </Tabs>
+      <Card>
+        <CardHeader>
+          <CardTitle>Data and Privacy</CardTitle>
+          <CardDescription>
+            Manage your data and privacy settings.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label>Export Account Data</Label>
+              <p className="text-sm text-muted-foreground">
+                Download a copy of your data, including your profile,
+                submissions, and achievements.
+              </p>
+            </div>
+            <Button variant="outline" onClick={handleExportData}>
+              <Download className="mr-2 h-4 w-4" />
+              Export Data
+            </Button>
+          </div>
+        </CardContent>
+        <CardFooter className="border-t px-6 py-4">
+          <div className="space-y-2">
+            <h4 className="font-medium text-destructive">Danger Zone</h4>
+            <p className="text-sm text-muted-foreground">
+              Once you delete your account, there is no going back. Please be
+              certain.
+            </p>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                toast({
+                  title: "Account deletion requested",
+                  description:
+                    "We've sent a confirmation email to verify this action.",
+                });
+              }}
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete Account
+            </Button>
+          </div>
+        </CardFooter>
+      </Card>
     </div>
-  )
+  );
 }
-

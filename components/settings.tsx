@@ -183,8 +183,12 @@ export function Settings() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="gemini-2.0-flash">Gemini Flash</SelectItem>
-                  <SelectItem value="gemini-2.0-pro">Gemini Pro</SelectItem>
-                  <SelectItem value="gemini-2.5">Gemini-@-Default</SelectItem>
+                  <SelectItem value="gemini-2.5-pro-exp-03-25">
+                    Gemini Pro
+                  </SelectItem>
+                  <SelectItem value="models/gemini-2.0-flash-lite">
+                    Gemini Flash Lite
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>

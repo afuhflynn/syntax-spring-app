@@ -18,9 +18,8 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Github } from "lucide-react";
 import Logo from "@/components/logo";
-import GoogleIcon from "@/components/GoogleIcon";
+import { AuthButtons } from "@/components/auth/auth-buttons";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -118,16 +117,9 @@ export default function LoginPage() {
                 </span>
               </div>
             </div>
-            <div className="flex space-x-2">
-              <Button variant="secondary" className="w-full border-border">
-                <Github className="mr-2 h-4 w-4" /> Github
-              </Button>
-              <Button variant="secondary" className="w-full">
-                <GoogleIcon className="mr-2 h-4 w-4" /> Google
-              </Button>
-            </div>
+            <AuthButtons />
             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/auth/sign-up"
                 className="text-primary hover:underline"

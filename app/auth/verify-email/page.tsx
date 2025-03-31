@@ -45,6 +45,8 @@ export default function VerifyEmailPage() {
       description:
         "A new verification email has been sent to your email address.",
     });
+    setSeconds(0);
+    setMinutes(1);
   };
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function VerifyEmailPage() {
         setSeconds((prev) => prev - 1);
       }
     }, 1000);
-  }, [seconds]);
+  }, [seconds, minutes]);
 
   return (
     <div className="container flex items-center justify-center min-h-screen py-12">
@@ -77,7 +79,7 @@ export default function VerifyEmailPage() {
             </CardTitle>
             <CardDescription>
               We've sent a 6 digit verification code to your email. Please enter
-              it below.
+              the code below.
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>

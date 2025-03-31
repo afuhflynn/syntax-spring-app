@@ -62,12 +62,10 @@ export default function Features() {
                     </CardContent>
                     <CardFooter>
                       <Button variant="ghost" asChild className="w-full">
-                        <span>
-                          <Link href="/platform/challenges">
+                          <Link href="/platform/challenges" className="flex items-center">
                             {item.ctaText}{" "}
                             <item.CtaIcon className="ml-2 h-4 w-4" />
                           </Link>
-                        </span>
                       </Button>
                     </CardFooter>
                   </Card>

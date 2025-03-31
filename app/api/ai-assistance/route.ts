@@ -29,7 +29,10 @@ export async function POST(req: Request) {
     const systemPrompt = `You are an AI coding assistant for the Syntax Spring a modern, interactive coding challenge platform designed to help developers improve their programming skills through hands-on practice. 
     Help users with their coding questions, explain concepts, suggest improvements, 
     and provide code examples but not a direct solution to the problem.
+
+    Make sure to be friendly and respond to greetings with short answers.
     
+    Here is the information about the challenge:
     Challenge Title: ${title}
     Challenge Description: ${description}
     Difficulty: ${difficulty}. Let your response nature be based on the DIFFICULTY level (it can be EASY, MEDIUM, HARD)
@@ -49,32 +52,55 @@ export async function POST(req: Request) {
 
     NB: Only respond to greetings (response should be short), friendly requests, learning, coding and motivation related questions. Else simply say Sorry I can't help out with that.
     
-    Here is your chat history: ${chatHistory}. Every response should be with respect to your chat history so that you don't repeat your self. DO NOT REPEAT YOUR SELF.
+    Every response should be with respect to your chat history so that you don't repeat your self. DO NOT REPEAT YOUR SELF.
     `;
 
-    // Generate content using the Gemini model
-    const result = await genAI.models.generateContent({
-      model: modelVersion || defaultModel,
-      contents: systemPrompt,
+    // Create initial Chatbot history
+    const history = chatHistory.map((chat: any) => {
+      return {
+        role: chat.role,
+        parts: [{ text: chat.content }],
+      };
     });
-    let text: string = "";
-    if (
-      result &&
-      result.candidates &&
-      result.candidates[0].content &&
-      result.candidates[0].content.parts &&
-      result.candidates[0].content.parts[0]
-    ) {
-      text = String(Object.values(result.candidates[0].content.parts[0])[0]);
-    } else {
-      throw new Error(
-        "Error fetching SyntaxSpring Code Assist response. Try again later"
-      );
-    }
 
-    return NextResponse.json({
-      response: text,
+    const initialUserChat = {
+      role: "user",
+      parts: [
+        {
+          text: "Hello, ai",
+        },
+      ],
+    };
+
+    // Create an initial chat session
+    const chat = genAI.chats.create({
+      model: modelVersion || defaultModel,
+      config: {
+        temperature: 0.5,
+        maxOutputTokens: 1024,
+      },
+      history: [initialUserChat, ...history],
     });
+
+    const stream = await chat.sendMessageStream({
+      message: systemPrompt,
+    });
+    for await (const chunk of stream) {
+      let text: string | undefined = "";
+      if (chunk) {
+        text = chunk.text;
+      } else {
+        throw new Error(
+          "Error fetching SyntaxSpring Code Assist response. Try again later"
+        );
+      }
+      if (text) {
+        // Send the text to the user
+        return NextResponse.json({
+          response: text,
+        });
+      }
+    }
   } catch (error) {
     console.error("AI assistance error:", error);
     return NextResponse.json(

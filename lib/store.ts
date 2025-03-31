@@ -56,7 +56,7 @@ export const useStore = create<EditorState>((set, get) => ({
     theme: "vs-dark",
   },
   aiSettings: {
-    model: "gemini-2.0-pro",
+    model: "gemini-2.0-flash",
     codeCompletion: true,
     errorDetection: true,
     codeSuggestions: true,

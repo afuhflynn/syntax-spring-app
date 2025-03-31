@@ -18,11 +18,11 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Check, Github } from "lucide-react";
+import { Check } from "lucide-react";
 import Logo from "@/components/logo";
 import PasswordStrengthCriteria from "@/components/password-strength-criteria";
 import PasswordStrengthMeter from "@/components/password-strength-meter";
-import GoogleIcon from "@/components/GoogleIcon";
+import { AuthButtons } from "@/components/auth/auth-buttons";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -167,14 +167,7 @@ export default function SignUpPage() {
                 </span>
               </div>
             </div>
-            <div className="flex space-x-2">
-              <Button variant="secondary" className="w-full">
-                <Github className="mr-2 h-4 w-4" /> Github
-              </Button>
-              <Button variant="secondary" className="w-full">
-                <GoogleIcon className="mr-2 h-4 w-4" /> Google
-              </Button>
-            </div>
+            <AuthButtons />
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
               <Link
