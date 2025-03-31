@@ -16,7 +16,11 @@ export async function POST(req: Request) {
       description,
       difficulty,
       chatHistory,
+      modelVersion,
     } = await req.json();
+
+    // Default model if user model does not exist
+    const defaultModel = "gemini-2.0-flash";
 
     // Initialize the Google Generative AI with the API key
     const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
@@ -50,7 +54,7 @@ export async function POST(req: Request) {
 
     // Generate content using the Gemini model
     const result = await genAI.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: modelVersion || defaultModel,
       contents: systemPrompt,
     });
     let text: string = "";

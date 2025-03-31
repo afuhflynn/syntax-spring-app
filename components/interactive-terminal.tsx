@@ -15,7 +15,11 @@ interface TerminalEntry {
   content: string;
 }
 
-export function InteractiveTerminal() {
+interface TerminalProps {
+  currentLangsExtensions?: string[];
+}
+
+export function InteractiveTerminal({ currentLangsExtensions }: TerminalProps) {
   const {
     language,
     code,
@@ -46,6 +50,7 @@ export function InteractiveTerminal() {
   // Add a command to the terminal history
   const addToHistory = (entry: TerminalEntry) => {
     setTerminalHistory((prev) => [...prev, entry]);
+    inputRef.current?.focus();
   };
 
   // Execute code from the editor
@@ -109,7 +114,7 @@ export function InteractiveTerminal() {
       } else if (input === "clear") {
         // Clear terminal
         setTerminalHistory([]);
-      } else if (input === "help") {
+      } else if (input === "help" || input === "-h") {
         // Show help
         addToHistory({
           type: "output",
@@ -118,7 +123,6 @@ export function InteractiveTerminal() {
  clear - Clear the terminal
  help - Show this help message
  ls - List files (simulated)
- pwd - Print working directory (simulated)
  echo [text] - Print text to terminal`,
         });
       } else if (input.startsWith("echo ")) {
@@ -126,16 +130,27 @@ export function InteractiveTerminal() {
         const text = input.substring(5);
         addToHistory({ type: "output", content: text });
       } else if (input === "ls") {
-        // Simulate ls command
-        addToHistory({
-          type: "output",
-          content: "main.js  package.json  README.md  node_modules/",
-        });
+        if (currentLangsExtensions) {
+          // Simulate ls command
+          let templateFiles = "";
+          currentLangsExtensions?.map((value) => {
+            templateFiles += `main.${value.toLowerCase()} `;
+          });
+          addToHistory({
+            type: "output",
+            content: templateFiles,
+          });
+        } else {
+          addToHistory({
+            type: "output",
+            content: "No files available",
+          });
+        }
       } else if (input === "pwd") {
         // Simulate pwd command
         addToHistory({
           type: "output",
-          content: "/home/user/codespark-project",
+          content: "/home/user/syntaxspring-project",
         });
       } else {
         // Unknown command
@@ -200,7 +215,7 @@ export function InteractiveTerminal() {
         </div>
         {/* Terminal body */}
         <div
-          className="bg-background font-mono text-xs p-4 flex-1 overflow-y-hidden cursor-text"
+          className="bg-background font-mono text-xs p-4 flex-1 overflow-y-hidden cursor-text overflow-x-scroll"
           onClick={focusInput}
           ref={terminalRef}
         >
@@ -208,7 +223,7 @@ export function InteractiveTerminal() {
             SyntaxSpring Code Terminal v1.0
           </div>
           <div className="mb-2 text-green-400">
-            Type 'help' for available commands
+            Type 'help' or '-h' for available commands
           </div>
 
           {/* Terminal history - commands and outputs in sequence */}

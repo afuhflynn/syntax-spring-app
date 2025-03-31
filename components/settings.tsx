@@ -118,12 +118,6 @@ export function Settings() {
                   <SelectItem value="solarized-light" disabled>
                     Solarized Light-Not available
                   </SelectItem>
-                  <SelectItem value="quiet-light" disabled>
-                    Quiet Light-Not available
-                  </SelectItem>
-                  <SelectItem value="dark-modern" disabled>
-                    Dark Modern-Not available
-                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -188,11 +182,9 @@ export function Settings() {
                   <SelectValue placeholder="Select AI model" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="gemini-flash">Gemini Flash</SelectItem>
-                  <SelectItem value="gemini-pro">Gemini Pro</SelectItem>
-                  <SelectItem value="gemini-pro-vision">
-                    Gemini Pro Vision
-                  </SelectItem>
+                  <SelectItem value="gemini-2.0-flash">Gemini Flash</SelectItem>
+                  <SelectItem value="gemini-2.0-pro">Gemini Pro</SelectItem>
+                  <SelectItem value="gemini-2.5">Gemini-@-Default</SelectItem>
                 </SelectContent>
               </Select>
             </div>

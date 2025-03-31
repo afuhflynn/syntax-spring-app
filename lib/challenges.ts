@@ -1,13 +1,12 @@
 import { Challenge } from "@/TYPES";
 
 export const challenges: Challenge[] = [
-  // 1. Two Sum
   {
     id: "1",
     slug: "two-sum",
     title: "Two Sum",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.",
     difficulty: "Easy",
@@ -71,16 +70,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 2. Reverse String
   {
     id: "2",
     title: "Reverse String",
     slug: "reverse-string",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Write a function that reverses a string. The input string is given as an array of characters.",
     difficulty: "Easy",
@@ -142,16 +140,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 3. FizzBuzz
   {
     id: "3",
     title: "FizzBuzz",
     slug: "fizzbuzz",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Write a program that outputs the string representation of numbers from 1 to n, but for multiples of three output 'Fizz', for multiples of five output 'Buzz', and for multiples of both three and five output 'FizzBuzz'.",
     difficulty: "Easy",
@@ -213,16 +210,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 4. Valid Palindrome
   {
     id: "4",
     title: "Valid Palindrome",
     slug: "valid-palindrome",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.",
     difficulty: "Easy",
@@ -285,16 +281,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 5. Container With Most Water
   {
     id: "5",
     title: "Container With Most Water",
     slug: "container-with-most-water",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Given n non-negative integers representing the heights of bars, find two lines that together with the x-axis form a container that holds the most water.",
     difficulty: "Medium",
@@ -356,7 +351,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -364,7 +359,7 @@ public:
     title: "Merge Sorted Array",
     slug: "merge-sorted-array",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Merge Sorted Array. Merge two sorted arrays into one sorted array.",
     difficulty: "Medium",
@@ -418,7 +413,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -426,7 +421,7 @@ public:
     title: "Valid Parentheses",
     slug: "valid-parentheses",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Valid Parentheses. Check if the input string containing '(', ')', '{', '}', '[' and ']' is valid.",
     difficulty: "Easy",
@@ -481,7 +476,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -489,7 +484,7 @@ public:
     title: "Merge Two Sorted Lists",
     slug: "merge-two-sorted-lists",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Merge Two Sorted Lists. Merge two sorted linked lists and return it as a sorted list.",
     difficulty: "Easy",
@@ -543,7 +538,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -551,7 +546,7 @@ public:
     title: "Linked List Cycle",
     slug: "linked-list-cycle",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Linked List Cycle. Determine if a linked list has a cycle in it.",
     difficulty: "Easy",
@@ -604,7 +599,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -612,7 +607,7 @@ public:
     title: "Longest Substring Without Repeating Characters",
     slug: "longest-substring-without-repeating-characters",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Longest Substring Without Repeating Characters. Find the length of the longest substring without repeating characters.",
     difficulty: "Medium",
@@ -665,7 +660,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -673,7 +668,7 @@ public:
     title: "Maximum Subarray",
     slug: "maximum-subarray",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Maximum Subarray. Find the contiguous subarray with the largest sum.",
     difficulty: "Medium",
@@ -726,7 +721,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -734,7 +729,7 @@ public:
     title: "Climbing Stairs",
     slug: "climbing-stairs",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Climbing Stairs. Determine the number of distinct ways to climb to the top of a staircase.",
     difficulty: "Easy",
@@ -787,7 +782,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -795,7 +790,7 @@ public:
     title: "Coin Change",
     slug: "coin-change",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Coin Change. Given coins of different denominations, find the fewest number of coins to make up a given amount.",
     difficulty: "Medium",
@@ -851,7 +846,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -859,7 +854,7 @@ public:
     title: "Longest Palindromic Substring",
     slug: "longest-palindromic-substring",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Longest Palindromic Substring. Find the longest palindromic substring in the given string.",
     difficulty: "Medium",
@@ -912,7 +907,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -920,7 +915,7 @@ public:
     title: "Binary Tree Inorder Traversal",
     slug: "binary-tree-inorder-traversal",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Binary Tree Inorder Traversal. Return the inorder traversal of a binary tree's nodes' values.",
     difficulty: "Easy",
@@ -973,7 +968,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -981,7 +976,7 @@ public:
     title: "Binary Tree Level Order Traversal",
     slug: "binary-tree-level-order-traversal",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Binary Tree Level Order Traversal. Return the level order traversal of a binary tree's nodes' values.",
     difficulty: "Medium",
@@ -1034,7 +1029,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -1042,7 +1037,7 @@ public:
     title: "Symmetric Tree",
     slug: "symmetric-tree",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Symmetric Tree. Check whether a binary tree is a mirror of itself (i.e. symmetric around its center).",
     difficulty: "Easy",
@@ -1095,7 +1090,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -1103,7 +1098,7 @@ public:
     title: "Maximum Depth of Binary Tree",
     slug: "maximum-depth-of-binary-tree",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Maximum Depth of Binary Tree. Find the maximum depth of a binary tree.",
     difficulty: "Easy",
@@ -1156,7 +1151,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -1164,7 +1159,7 @@ public:
     title: "Convert Sorted Array to Binary Search Tree",
     slug: "convert-sorted-array-to-bst",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Convert Sorted Array to Binary Search Tree. Convert a sorted array into a height-balanced BST.",
     difficulty: "Medium",
@@ -1217,7 +1212,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -1225,7 +1220,7 @@ public:
     title: "Balanced Binary Tree",
     slug: "balanced-binary-tree",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Balanced Binary Tree. Determine if a binary tree is height-balanced.",
     difficulty: "Easy",
@@ -1278,18 +1273,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // ....................................................................
-  // [Challenges 21 to 140 follow the same structure; here is a brief list of titles, difficulties, and slugs]
-  // 21. Lowest Common Ancestor of a Binary Tree (Medium)
   {
     id: "21",
     title: "Lowest Common Ancestor of a Binary Tree",
     slug: "lowest-common-ancestor-of-a-binary-tree",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Find the lowest common ancestor (LCA) of two nodes in a binary tree.",
     difficulty: "Medium",
@@ -1344,16 +1336,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 22. House Robber (Medium)
   {
     id: "22",
     title: "House Robber",
     slug: "house-robber",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: House Robber. Given an array representing the amount of money of each house, determine the maximum amount you can rob without alerting the police.",
     difficulty: "Medium",
@@ -1406,16 +1397,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 23. Word Break (Medium)
   {
     id: "23",
     title: "Word Break",
     slug: "word-break",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Word Break. Determine if a string can be segmented into a space-separated sequence of one or more dictionary words.",
     difficulty: "Medium",
@@ -1470,16 +1460,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // 24. Longest Increasing Subsequence (Medium)
   {
     id: "24",
     title: "Longest Increasing Subsequence",
     slug: "longest-increasing-subsequence",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Longest Increasing Subsequence. Find the length of the longest strictly increasing subsequence.",
     difficulty: "Medium",
@@ -1532,18 +1521,15 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
-  // ... (Challenges 25 through 140 continue with the same pattern.)
-  // For brevity, below is a summary list of titles and ids for challenges 25 to 140.
-  // You would expand each into a full challenge object following the above structure.
   {
     id: "25",
     title: "Subarray Sum Equals K",
     slug: "subarray-sum-equals-k",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Subarray Sum Equals K. Find the total number of continuous subarrays whose sum equals to k.",
     difficulty: "Medium",
@@ -1590,7 +1576,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -1598,7 +1584,7 @@ public:
     title: "Product of Array Except Self",
     slug: "product-of-array-except-self",
     category: "Algorithms",
-    languages: ["JavaScript", "Python", "Java", "C++"],
+    languages: ["js", "py", "java", "cpp"],
     description:
       "Solve problem: Product of Array Except Self. Return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].",
     difficulty: "Medium",
@@ -1646,7 +1632,7 @@ public:
       JavaScript: "https://example.com/icons/javascript.png",
       Python: "https://example.com/icons/python.png",
       Java: "https://example.com/icons/java.png",
-      "C++": "https://example.com/icons/cpp.png",
+      Cpp: "https://example.com/icons/cpp.png",
     },
   },
   {
@@ -1655,7 +1641,7 @@ public:
     description:
       "Build a responsive navigation bar using HTML, CSS, and JavaScript. The navbar should collapse into a hamburger menu on smaller screens and expand on larger screens.",
     difficulty: "Easy",
-    languages: ["HTML", "CSS", "JavaScript"],
+    languages: ["html", "css", "js"],
     slug: "responsive-navbar",
     category: "Web Development",
     examples: [
@@ -1694,47 +1680,13 @@ public:
       javascript: `function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); }`,
     },
   },
-
-  {
-    id: "14",
-    title: "Implement a RESTful API in Node.js",
-    description:
-      "Build a simple RESTful API using Express.js that handles CRUD operations for a list of users.",
-    difficulty: "Medium",
-    languages: ["JavaScript", "Node.js", "Express"],
-    slug: "restful-api-nodejs",
-    category: "Backend Development",
-    examples: [
-      {
-        input: "GET /users",
-        output: "Returns a list of users as JSON.",
-        explanation: "The API should follow RESTful principles.",
-      },
-    ],
-    constraints: [
-      "Use Express.js to handle routes.",
-      "Data should be stored in an in-memory array for simplicity.",
-      "Use JSON as the response format.",
-    ],
-    defaultCode: {
-      javascript: `const express = require('express');
-const app = express();
-app.use(express.json());
-let users = [{ id: 1, name: 'John Doe' }];
-
-app.get('/users', (req, res) => res.json(users));
-app.listen(3000, () => console.log('Server running on port 3000'));
-`,
-    },
-  },
-  // Additional challenges from 15 to 22
   {
     id: "15",
     title: "Design a CSS Grid Layout for a Portfolio",
     description:
       "Create a responsive portfolio grid layout using HTML and CSS. The layout should display portfolio items in a grid that adjusts the number of columns based on the screen width.",
     difficulty: "Medium",
-    languages: ["HTML", "CSS"],
+    languages: ["html", "css"],
     slug: "portfolio-grid-layout",
     category: "Web Development",
     examples: [
@@ -1785,7 +1737,7 @@ app.listen(3000, () => console.log('Server running on port 3000'));
     description:
       "Create a dark mode toggle feature using HTML, CSS, and JavaScript. Users should be able to switch between light and dark themes, with the preference persisting across sessions.",
     difficulty: "Medium",
-    languages: ["HTML", "CSS", "JavaScript"],
+    languages: ["html", "css", "js"],
     slug: "dark-mode-toggle",
     category: "Web Development",
     examples: [
@@ -1835,7 +1787,7 @@ toggleButton.addEventListener('click', () => {
     description:
       "Develop a basic calculator using HTML, CSS, and JavaScript. The calculator should support addition, subtraction, multiplication, and division.",
     difficulty: "Easy",
-    languages: ["HTML", "CSS", "JavaScript"],
+    languages: ["html", "css", "js"],
     slug: "simple-calculator",
     category: "Web Development",
     examples: [
@@ -1906,7 +1858,7 @@ function clearDisplay() {
     description:
       "Create an interactive form with client-side validation. Validate inputs like email and password, displaying appropriate error messages when validations fail.",
     difficulty: "Easy",
-    languages: ["HTML", "CSS", "JavaScript"],
+    languages: ["html", "css", "js"],
     slug: "form-validation",
     category: "Web Development",
     examples: [
@@ -1955,202 +1907,12 @@ function clearDisplay() {
   },
 
   {
-    id: "20",
-    title: "Build a Chat Application (WebSocket)",
-    description:
-      "Develop a real-time chat application using WebSockets with Node.js, Express, and Socket.IO. Users should be able to join chat rooms and exchange messages in real time.",
-    difficulty: "Hard",
-    languages: ["JavaScript", "Node.js", "Express", "Socket.IO"],
-    slug: "chat-app-websocket",
-    category: "Backend Development",
-    examples: [
-      {
-        input: "User sends a message in a chat room",
-        output: "All users in that chat room receive the message instantly",
-        explanation:
-          "Implement real-time communication using Socket.IO to broadcast messages.",
-      },
-    ],
-    constraints: [
-      "Utilize Socket.IO for WebSocket communication",
-      "Support multiple chat rooms",
-      "Ensure real-time message delivery",
-    ],
-    defaultCode: {
-      javascript: `const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
-
-const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
-
-io.on('connection', (socket) => {
-  console.log('New client connected');
-  socket.on('joinRoom', (room) => {
-    socket.join(room);
-  });
-  socket.on('message', (data) => {
-    io.to(data.room).emit('message', data.message);
-  });
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-});
-
-server.listen(3000, () => console.log('Server is running on port 3000'));
-`,
-    },
-  },
-
-  {
-    id: "21",
-    title: "Implement a Progressive Web App (PWA)",
-    description:
-      "Convert a simple website into a Progressive Web App by adding a service worker and a manifest file. The app should work offline and be installable on mobile devices.",
-    difficulty: "Medium",
-    languages: ["HTML", "CSS", "JavaScript"],
-    slug: "pwa-implementation",
-    category: "Web Development",
-    examples: [
-      {
-        input: "User opens the app offline",
-        output: "The app loads using cached assets",
-        explanation:
-          "Utilize a service worker to cache assets and a manifest.json file to define the app's metadata.",
-      },
-    ],
-    constraints: [
-      "Register a service worker",
-      "Include a valid manifest.json file",
-      "Ensure offline functionality through proper caching",
-    ],
-    defaultCode: {
-      javascript: `// service-worker.js
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open('v1').then((cache) => {
-      return cache.addAll([
-        '/',
-        '/index.html',
-        '/styles.css',
-        '/script.js'
-      ]);
-    })
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
-});
-
-// In your main JS file
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js').then(() => {
-    console.log('Service Worker Registered');
-  });
-}
-
-/* manifest.json example:
-{
-  \"name\": \"My PWA\",
-  \"short_name\": \"PWA\",
-  \"start_url\": \"/\",
-  \"display\": \"standalone\",
-  \"background_color\": \"#ffffff\",
-  \"theme_color\": \"#000000\",
-  \"icons\": [
-    {
-      \"src\": \"/icon-192x192.png\",
-      \"sizes\": \"192x192\",
-      \"type\": \"image/png\"
-    },
-    {
-      \"src\": \"/icon-512x512.png\",
-      \"sizes\": \"512x512\",
-      \"type\": \"image/png\"
-    }
-  ]
-}
-*/`,
-    },
-  },
-
-  {
-    id: "22",
-    title: "GraphQL API Integration",
-    description:
-      "Create a GraphQL API using Apollo Server in Node.js that supports querying and mutating data for a list of products.",
-    difficulty: "Hard",
-    languages: ["JavaScript", "Node.js", "GraphQL"],
-    slug: "graphql-api-integration",
-    category: "Backend Development",
-    examples: [
-      {
-        input: "Query for products",
-        output: "Returns a list of products in JSON format",
-        explanation:
-          "The API should allow fetching and updating product data using GraphQL queries and mutations.",
-      },
-    ],
-    constraints: [
-      "Use Apollo Server with Node.js",
-      "Define a GraphQL schema for products",
-      "Support both queries and mutations",
-    ],
-    defaultCode: {
-      javascript: `const { ApolloServer, gql } = require('apollo-server');
-
-const typeDefs = gql\`
-  type Product {
-    id: ID!
-    name: String!
-    price: Float!
-  }
-
-  type Query {
-    products: [Product]
-  }
-
-  type Mutation {
-    addProduct(name: String!, price: Float!): Product
-  }
-\`;
-
-let products = [{ id: '1', name: 'Sample Product', price: 19.99 }];
-
-const resolvers = {
-  Query: {
-    products: () => products,
-  },
-  Mutation: {
-    addProduct: (_, { name, price }) => {
-      const product = { id: String(products.length + 1), name, price };
-      products.push(product);
-      return product;
-    }
-  }
-};
-
-const server = new ApolloServer({ typeDefs, resolvers });
-server.listen().then(({ url }) => {
-  console.log(\`Server ready at \${url}\`);
-});
-`,
-    },
-  },
-  // Additional 13 challenges focusing on native languages (IDs 23 to 35)
-  {
     id: "23",
     title: "Implement Binary Search",
     description:
       "Given a sorted array and a target value, implement the binary search algorithm to return the index of the target, or -1 if not found.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "binary-search",
     category: "Algorithms",
     examples: [
@@ -2240,7 +2002,7 @@ if __name__ == '__main__':
     description:
       "Implement a stack data structure using an array. Support operations such as push, pop, and peek.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "stack-implementation",
     category: "Data Structures",
     examples: [
@@ -2322,7 +2084,7 @@ if __name__ == '__main__':
     description:
       "Implement a queue data structure using an array. Support operations such as enqueue, dequeue, and front.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "queue-implementation",
     category: "Data Structures",
     examples: [
@@ -2387,7 +2149,7 @@ print(q.popleft())`,
     description:
       "Implement the merge sort algorithm to sort an array of numbers.",
     difficulty: "Medium",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "merge-sort",
     category: "Algorithms",
     examples: [
@@ -2526,7 +2288,7 @@ if __name__ == '__main__':
     description:
       "Implement the quick sort algorithm to sort an array of numbers.",
     difficulty: "Medium",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "quick-sort",
     category: "Algorithms",
     examples: [
@@ -2636,7 +2398,7 @@ if __name__ == '__main__':
     description:
       "Implement Dijkstra's algorithm to find the shortest path from a starting node to all other nodes in a weighted graph.",
     difficulty: "Hard",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "dijkstras-algorithm",
     category: "Algorithms",
     examples: [
@@ -2796,7 +2558,7 @@ if __name__ == '__main__':
     description:
       "Implement a function to compute the nth Fibonacci number using both recursive and iterative approaches.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "fibonacci-number",
     category: "Algorithms",
     examples: [
@@ -2896,7 +2658,7 @@ if __name__ == '__main__':
     description:
       "Implement matrix multiplication for two 2D arrays representing matrices.",
     difficulty: "Medium",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "matrix-multiplication",
     category: "Algorithms",
     examples: [
@@ -2999,7 +2761,7 @@ if __name__ == '__main__':
     description:
       "Given a singly linked list, reverse it and return the new head.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "reverse-linked-list",
     category: "Data Structures",
     examples: [
@@ -3099,7 +2861,7 @@ if __name__ == '__main__':
     description:
       "Implement a Binary Search Tree (BST) with methods for insertion, search, and in-order traversal.",
     difficulty: "Medium",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "binary-search-tree",
     category: "Data Structures",
     examples: [
@@ -3255,7 +3017,7 @@ if __name__ == '__main__':
     description:
       "Write a function that finds the minimum and maximum elements in an unsorted array in a single pass.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "min-max-array",
     category: "Algorithms",
     examples: [
@@ -3336,7 +3098,7 @@ if __name__ == '__main__':
     description:
       "Determine if a given singly linked list contains a cycle using Floyd's Tortoise and Hare algorithm.",
     difficulty: "Medium",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "cycle-detection-linked-list",
     category: "Data Structures",
     examples: [
@@ -3430,7 +3192,7 @@ if __name__ == '__main__':
     description:
       "Write a function to check if a given string of parentheses is balanced.",
     difficulty: "Easy",
-    languages: ["C", "C++", "Java", "Python"],
+    languages: ["c", "cpp", "java", "py"],
     slug: "balanced-parentheses",
     category: "Algorithms",
     examples: [

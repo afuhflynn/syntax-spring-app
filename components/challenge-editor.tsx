@@ -37,13 +37,15 @@ export default function ChallengeEditor({ challenge }: ChallengeEditorProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
     Object.keys(challenge.defaultCode || {})[0]
   );
-  const [isWebChallenge, setIsWebChallenge] = useState<null | boolean>(null);
 
   const storageKey = `code-${challenge.slug}-${selectedLanguage}`;
+
   const [code, setCode] = useLocalStorage<string>(
     storageKey,
     challenge.defaultCode?.[selectedLanguage] || ""
   );
+
+  const [isWebChallenge, setIsWebChallenge] = useState<null | boolean>(null);
   const [html, setHtml] = useState(
     challenge.defaultCode && challenge.defaultCode["html"]
   );
@@ -107,16 +109,23 @@ Execution completed successfully.`);
     setIsAIHelpOpen(true);
   };
 
-  const challengeLanguages = Object.keys(challenge.defaultCode || {});
+  // Current challenge languages
+  const currentChallengeLangs = Object.keys(challenge.defaultCode || {});
   useEffect(() => {
-    challengeLanguages.forEach((lang) => {
-      if (lang.toLowerCase() === "cpp") {
-        setIsWebChallenge(false);
-      } else {
+    for (let index = 0; index < currentChallengeLangs.length - 1; index++) {
+      if (
+        ["html", "css"].includes(
+          currentChallengeLangs[index].toLocaleLowerCase()
+        )
+      ) {
         setIsWebChallenge(true);
+        break;
+      } else {
+        setIsWebChallenge(false);
+        break;
       }
-    });
-  }, [challengeLanguages]);
+    }
+  }, []);
 
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     editorRef.current = editor;
@@ -133,6 +142,7 @@ Execution completed successfully.`);
 
   // Update the web view components based on lang type and if code changes
   const handleCodeChange = (value: string) => {
+    setCode(value);
     if (selectedLanguage.toLowerCase() === "html") {
       setHtml(value);
     } else if (selectedLanguage.toLowerCase() === "css") {
@@ -140,7 +150,6 @@ Execution completed successfully.`);
     } else if (selectedLanguage.toLowerCase() === "javascript") {
       setJs(value);
     }
-    setCode(value);
   };
 
   return (
@@ -280,7 +289,7 @@ Execution completed successfully.`);
                 : "h-full"
             )}`}
           >
-            <InteractiveTerminal />
+            <InteractiveTerminal currentLangsExtensions={challenge.languages} />
           </div>
         </div>
       )}

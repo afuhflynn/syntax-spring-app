@@ -11,6 +11,7 @@ import axios from "axios";
 import Image from "next/image";
 import { Tooltip } from "@mui/material";
 import Logo from "./logo";
+import { useStore } from "@/lib/store";
 
 interface AIHelpModalProps {
   isOpen: boolean;
@@ -24,7 +25,7 @@ interface AIHelpModalProps {
   difficulty: string;
 }
 
-const maxLength = 100;
+const maxLength = 300;
 export default function AIHelpModal({
   isOpen,
   onClose,
@@ -38,6 +39,7 @@ export default function AIHelpModal({
 }: AIHelpModalProps) {
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { aiSettings } = useStore();
   const username = "afuhflynn"; // TODO: Change to real user name
   const [conversation, setConversation] = useState<
     Array<{ role: "user" | "bot"; content: string }>
@@ -73,6 +75,7 @@ export default function AIHelpModal({
         description,
         difficulty,
         chatHistory: conversation,
+        modelVersion: aiSettings.model,
       });
       const aiResponse = res.data.response;
 

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Tooltip } from "@mui/material";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Settings } from "@/components/settings";
+import { UserButton } from "@/components/user-button";
 
 export default function ChallengeClient({
   challenge,
@@ -21,6 +22,11 @@ export default function ChallengeClient({
   const router = useRouter();
   const [isEditor, setIsEditor] = useState(true);
   const [isDetails, setIsDetails] = useState(true);
+  const dummyUser = {
+    name: "afuhflynn",
+    email: "flyinnsafuh@gmail.com",
+    image: "",
+  };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -76,6 +82,7 @@ export default function ChallengeClient({
               {isDetails ? <SliceIcon /> : <Text />}
             </Button>
           </Tooltip>
+          <UserButton user={dummyUser} />
         </div>
       </header>
       {/* Challenge details */}
