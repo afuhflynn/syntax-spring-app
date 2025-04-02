@@ -1,10 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// DB Client provider
 generator client {
   provider = "prisma-client-js"
 }
 
+// DB provider
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
@@ -38,7 +37,7 @@ model User {
 
 enum UserRole {
   USER
-  MODERATOR
+  DEVELOPER
   ADMIN
 }
 
