@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, Send } from "lucide-react";
+import { X, Loader2, Send, CopyCheckIcon, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar } from "@/components/ui/avatar";
@@ -40,6 +40,10 @@ export default function AIHelpModal({
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { aiSettings } = useStore();
+  // Refs
+  const bottomRef = useRef<null | HTMLSpanElement>(null);
+  const chatContainerRef = useRef<null | HTMLDivElement>(null);
+
   const username = "afuhflynn"; // TODO: Change to real user name
   const [conversation, setConversation] = useState<
     Array<{ role: "user" | "model"; content: string }>
@@ -103,6 +107,15 @@ export default function AIHelpModal({
     }
   };
 
+  // Scroll to bottom on initial load
+  useEffect(() => {
+    if (bottomRef && bottomRef.current) {
+      bottomRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, [bottomRef, conversation]);
+
   if (!isOpen) return null;
 
   return (
@@ -130,7 +143,10 @@ export default function AIHelpModal({
             </div>
 
             {/* Conversation */}
-            <div className="p-4 h-[400px] overflow-y-auto">
+            <div
+              className="p-4 h-[400px] overflow-y-auto"
+              ref={chatContainerRef}
+            >
               {conversation.map((message, index) => (
                 <div
                   key={index}
@@ -155,16 +171,19 @@ export default function AIHelpModal({
                     </Avatar>
                   )}
                   <div
-                    className={cn(
+                    className={`relative ${cn(
                       "rounded-lg p-3 max-w-[80%]",
                       message.role === "model"
                         ? "bg-muted"
                         : "bg-primary text-primary-foreground ml-auto"
-                    )}
+                    )}`}
                   >
                     <div className="whitespace-pre-wrap text-sm response">
                       {message.content}
                     </div>
+                    <button className="absolute text-white">
+                      <Copy className="h-3 w-3" /> <CopyCheckIcon />
+                    </button>
                   </div>
                 </div>
               ))}
@@ -187,6 +206,7 @@ export default function AIHelpModal({
                   </div>
                 </div>
               )}
+              <span ref={bottomRef} />
             </div>
 
             {/* Input */}

@@ -18,7 +18,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
+    <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center w-full">
       <div className="flex items-center justify-center w-16 h-16 rounded-full bg-destructive/10 mb-6">
         <AlertCircle className="h-8 w-8 text-destructive" />
       </div>
@@ -27,23 +27,18 @@ export default function Error({
         We apologize for the inconvenience. Please try again or return to the
         home page.
       </p>
-      <div className="flex flex-col sm:flex-row gap-4">
-        <Button onClick={reset} variant="outline">
+      <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+        <Button onClick={reset} variant="outline" className="w-full md:w-auto">
           <span className="flex flex-row items-center gap-2">
             <RefreshCw className="mr-2 h-4 w-4" />
             Try again
           </span>
         </Button>
-        <Button asChild>
-          <span>
-            <Link
-              href="/"
-              className="flex flex-row items-center justify-center"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Link>
-          </span>
+        <Button asChild className="w-full md:w-auto">
+          <Link href="/" className="flex flex-row items-center justify-center">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Link>
         </Button>
       </div>
     </div>

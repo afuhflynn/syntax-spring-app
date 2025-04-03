@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function HowItWorks() {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background w-full">
       <div className="container">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4">
@@ -59,8 +59,8 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        <div className="flex justify-center mt-12">
-          <Button size="lg" asChild>
+        <div className="flex justify-center mt-12 w-full">
+          <Button size="lg" asChild className="w-full md:w-auto">
             <Link
               href="/platform/challenges"
               className="flex flex-row items-center justify-center"

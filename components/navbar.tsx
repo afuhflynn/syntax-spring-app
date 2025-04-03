@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,29 +10,14 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 import Logo from "./logo";
 import { UserButton } from "./user-button";
-
-// This is a mock function. Replace it with your actual authentication logic.
-const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Simulate checking auth status
-  useEffect(() => {
-    const checkAuth = async () => {
-      // Replace this with actual auth check
-      const auth = localStorage.getItem("isAuthenticated") === "true";
-      setIsAuthenticated(auth);
-    };
-    checkAuth();
-  }, []);
-
-  return { isAuthenticated, setIsAuthenticated };
-};
+import useUserStore from "@/lib/user.store";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const mobileNavRef = useRef<null | HTMLDivElement>(null);
+  const { isAuthenticated } = useUserStore();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -41,9 +26,24 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
+    const handleToggleMobileNav = (e: any) => {
+      if (
+        mobileNavRef &&
+        mobileNavRef.current &&
+        mobileNavRef.current.contains(e.target)
+      ) {
+        return;
+      } else {
+        setIsOpen(false);
+      }
+    };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("mousedown", handleToggleMobileNav);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousedown", handleToggleMobileNav);
+    };
   }, []);
 
   // Close mobile menu when route changes
@@ -57,12 +57,6 @@ export default function Navbar() {
     { name: "Community", path: "/platform/community" },
     { name: "About", path: "/platform/about" },
   ];
-
-   const dummyUser = {
-    name: "afuhflynn",
-    email: "flyinnsafuh@gmail.com",
-    image: "",
-  };
 
   return (
     <header
@@ -89,22 +83,47 @@ export default function Navbar() {
                   : "text-muted-foreground"
               )}
             >
-              {item.name}
-              {pathname === item.path && (
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                  layoutId="navbar-indicator"
-                  transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
-                />
+              {!isAuthenticated && item.name === "Home" ? (
+                <>
+                  {item.name}
+                  {pathname === item.path && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      layoutId="navbar-indicator"
+                      transition={{
+                        type: "spring",
+                        bounce: 0.25,
+                        duration: 0.5,
+                      }}
+                    />
+                  )}
+                </>
+              ) : (
+                item.name !== "Home" && (
+                  <>
+                    {item.name}
+                    {pathname === item.path && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                        layoutId="navbar-indicator"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.25,
+                          duration: 0.5,
+                        }}
+                      />
+                    )}
+                  </>
+                )
               )}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-4">
-          <ThemeToggle />
+          {isAuthenticated && <ThemeToggle />}
           {isAuthenticated ? (
-            <UserButton user={dummyUser} />
+            <UserButton />
           ) : (
             <>
               <Button
@@ -113,14 +132,10 @@ export default function Navbar() {
                 asChild
                 className="hidden md:flex"
               >
-                <span>
-                  <Link href="/auth/log-in">Log in</Link>
-                </span>
+                <Link href="/auth/log-in">Log in</Link>
               </Button>
               <Button asChild className="hidden md:flex">
-                <span>
-                  <Link href="/auth/sign-up">Get started for free</Link>
-                </span>
+                <Link href="/auth/sign-up">Get started for free</Link>
               </Button>
             </>
           )}
@@ -146,6 +161,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
+            ref={mobileNavRef}
             className="md:hidden border-t"
           >
             <div className="container py-4 flex flex-col space-y-4">
@@ -154,7 +170,7 @@ export default function Navbar() {
                   key={item.path}
                   href={item.path}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary py-2",
+                    "text-sm font-medium transition-colors w-auto hover:text-primary py-2",
                     pathname === item.path
                       ? "text-primary"
                       : "text-muted-foreground"
@@ -165,23 +181,14 @@ export default function Navbar() {
                 </Link>
               ))}
               {isAuthenticated ? (
-                <Button>Log out</Button>
+                <Button variant="secondary">Log out</Button>
               ) : (
                 <>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    asChild
-                    className="hidden md:flex"
-                  >
-                    <span>
-                      <Link href="/auth/log-in">Log in</Link>
-                    </span>
+                  <Button variant="outline" size="lg" asChild className="flex">
+                    <Link href="/auth/log-in">Log in</Link>
                   </Button>
-                  <Button asChild className="hidden md:flex">
-                    <span>
-                      <Link href="/auth/sign-up">Get Started</Link>
-                    </span>
+                  <Button asChild className="flex">
+                    <Link href="/auth/sign-up">Get Started</Link>
                   </Button>
                 </>
               )}

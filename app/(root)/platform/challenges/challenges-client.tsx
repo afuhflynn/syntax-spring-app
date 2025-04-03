@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -25,6 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { MainLoader } from "@/components/loader";
+import useUserStore from "@/lib/user.store";
 
 const initialCategoryFilterQuery = "Filter By Category";
 const initialDifficultyFilterQuery = "Filter By Difficulty";
@@ -33,8 +34,6 @@ export default function ChallengesClient({
 }: {
   challenges: Challenge[];
 }) {
-  const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilterQuery, setCategoryFilterQuery] = useState(
@@ -49,6 +48,7 @@ export default function ChallengesClient({
     useState(false);
 
   const [filteredChallenges, setFilteredChallenges] = useState(challenges);
+  const { user } = useUserStore();
 
   const handleSearchFilter = (searchTerm: string) => {
     setSearchQuery(searchTerm);
@@ -78,24 +78,14 @@ export default function ChallengesClient({
   };
 
   useEffect(() => {
-    const checkAuth = async () => {
-      // Replace this with your actual authentication check
-      const auth = localStorage.getItem("isAuthenticated") === "true";
-      setIsAuthenticated(auth);
-      setIsLoading(false);
-      if (!auth) {
-        router.push("/auth/log-in");
-      }
-    };
-    checkAuth();
-  }, [router]);
+    if (!user) {
+      redirect("/auth/log-in");
+    }
+  }, [user]);
 
+  // To be displayed when loading challenges or loading a fetched or filtered or target challenge
   if (isLoading) {
     return <MainLoader />;
-  }
-
-  if (!isAuthenticated) {
-    return null;
   }
 
   const getDifficultyColor = (difficulty: string) => {
@@ -111,16 +101,13 @@ export default function ChallengesClient({
     }
   };
 
-  const handleRouting = (slug: string) => {
-    router.push(`/play-ground/challenge/${slug}`);
+  const handleRouting = (slug: string, id: string) => {
+    redirect(`/play-ground/challenge/?title=${slug}&id=${id}`);
   };
 
   return (
     <div className="container py-12">
       <div className="mb-12 text-center">
-        <h1 className="text-4xl font-bold tracking-tighter mb-4">
-          Search or filter Challenges
-        </h1>
         {/* Search bar and filter bar */}
         <div className="w-full md:w-full h-auto grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 items-center justify-center md:gap-8 gap-4 md:my-8">
           <div className="relative w-full">
@@ -227,7 +214,7 @@ export default function ChallengesClient({
           filteredChallenges.map((challenge, index) => (
             <Card
               key={`${challenge.id}-${index}-${challenge.title}`}
-              onClick={() => handleRouting(challenge.slug)}
+              onClick={() => handleRouting(challenge.slug, challenge.id)}
               className="flex flex-col h-full hover:shadow-md transition-shadow cursor-pointer"
             >
               <CardHeader>
@@ -274,7 +261,7 @@ export default function ChallengesClient({
               <CardFooter>
                 <Button
                   className="w-full"
-                  onClick={() => handleRouting(challenge.slug)}
+                  onClick={() => handleRouting(challenge.slug, challenge.id)}
                 >
                   Solve Challenge <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

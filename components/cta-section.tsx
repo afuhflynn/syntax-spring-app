@@ -4,9 +4,9 @@ import { ArrowRight } from "lucide-react";
 
 export default function CTA() {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background w-full">
       <div className="container">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="mx-auto text-center w-full">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tighter">
             Ready to Level Up Your Coding Skills?
           </h2>
@@ -14,7 +14,7 @@ export default function CTA() {
             Join a community of innovators who are improving their skills with
             Syntax Spring. Start coding today and see the difference.
           </p>
-          <Button size="lg" asChild>
+          <Button size="lg" asChild className="w-full md:w-auto">
             <Link
               href="/platform/challenges"
               className="flex flex-row items-center justify-center"

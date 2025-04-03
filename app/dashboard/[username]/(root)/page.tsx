@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,32 +11,62 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Zap } from "lucide-react";
+import useUserStore from "@/lib/user.store";
+import { getChallengeBySlug } from "@/lib/challenges";
+import { redirect } from "next/navigation";
 
 export default function Dashboard() {
+  const { user } = useUserStore();
+  const currentDate = new Date();
+  // TODO: Change later to actual user data
+  const currentScore = 40;
+  const dummyChallenge = getChallengeBySlug("two-sum");
+
+  // Redirect to home page if there is no user data
+  if (!user) {
+    redirect("/");
+  }
   return (
     <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-3">
       <div className="col-span-2 space-y-6">
         {/* Streak Card */}
         <Card className="overflow-hidden bg-[#0f172a] text-white">
           <CardHeader className="pb-2">
-            <h2 className="text-2xl font-bold">Afuh, your streak was broken</h2>
-            <p className="text-sm text-gray-300">
-              Your previous streak was broken{" "}
-              <span className="inline-block">😞</span>. Upskill yourself for
-              over <span className="font-bold">10 minutes</span> to start a new
-              streak.
-            </p>
+            <h2 className="text-2xl font-bold">
+              {user && user.name ? user.name.split(" ")[0] : "Hey"},
+            </h2>
+            {user && user.submissions && user.submissions.length > 0 ? (
+              <p className="text-sm text-gray-300 text-center">
+                Upskill yourself{" "}
+                <span className="font-bold">
+                  right away with a new challenge
+                </span>{" "}
+                to increase your score.
+              </p>
+            ) : (
+              <p className="text-sm text-gray-300 text-center">
+                You don&apos;t have any score yet.
+                <span className="inline-block">😞</span>. Take a challenge now{" "}
+                <span className="font-bold">to increase your score.</span>
+              </p>
+            )}
           </CardHeader>
           <CardContent className="pb-0">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center flex-col justify-center">
+              <span className="py-2">Your current score for this week.</span>
               <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-8 border-[#1e293b]">
-                <span className="text-5xl font-bold">5</span>
+                <div className="relative flex h-full w-full items-center justify-center rounded-full">
+                  <span className="text-4xl font-bold">{currentScore}</span>
+                  <br /> of
+                  <br />
+                  1024
+                </div>
               </div>
             </div>
-            <div className="mt-6 flex justify-between px-4">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((day) => (
-                <div key={day} className="flex flex-col items-center">
-                  <Zap className="mb-1 h-5 w-5" />
+            <div className="mt-6 flex justify-between px-24 pb-4">
+              {[...Array(5)].map((day) => (
+                <div key={day} className="flex flex-col items-center ">
+                  <Zap className="mb-1 h-5 w-5 fill-yellow-400 border-yellow-500 " />
                   <span className="text-xs">Day {day}</span>
                 </div>
               ))}
@@ -42,107 +74,57 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Course Enrollment Card */}
-        <Card>
-          <CardContent className="flex flex-col items-center p-6 sm:flex-row sm:items-start sm:gap-6">
-            <div className="mb-4 shrink-0 sm:mb-0">
-              <div className="h-32 w-32 rounded-md border bg-muted p-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-monitor"
-                >
-                  <rect width="20" height="14" x="2" y="3" rx="2" />
-                  <line x1="8" x2="16" y1="21" y2="21" />
-                  <line x1="12" x2="12" y1="17" y2="21" />
-                </svg>
-              </div>
-            </div>
-            <div className="text-center sm:text-left">
-              <h3 className="text-xl font-semibold">
-                You haven&apos;t enrolled in a course yet
-              </h3>
-              <p className="mt-2 text-muted-foreground">
-                Accelerate your learning by starting a curated learning path
-                that fits your interests.
-              </p>
-              <Button className="mt-4 bg-indigo-600 hover:bg-indigo-700">
-                Explore learning paths
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Resume Practice */}
+        {/* Resume Challenges or preview completed challenges */}
         <div>
           <h3 className="mb-4 text-xl font-bold">Resume your practice</h3>
           <div className="space-y-4">
-            <Card>
-              <CardContent className="flex items-center gap-4 p-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 p-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-python text-blue-600"
-                  >
-                    <path d="M12 9H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3" />
-                    <path d="M12 15h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3" />
-                    <path d="M8 9V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2Z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-medium">Hello Codedamn! feat. Python</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Started a year ago
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex items-center gap-4 p-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 p-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-atom text-blue-600"
-                  >
-                    <circle cx="12" cy="12" r="1" />
-                    <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
-                    <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-medium">Hello Codedamn! feat. React</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Started a year ago
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            {user &&
+              user.authoredChallenges &&
+              user.authoredChallenges.map((item, index) => (
+                <Card
+                  key={`${item.id}-${item.author}-${item.createdAt}-${index}`}
+                >
+                  <CardContent className="flex items-center gap-4 p-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 p-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-python text-blue-600"
+                      >
+                        <path d="M12 9H5a2 2 0 0 0-2 2v4a2 0 2 0 0 2 2h3" />
+                        <path d="M12 15h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3" />
+                        <path d="M8 9V5a2 2 0 0 1 2-2h4a2 2 0 0 2 1 2v5a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2Z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Started{" "}
+                        {currentDate.getFullYear() -
+                          item.createdAt.getFullYear()}{" "}
+                        {currentDate.getFullYear() -
+                          item.createdAt.getFullYear() >
+                        1
+                          ? "years"
+                          : "year"}{" "}
+                        ago
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
-          <Button variant="link" className="mt-4 px-0 text-indigo-600">
-            Explore all problems
+          <Button variant="link" className="mt-4 px-0 text-primary" asChild>
+            <Link href={`/dashboard/${user?.username}/challenges`}>
+              Explore all challenges
+            </Link>
           </Button>
         </div>
       </div>
@@ -269,19 +251,19 @@ export default function Dashboard() {
             </div>
           </CardContent>
           <CardFooter>
-            <p className="text-sm text-muted-foreground">
-              Earn XP to start competing.{" "}
-              <Link href="#" className="text-indigo-600 hover:underline">
-                Explore problems
-              </Link>
-            </p>
+            <Link
+              href="/platform/challenges"
+              className="text-primary hover:underline"
+            >
+              Try out a new challenge.
+            </Link>
           </CardFooter>
         </Card>
 
-        {/* New Course */}
+        {/* TODO: Generate a random index in actual challenges array and select it as a suggested challenge */}
         <Card>
           <CardHeader>
-            <h3 className="text-xl font-bold">A New Course For You</h3>
+            <h3 className="text-xl font-bold">A New Challenge For You</h3>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="overflow-hidden rounded-lg">
@@ -294,15 +276,18 @@ export default function Dashboard() {
               />
             </div>
             <div>
-              <h4 className="text-lg font-semibold">
-                Learn the basics of web - Internet fundamentals
-              </h4>
+              <h4 className="text-lg font-semibold">{dummyChallenge?.title}</h4>
               <p className="mt-2 text-sm text-muted-foreground">
-                This is a small course diving into some of the fundamentals and
-                core of how HTTP works and how the overall web works giving you
-                a solid understanding of underlying HTTP technology
+                {dummyChallenge?.description}
               </p>
             </div>
+            <Button asChild>
+              <Link
+                href={`/play-ground/challenge/?title=${dummyChallenge?.slug}&id=${dummyChallenge?.id}`}
+              >
+                Start challenge.
+              </Link>
+            </Button>
           </CardContent>
         </Card>
       </div>

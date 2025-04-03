@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Check } from "lucide-react";
+import { Check, Eye, EyeClosed } from "lucide-react";
 import Logo from "@/components/logo";
 import PasswordStrengthCriteria from "@/components/password-strength-criteria";
 import PasswordStrengthMeter from "@/components/password-strength-meter";
@@ -30,6 +30,7 @@ export default function SignUpPage() {
     password: "",
     username: "",
   });
+  const [isPassword, setIsPassword] = useState(true);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
@@ -101,17 +102,26 @@ export default function SignUpPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={(e) =>
-                    handleInputChange(e.target.name, e.target.value)
-                  }
-                  required
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={isPassword ? "password" : "text"}
+                    name="password"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={(e) =>
+                      handleInputChange(e.target.name, e.target.value)
+                    }
+                    required
+                  />
+                  <button
+                    className="absolute right-2 top-0 bottom-0"
+                    type="button"
+                    onClick={() => setIsPassword((prev) => !prev)}
+                  >
+                    {isPassword ? <Eye /> : <EyeClosed />}
+                  </button>
+                </div>
               </div>
               {formData.password.trim() !== "" && (
                 <PasswordStrengthMeter password={formData.password} />

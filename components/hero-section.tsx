@@ -34,11 +34,11 @@ export default function Hero() {
     },
   ];
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section className="relative py-20 md:py-32 overflow-hidden w-full">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background -z-10" />
-      <div className="container relative z-10">
+      <div className="container relative z-10 w-full">
         <motion.div
-          className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto"
+          className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto"
           initial="hidden"
           animate="visible"
           variants={fadeIn}
@@ -47,7 +47,7 @@ export default function Hero() {
             Welcome to Syntax Spring
           </Badge>
           <motion.h1
-            className="text-4xl md:text-6xl font-bold tracking-tighter"
+            className="text-4xl md:text-6xl font-bold"
             variants={fadeIn}
           >
             Master Coding With{" "}
@@ -58,14 +58,13 @@ export default function Hero() {
             variants={fadeIn}
           >
             Improve your programming skills with our interactive coding
-            platform. Write, test, and execute code directly in your browser
-            across multiple languages.
+            platform.
           </motion.p>
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 mt-4"
+            className="flex flex-col sm:flex-row gap-4 mt-4 w-full md:w-auto"
             variants={fadeIn}
           >
-            <Button size="lg" asChild>
+            <Button size="lg" asChild className="w-full md:w-auto">
               <Link
                 href="/platform/challenges"
                 className="flex flex-row items-center justify-center"
@@ -73,7 +72,12 @@ export default function Hero() {
                 Start Coding <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" asChild>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="w-full md:w-auto"
+            >
               <Link href="/platform/about">Learn More</Link>
             </Button>
           </motion.div>

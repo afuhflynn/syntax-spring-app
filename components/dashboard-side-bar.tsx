@@ -3,9 +3,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./logo";
 import devLog from "@/lib/devLog";
+import useUserStore from "@/lib/user.store";
 
 export const DashboardSideBar = () => {
-  const dummyUser = "afuhflynn";
+  const { user } = useUserStore();
   const pathName = usePathname();
   const pathNameArray = pathName.split("/");
   const path = pathNameArray[pathNameArray.length - 1];
@@ -16,9 +17,9 @@ export const DashboardSideBar = () => {
       <div className="px-3 py-2">
         <nav className="space-y-1">
           <Link
-            href={`/dashboard/${dummyUser}`}
+            href={`/dashboard/${user?.username}`}
             className={`flex items-center gap-3 rounded-md ${
-              path.trim() === "afuhflynn" ? "bg-muted" : ""
+              path.trim() === user?.username ? "bg-muted" : ""
             } px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground`}
           >
             <svg
@@ -42,34 +43,7 @@ export const DashboardSideBar = () => {
           </Link>
 
           <Link
-            href={`/dashboard/${dummyUser}/learning-paths`}
-            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-              path.trim() === "learning-paths" ? "bg-muted" : ""
-            } hover:bg-muted hover:text-foreground`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-git-branch"
-            >
-              <circle cx="12" cy="18" r="3" />
-              <circle cx="6" cy="6" r="3" />
-              <circle cx="18" cy="6" r="3" />
-              <path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9" />
-              <path d="M12 12v3" />
-            </svg>
-            My Learning Paths
-          </Link>
-
-          <Link
-            href={`/dashboard/${dummyUser}/challenges`}
+            href={`/dashboard/${user?.username}/challenges`}
             className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground ${
               path.trim() === "challenges" ? "bg-muted" : ""
             }`}

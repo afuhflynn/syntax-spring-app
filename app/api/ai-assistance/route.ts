@@ -95,8 +95,8 @@ export async function POST(req: Request) {
     console.error("AI assistance error:", error);
     return NextResponse.json(
       {
-        error: "Failed to get AI assistance",
-        message: error instanceof Error ? error.message : "Unknown error",
+        error: "Failed to get AI assistance.",
+        message: "An error occurred. Try again later.",
       },
       { status: 500 }
     );

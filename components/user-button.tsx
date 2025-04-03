@@ -12,20 +12,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useUserStore from "@/lib/user.store";
 
-interface UserAccountNavProps {
-  user: {
-    name: string | null;
-    email: string | null;
-    image: string | null;
-  } | null;
-}
-
-export const UserButton = ({ user }: UserAccountNavProps) => {
+export const UserButton = () => {
   // If no user is provided, use a default dev user in development mode
-  const displayUser = user || null;
+  const { user } = useUserStore();
 
-  if (!displayUser) {
+  if (!user) {
     return null;
   }
 
@@ -35,13 +28,11 @@ export const UserButton = ({ user }: UserAccountNavProps) => {
         <Button variant="ghost" className="relative w-8 h-8 rounded-full">
           <Avatar className="w-8 h-8">
             <AvatarImage
-              src={displayUser.image || ""}
-              alt={displayUser.name || "User"}
+              src={user.avatarUrl || ""}
+              alt={user.username || "User"}
             />
             <AvatarFallback>
-              {displayUser.name
-                ? displayUser.name.charAt(0).toUpperCase()
-                : "U"}
+              {user.username ? user.username.charAt(0).toUpperCase() : "U"}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -49,31 +40,29 @@ export const UserButton = ({ user }: UserAccountNavProps) => {
       <DropdownMenuContent align="end" className="bg-background">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
-            {displayUser.name && (
-              <p className="font-medium">{displayUser.name}</p>
-            )}
-            {displayUser.email && (
-              <p className="w-[200px] truncate text-sm text-muted-foreground">
-                {displayUser.email}
+            {user.username && <p className="font-larger">{user.username}</p>}
+            {user.email && (
+              <p className="w-[200px] truncate text-sm text-primary">
+                {user.email}
               </p>
             )}
           </div>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="cursor-pointer">
-          <Link href={`/dashboard/${user?.name}`}>
+          <Link href={`/dashboard/${user.username}`}>
             <LayoutDashboard className="w-4 h-4 mr-2" />
             <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="cursor-pointer">
-          <Link href={`/dashboard/${user?.name}/profile`}>
+          <Link href={`/dashboard/${user.username}/profile`}>
             <UserIcon className="w-4 h-4 mr-2" />
             <span>Profile</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="cursor-pointer">
-          <Link href={`/dashboard/${user?.name}/settings`}>
+          <Link href={`/dashboard/${user.username}/settings`}>
             <Settings className="w-4 h-4 mr-2" />
             <span>Settings</span>
           </Link>
