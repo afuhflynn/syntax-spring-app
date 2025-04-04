@@ -160,9 +160,12 @@ export default function PrivacyPolicyPage() {
           <p>
             Our service is not directed to anyone under the age of 13. We do not
             knowingly collect personally identifiable information from anyone
-            under the age of 13. If you are a parent or guardian and you are
-            aware that your child has provided us with personal data, please
-            contact us.
+            under the age of 13.
+          </p>
+          <p>
+            If you are a parent or guardian and you think your child is
+            responsible and curious to learn, then we recommend the child uses
+            your details for the account creation.
           </p>
 
           <h2>Changes to This Privacy Policy</h2>

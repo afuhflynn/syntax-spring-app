@@ -1,13 +1,15 @@
 "use client";
 
-import { notFound, usePathname } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import { getChallengeBySlug } from "@/lib/challenges";
 import ChallengeClient from "./challenge-client";
+import devLog from "@/lib/devLog";
 
 export default function ChallengePage() {
-  const pathname = usePathname();
-  const slug = pathname.split("/")[3];
-  const challenge = getChallengeBySlug(slug);
+  const params = useSearchParams();
+  const slug = params.get("slug");
+  devLog(slug);
+  const challenge = getChallengeBySlug(slug as string);
 
   if (!challenge) {
     notFound();

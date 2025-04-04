@@ -19,7 +19,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { InteractiveTerminal } from "@/components/interactive-terminal";
 import { MainLoader } from "./loader";
 import Logo from "./logo";
 import dynamic from "next/dynamic";
@@ -284,9 +283,6 @@ export function TestCodeEditor() {
       </header>
       <div className="flex-1 container py-4 flex flex-col lg:flex-row gap-4 h-[calc(100vh-4rem)]">
         <div className="lg:flex-1 flex flex-col h-full min-h-[60vh] lg:min-h-0">
-          <h1 className="text-xl font-bold tracking-tighter mb-6">
-            Experiment, play and get cooked up with any language you want.
-          </h1>
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <TooltipProvider>
@@ -350,18 +346,6 @@ export function TestCodeEditor() {
           <Card className="flex-1 overflow-hidden border">
             {MonacoEditorComponent()}
           </Card>
-
-          <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {isTerminalVisible && (
-              <div
-                className={
-                  isWebProject ? "col-span-1" : "col-span-1 lg:col-span-2"
-                }
-              >
-                <InteractiveTerminal />
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>

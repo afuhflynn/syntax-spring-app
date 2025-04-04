@@ -2,24 +2,23 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./logo";
-import devLog from "@/lib/devLog";
 import useUserStore from "@/lib/user.store";
 
 export const DashboardSideBar = () => {
   const { user } = useUserStore();
-  const pathName = usePathname();
-  const pathNameArray = pathName.split("/");
-  const path = pathNameArray[pathNameArray.length - 1];
-  devLog(path);
+  const pathname = usePathname();
   return (
     <aside className="hidden w-64 border-r bg-muted/10 md:block">
+      <div className="mt-2 w-full flex flex-row items-center ml-2">
+
       <Logo />
-      <div className="px-3 py-2">
+      </div>
+      <div className="px-3 py-2 pt-8">
         <nav className="space-y-1">
           <Link
             href={`/dashboard/${user?.username}`}
             className={`flex items-center gap-3 rounded-md ${
-              path.trim() === user?.username ? "bg-muted" : ""
+              pathname === `/dashboard/${user?.username}` ? "bg-muted" : ""
             } px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground`}
           >
             <svg
@@ -45,7 +44,9 @@ export const DashboardSideBar = () => {
           <Link
             href={`/dashboard/${user?.username}/challenges`}
             className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground ${
-              path.trim() === "challenges" ? "bg-muted" : ""
+              pathname === `/dashboard/${user?.username}/challenges`
+                ? "bg-muted"
+                : ""
             }`}
           >
             <svg

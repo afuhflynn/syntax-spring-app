@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, Send, CopyCheckIcon, Copy } from "lucide-react";
+import { motion, AnimatePresence, easeIn } from "framer-motion";
+import { X, Loader2, Send, Copy, LucideCopyCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar } from "@/components/ui/avatar";
@@ -25,7 +25,7 @@ interface AIHelpModalProps {
   difficulty: string;
 }
 
-const maxLength = 300;
+const maxLength = 1000;
 export default function AIHelpModal({
   isOpen,
   onClose,
@@ -39,6 +39,7 @@ export default function AIHelpModal({
 }: AIHelpModalProps) {
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCopyingText, setIsCopyingText] = useState<boolean>(false);
   const { aiSettings } = useStore();
   // Refs
   const bottomRef = useRef<null | HTMLSpanElement>(null);
@@ -116,6 +117,14 @@ export default function AIHelpModal({
     }
   }, [bottomRef, conversation]);
 
+  const handleCopyResponse = (data: string) => {
+    setIsCopyingText((prev) => !prev);
+    navigator.clipboard.writeText(data);
+    setTimeout(() => {
+      setIsCopyingText((prev) => !prev);
+    }, 3000);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -150,12 +159,12 @@ export default function AIHelpModal({
               {conversation.map((message, index) => (
                 <div
                   key={index}
-                  className={cn(
+                  className={`relative ${cn(
                     "flex gap-3 mb-4",
                     message.role === "model"
                       ? "items-start"
                       : "items-start flex-row-reverse"
-                  )}
+                  )}`}
                 >
                   {message.role === "model" && (
                     <Avatar className="h-8 w-8 bg-secondary">
@@ -171,19 +180,29 @@ export default function AIHelpModal({
                     </Avatar>
                   )}
                   <div
-                    className={`relative ${cn(
-                      "rounded-lg p-3 max-w-[80%]",
+                    className={`relative mb-4 ${cn(
+                      "rounded-2xl p-3 max-w-[80%]",
                       message.role === "model"
-                        ? "bg-muted"
-                        : "bg-primary text-primary-foreground ml-auto"
+                        ? "border border-muted"
+                        : "bg-muted text-primary-foreground ml-auto"
                     )}`}
                   >
                     <div className="whitespace-pre-wrap text-sm response">
                       {message.content}
                     </div>
-                    <button className="absolute text-white">
-                      <Copy className="h-3 w-3" /> <CopyCheckIcon />
-                    </button>
+                    <Tooltip title="Copy" placement="right-end" arrow>
+                      <button
+                        className="absolute right-1 -bottom-5 text-muted-foreground"
+                        onClick={() => handleCopyResponse(message.content)}
+                        aria-label="Copy"
+                      >
+                        {isCopyingText ? (
+                          <LucideCopyCheck className="h-4 w-4 text-green-500" />
+                        ) : (
+                          <Copy className="h-4 w-4" />
+                        )}
+                      </button>
+                    </Tooltip>
                   </div>
                 </div>
               ))}
@@ -201,7 +220,7 @@ export default function AIHelpModal({
                       className="text-xs font-medium text-primary-foreground"
                     />
                   </Avatar>
-                  <div className="rounded-lg p-3 bg-muted flex flex-row items-center gap-2">
+                  <div className="rounded-2xl p-3 bg-primary flex flex-row items-center gap-2">
                     Is Thinking... <Loader2 className="h-4 w-4 animate-spin" />
                   </div>
                 </div>

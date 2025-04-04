@@ -1,17 +1,13 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
-import { useTheme } from "next-themes";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AlertCircle, Copy, Download, Trash2, Upload } from "lucide-react";
+import { Copy, Download, Trash2, Upload } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -20,21 +16,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import useUserStore from "@/lib/user.store";
 
 export default function AccountSettings() {
   const { toast } = useToast();
-  const { theme } = useTheme();
+  const { user } = useUserStore();
 
   // Mock user data - replace with actual user data
-  const [userData, setUserData] = useState({
-    name: "John Doe",
-    username: "johndoe",
-    email: "john.doe@example.com",
-    createdAt: "January 15, 2023",
-    twoFactorEnabled: false,
-    image: "",
-  });
+  const [username, setUsername] = useState(user?.username);
+  const [email, setEmail] = useState(user?.email);
+  const [name, setName] = useState(user?.name);
 
   const handleAccountUpdate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +36,7 @@ export default function AccountSettings() {
   };
 
   const handleCopyUsername = () => {
-    navigator.clipboard.writeText(userData.username);
+    navigator.clipboard.writeText(user?.username as string);
     toast({
       title: "Username copied",
       description: "Username has been copied to clipboard.",
@@ -81,11 +72,14 @@ export default function AccountSettings() {
         <form onSubmit={handleAccountUpdate}>
           <CardContent className="space-y-6">
             <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 sm:items-center">
-              <div className="flex flex-col items-center space-y-2">
-                <Avatar className="h-24 w-24">
-                  <AvatarImage src={userData.image || ""} alt={userData.name} />
+              <div className="flex flex-col items-center justify-center space-y-2">
+                <Avatar className="h-20 w-20 flex flex-row items-center justify-center">
+                  <AvatarImage
+                    src={user?.avatarUrl || ""}
+                    alt={user?.username}
+                  />
                   <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
-                    {userData.name.charAt(0)}
+                    {user?.username.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex space-x-2">
@@ -109,10 +103,8 @@ export default function AccountSettings() {
                   <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
-                    value={userData.name}
-                    onChange={(e) =>
-                      setUserData({ ...userData, name: e.target.value })
-                    }
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -120,10 +112,8 @@ export default function AccountSettings() {
                   <div className="flex">
                     <Input
                       id="username"
-                      value={userData.username}
-                      onChange={(e) =>
-                        setUserData({ ...userData, username: e.target.value })
-                      }
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       className="rounded-r-none"
                     />
                     <Button
@@ -137,8 +127,8 @@ export default function AccountSettings() {
                     </Button>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Your profile URL: https://syntaxspring.com/
-                    {userData.username}
+                    Your profile URL: https://syntaxspring.com/dashboard/
+                    {user?.username}/profile
                   </p>
                 </div>
                 <div className="grid gap-2">
@@ -146,10 +136,8 @@ export default function AccountSettings() {
                   <Input
                     id="email"
                     type="email"
-                    value={userData.email}
-                    onChange={(e) =>
-                      setUserData({ ...userData, email: e.target.value })
-                    }
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <p className="text-xs text-muted-foreground">
                     This email is used for notifications and account recovery.
@@ -160,7 +148,7 @@ export default function AccountSettings() {
           </CardContent>
           <CardFooter className="flex justify-between border-t px-6 py-4">
             <p className="text-sm text-muted-foreground">
-              Member since {userData.createdAt}
+              Member since {user?.createdAt.toLocaleDateString()}
             </p>
             <Button type="submit">Save Changes</Button>
           </CardFooter>
@@ -174,39 +162,6 @@ export default function AccountSettings() {
             Add an extra layer of security to your account.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label htmlFor="two-factor">Two-Factor Authentication</Label>
-              <p className="text-sm text-muted-foreground">
-                Require a verification code when signing in.
-              </p>
-            </div>
-            <Switch
-              id="two-factor"
-              checked={userData.twoFactorEnabled}
-              onCheckedChange={(checked) => {
-                setUserData({ ...userData, twoFactorEnabled: checked });
-                toast({
-                  title: checked ? "2FA Enabled" : "2FA Disabled",
-                  description: checked
-                    ? "Two-factor authentication has been enabled."
-                    : "Two-factor authentication has been disabled.",
-                });
-              }}
-            />
-          </div>
-          {userData.twoFactorEnabled && (
-            <Alert>
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Two-factor authentication is enabled</AlertTitle>
-              <AlertDescription>
-                Your account is now more secure. You'll need to enter a
-                verification code when signing in.
-              </AlertDescription>
-            </Alert>
-          )}
-        </CardContent>
       </Card>
 
       <Card>

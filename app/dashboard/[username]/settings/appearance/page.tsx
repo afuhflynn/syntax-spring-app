@@ -55,16 +55,8 @@ export default function AppearanceSettings() {
     });
   };
 
-  const colorSchemes = [
-    { name: "Blue", value: "blue" },
-    { name: "Purple", value: "purple" },
-    { name: "Green", value: "green" },
-    { name: "Orange", value: "orange" },
-    { name: "Red", value: "red" },
-  ];
-
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 h-screen overflow-auto">
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Appearance</h2>
         <p className="text-muted-foreground">
@@ -150,94 +142,6 @@ export default function AppearanceSettings() {
                   </div>
                   <p className="mt-2 font-medium text-center">System</p>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Color Scheme</CardTitle>
-              <CardDescription>
-                Choose a color scheme for the interface.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RadioGroup
-                value={colorScheme}
-                onValueChange={setColorScheme}
-                className="grid grid-cols-2 md:grid-cols-5 gap-4"
-              >
-                {colorSchemes.map((scheme) => (
-                  <div
-                    key={scheme.value}
-                    className="flex items-center space-x-2"
-                  >
-                    <RadioGroupItem
-                      value={scheme.value}
-                      id={`color-${scheme.value}`}
-                    />
-                    <Label
-                      htmlFor={`color-${scheme.value}`}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <span
-                        className={`mr-2 h-4 w-4 rounded-full bg-${scheme.value}-500`}
-                        style={{ backgroundColor: `var(--${scheme.value})` }}
-                      ></span>
-                      {scheme.name}
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Accessibility</CardTitle>
-              <CardDescription>
-                Customize accessibility settings.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <Label htmlFor="font-scale">Font Size ({fontScale}%)</Label>
-                <Slider
-                  id="font-scale"
-                  min={75}
-                  max={150}
-                  step={5}
-                  value={[fontScale]}
-                  onValueChange={(value) => setFontScale(value[0])}
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="reduced-motion">Reduced Motion</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Minimize animations and transitions.
-                  </p>
-                </div>
-                <Switch
-                  id="reduced-motion"
-                  checked={reducedMotion}
-                  onCheckedChange={setReducedMotion}
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="high-contrast">High Contrast</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Increase contrast for better visibility.
-                  </p>
-                </div>
-                <Switch
-                  id="high-contrast"
-                  checked={highContrast}
-                  onCheckedChange={setHighContrast}
-                />
               </div>
             </CardContent>
           </Card>

@@ -58,7 +58,7 @@ export default function ProfileSettings() {
   };
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 h-screen overflow-auto">
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Profile Settings</h2>
         <p className="text-muted-foreground">
@@ -252,112 +252,6 @@ export default function ProfileSettings() {
                     />
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Profile Display</CardTitle>
-              <CardDescription>
-                Control what information is visible on your public profile.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="show-badges">Show Badges</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Display your earned badges on your profile.
-                  </p>
-                </div>
-                <Switch
-                  id="show-badges"
-                  checked={profileData.showBadges}
-                  onCheckedChange={(checked) =>
-                    setProfileData({ ...profileData, showBadges: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="show-activity">Show Activity</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Display your recent activity on your profile.
-                  </p>
-                </div>
-                <Switch
-                  id="show-activity"
-                  checked={profileData.showActivity}
-                  onCheckedChange={(checked) =>
-                    setProfileData({ ...profileData, showActivity: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="show-stats">Show Statistics</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Display your coding statistics on your profile.
-                  </p>
-                </div>
-                <Switch
-                  id="show-stats"
-                  checked={profileData.showStats}
-                  onCheckedChange={(checked) =>
-                    setProfileData({ ...profileData, showStats: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="show-languages">Show Languages</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Display your programming languages on your profile.
-                  </p>
-                </div>
-                <Switch
-                  id="show-languages"
-                  checked={profileData.showLanguages}
-                  onCheckedChange={(checked) =>
-                    setProfileData({ ...profileData, showLanguages: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="show-followers">Show Followers</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Display your followers on your profile.
-                  </p>
-                </div>
-                <Switch
-                  id="show-followers"
-                  checked={profileData.showFollowers}
-                  onCheckedChange={(checked) =>
-                    setProfileData({ ...profileData, showFollowers: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="show-following">Show Following</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Display who you follow on your profile.
-                  </p>
-                </div>
-                <Switch
-                  id="show-following"
-                  checked={profileData.showFollowing}
-                  onCheckedChange={(checked) =>
-                    setProfileData({ ...profileData, showFollowing: checked })
-                  }
-                />
               </div>
             </CardContent>
           </Card>

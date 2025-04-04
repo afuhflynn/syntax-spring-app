@@ -1,7 +1,5 @@
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { getChallengeBySlug } from "@/lib/challenges";
-import devLog from "@/lib/devLog";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,23 +7,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export async function generateMetadata(params: {
-  slug: string;
-}): Promise<Metadata> {
-  devLog(params.slug);
-  const challenge = getChallengeBySlug(params.slug);
-
-  if (!challenge) {
-    return {
-      title: "Challenge Not Found",
-    };
-  }
-
-  return {
-    title: `${challenge.title} | Syntax Spring`,
-    description: challenge.description.substring(0, 160),
-  };
-}
+export const metadata: Metadata = {
+  title: `Playground | Syntax Spring`,
+  description: "Challenge playground with code editor.",
+};
 
 export default function PlaygroundLayout({
   children,

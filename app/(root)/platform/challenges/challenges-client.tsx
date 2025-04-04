@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -34,7 +34,7 @@ export default function ChallengesClient({
 }: {
   challenges: Challenge[];
 }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilterQuery, setCategoryFilterQuery] = useState(
     initialCategoryFilterQuery
@@ -46,6 +46,7 @@ export default function ChallengesClient({
     useState(false);
   const [isDifficultyFilterDropdown, setIsDifficultyFilterDropDown] =
     useState(false);
+  const router = useRouter();
 
   const [filteredChallenges, setFilteredChallenges] = useState(challenges);
   const { user } = useUserStore();
@@ -85,7 +86,7 @@ export default function ChallengesClient({
 
   // To be displayed when loading challenges or loading a fetched or filtered or target challenge
   if (isLoading) {
-    return <MainLoader />;
+    return <MainLoader text={"Loading challenges"} />;
   }
 
   const getDifficultyColor = (difficulty: string) => {
@@ -102,7 +103,7 @@ export default function ChallengesClient({
   };
 
   const handleRouting = (slug: string, id: string) => {
-    redirect(`/play-ground/challenge/?title=${slug}&id=${id}`);
+    router.push(`/play-ground/challenge?slug=${slug}&id=${id}`);
   };
 
   return (

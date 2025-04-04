@@ -29,10 +29,11 @@ import {
 } from "@/components/ui/card";
 import { ProfileDashboard } from "@/components/profile-dashboard";
 import { RecommendedChallenges } from "./recommended-challenges";
+import useUserStore from "@/lib/user.store";
 
 export default function ProfilePage() {
-  const [activeTab, setActiveTab] = useState("overview");
   const [streakData, setStreakData] = useState<number[]>([]);
+  const { user } = useUserStore();
 
   // Mock user data - replace with actual user data
   const userData = {

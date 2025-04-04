@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChart2,
+  Bell,
   Code,
-  Github,
-  Home,
+  Key,
   LayoutDashboard,
-  Settings,
-  Trophy,
-  Users,
+  Palette,
+  Shield,
+  Terminal,
+  User,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -28,44 +28,45 @@ interface ProfileSidebarNavProps {
   className?: string;
 }
 
-export function ProfileSidebarNav({ className }: ProfileSidebarNavProps) {
+export function SettingsSidebarNav({ className }: ProfileSidebarNavProps) {
   const { user } = useUserStore();
   const pathname = usePathname();
 
   const mainNavItems = [
     {
-      title: "Overview",
-      href: `/dashboard/${user?.username}/profile`,
-      icon: Home,
+      name: "Profile",
+      href: `/dashboard/${user?.username}/settings/profile`,
+      icon: User,
     },
     {
-      title: "Challenges",
-      href: `/dashboard/${user?.username}/profile/challenges`,
+      name: "Account",
+      href: `/dashboard/${user?.username}/settings`,
+      icon: Shield,
+    },
+    {
+      name: "Appearance",
+      href: `/dashboard/${user?.username}/settings/appearance`,
+      icon: Palette,
+    },
+    {
+      name: "Notifications",
+      href: `/dashboard/${user?.username}/settings/notifications`,
+      icon: Bell,
+    },
+    {
+      name: "Editor",
+      href: `/dashboard/${user?.username}/settings/editor`,
       icon: Code,
     },
     {
-      title: "Activity",
-      href: `/dashboard/${user?.username}/profile/activity`,
-      icon: BarChart2,
+      name: "Terminal",
+      href: `/dashboard/${user?.username}/settings/terminal`,
+      icon: Terminal,
     },
     {
-      title: "Achievements",
-      href: `/dashboard/${user?.username}/profile/achievements`,
-      icon: Trophy,
-    },
-  ];
-
-  const communityNavItems = [
-    {
-      title: "Community",
-      href: `/platform/community`,
-      icon: Users,
-    },
-    {
-      title: "GitHub",
-      href: `https://github.com/afuhflynn/syntax-spring-app`,
-      icon: Github,
-      external: true,
+      name: "Security",
+      href: `/dashboard/${user?.username}/settings/security`,
+      icon: Key,
     },
   ];
 
@@ -74,7 +75,7 @@ export function ProfileSidebarNav({ className }: ProfileSidebarNavProps) {
       <div className="space-y-4 py-4">
         <div className="px-4 py-2">
           <h2 className="mb-2 px-2 text-lg font-semibold tracking-tight">
-            Profile
+            Settings
           </h2>
           <div className="space-y-1">
             {mainNavItems.map((item) => (
@@ -93,49 +94,12 @@ export function ProfileSidebarNav({ className }: ProfileSidebarNavProps) {
                     >
                       <Link href={item.href}>
                         <item.icon className="mr-2 h-4 w-4" />
-                        {item.title}
+                        {item.name}
                       </Link>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right" className="hidden md:block">
-                    {item.title}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            ))}
-          </div>
-        </div>
-        <Separator />
-        <div className="px-4 py-2">
-          <h2 className="mb-2 px-2 text-lg font-semibold tracking-tight">
-            Community
-          </h2>
-          <div className="space-y-1">
-            {communityNavItems.map((item) => (
-              <TooltipProvider key={item.href} delayDuration={0}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant={"ghost"}
-                      size="sm"
-                      className="w-full justify-start"
-                      asChild
-                    >
-                      <Link
-                        href={item.href}
-                        target={item.external ? "_blank" : undefined}
-                        rel={item.external ? "noopener noreferrer" : undefined}
-                      >
-                        <item.icon className="mr-2 h-4 w-4" />
-                        {item.title}
-                        {item.external && (
-                          <span className="sr-only">(opens in new tab)</span>
-                        )}
-                      </Link>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="right" className="hidden md:block">
-                    {item.title}
+                    {item.name}
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -168,17 +132,6 @@ export function ProfileSidebarNav({ className }: ProfileSidebarNavProps) {
               <Link href="/platform/challenges">
                 <Code className="mr-2 h-4 w-4" />
                 Start New Challenge
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full justify-start"
-              asChild
-            >
-              <Link href={`/dashboard/${user?.username}/settings/profile`}>
-                <Settings className="mr-2 h-4 w-4" />
-                Edit Profile
               </Link>
             </Button>
           </div>

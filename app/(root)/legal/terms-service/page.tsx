@@ -134,7 +134,9 @@ export default function TermsPage() {
             Upon termination, your right to use the Service will immediately
             cease. If you wish to terminate your account, you may simply
             discontinue using the Service or contact us to request account
-            deletion.
+            deletion or provide your information and confirm{" "}
+            <span className="font-bold uppercase text-md">Permanent</span> an
+            account deletion.
           </p>
 
           <h2>10. Limitation of Liability</h2>
@@ -171,8 +173,7 @@ export default function TermsPage() {
           <h2>12. Governing Law</h2>
           <p>
             These Terms shall be governed and construed in accordance with the
-            laws of the United States, without regard to its conflict of law
-            provisions.
+            laws of Cameroon, without regard to its conflict of law provisions.
           </p>
 
           <h2>13. Changes to Terms</h2>

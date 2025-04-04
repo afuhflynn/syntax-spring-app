@@ -56,10 +56,7 @@ export default function Dashboard() {
               <span className="py-2">Your current score for this week.</span>
               <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-8 border-[#1e293b]">
                 <div className="relative flex h-full w-full items-center justify-center rounded-full">
-                  <span className="text-4xl font-bold">{currentScore}</span>
-                  <br /> of
-                  <br />
-                  1024
+                  <span className="text-5xl font-bold">{currentScore}</span>
                 </div>
               </div>
             </div>
@@ -283,7 +280,7 @@ export default function Dashboard() {
             </div>
             <Button asChild>
               <Link
-                href={`/play-ground/challenge/?title=${dummyChallenge?.slug}&id=${dummyChallenge?.id}`}
+                href={`/play-ground/challenge?slug=${dummyChallenge?.slug}&id=${dummyChallenge?.id}`}
               >
                 Start challenge.
               </Link>

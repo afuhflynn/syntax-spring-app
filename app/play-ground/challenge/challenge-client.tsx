@@ -1,18 +1,19 @@
 "use client";
 
 // import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftCircle, SliceIcon, Text } from "lucide-react";
 import { Challenge } from "@/TYPES";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tooltip } from "@mui/material";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Settings } from "@/components/settings";
 import { UserButton } from "@/components/user-button";
+import useUserStore from "@/lib/user.store";
 
 export default function ChallengeClient({
   challenge,
@@ -22,11 +23,13 @@ export default function ChallengeClient({
   const router = useRouter();
   const [isEditor, setIsEditor] = useState(true);
   const [isDetails, setIsDetails] = useState(true);
-  const dummyUser = {
-    name: "afuhflynn",
-    email: "flyinnsafuh@gmail.com",
-    image: "",
-  };
+  const { user } = useUserStore();
+
+  useEffect(() => {
+    if (!user) {
+      redirect("/auth/log-in");
+    }
+  });
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -82,7 +85,7 @@ export default function ChallengeClient({
               {isDetails ? <SliceIcon /> : <Text />}
             </Button>
           </Tooltip>
-          <UserButton user={dummyUser} />
+          <UserButton />
         </div>
       </header>
       {/* Challenge details */}
