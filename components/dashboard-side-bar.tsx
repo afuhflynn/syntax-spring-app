@@ -8,10 +8,10 @@ export const DashboardSideBar = () => {
   const { user } = useUserStore();
   const pathname = usePathname();
   return (
-    <aside className="hidden w-64 border-r bg-muted/10 md:block">
+    <aside className="w-64 border-r bg-muted/10 hidden md:block">
+      {/* Desktop sidebar */}
       <div className="mt-2 w-full flex flex-row items-center ml-2">
-
-      <Logo />
+        <Logo />
       </div>
       <div className="px-3 py-2 pt-8">
         <nav className="space-y-1">

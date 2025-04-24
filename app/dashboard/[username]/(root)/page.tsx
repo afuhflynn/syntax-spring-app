@@ -60,7 +60,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="mt-6 flex justify-between px-24 pb-4">
+            <div className="mt-6 flex justify-between md:px-24 pb-4">
               {[...Array(5)].map((day) => (
                 <div key={day} className="flex flex-col items-center ">
                   <Zap className="mb-1 h-5 w-5 fill-yellow-400 border-yellow-500 " />
@@ -73,7 +73,7 @@ export default function Dashboard() {
 
         {/* Resume Challenges or preview completed challenges */}
         <div>
-          <h3 className="mb-4 text-xl font-bold">Resume your practice</h3>
+          <h3 className="mb-2 text-xl font-bold">Resume your practice</h3>
           <div className="space-y-4">
             {user &&
               user.authoredChallenges &&
@@ -118,7 +118,7 @@ export default function Dashboard() {
                 </Card>
               ))}
           </div>
-          <Button variant="link" className="mt-4 px-0 text-primary" asChild>
+          <Button variant="link" className="mt-2 px-0 text-primary" asChild>
             <Link href={`/dashboard/${user?.username}/challenges`}>
               Explore all challenges
             </Link>
@@ -126,13 +126,13 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-6 flex flex-col items-center justify-center w-full md:w-auto">
         {/* Weekly Leaderboard */}
-        <Card>
+        <Card className="w-full md:w-auto">
           <CardHeader>
             <h3 className="text-xl font-bold">Weekly Leaderboard</h3>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 w-full">
             <div className="flex items-center gap-3">
               <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500 text-xs font-bold text-white">
                 🥇
@@ -275,7 +275,7 @@ export default function Dashboard() {
             <div>
               <h4 className="text-lg font-semibold">{dummyChallenge?.title}</h4>
               <p className="mt-2 text-sm text-muted-foreground">
-                {dummyChallenge?.description}
+                {dummyChallenge?.description.substring(0, 179)}...
               </p>
             </div>
             <Button asChild>

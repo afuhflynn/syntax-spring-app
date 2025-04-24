@@ -16,9 +16,9 @@ export default function Home() {
     checkAuth();
   }, [checkAuth]);
 
-  // TODO: Redirect user to dashboard page if user data exists
+  // TODO: Redirect user to challenges page if user data exists
   if (user) {
-    redirect(`/dashboard/${user.username}`);
+    redirect(`/platform/challenges`);
   }
 
   if (isCheckingAuth) {

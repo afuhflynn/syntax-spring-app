@@ -153,7 +153,7 @@ Execution completed successfully.`);
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-card shadow-sm w-full h-full py-1 mt-4">
+    <div className="flex-1 border rounded-lg overflow-hidden bg-card shadow-sm w-full h-full py-1 mt-4">
       <div className="px-4 py-2 h-auto flex justify-between items-center border-border">
         <div className="flex items-center gap-2">
           <Tabs
@@ -175,7 +175,9 @@ Execution completed successfully.`);
             variant="outline"
             size="sm"
             onClick={() => setViewMode("editor")}
-            className={cn(viewMode === "editor" ? "bg-muted" : "")}
+            className={`hidden w-auto p-0 px-1 md:flex flex-row items-center justify-center md:p-2 ${cn(
+              viewMode === "editor" ? "bg-muted" : ""
+            )}`}
             aria-label="Editor view"
           >
             <Code className="h-4 w-4 mr-1" />
@@ -185,7 +187,9 @@ Execution completed successfully.`);
             variant="outline"
             size="sm"
             onClick={() => setViewMode("output")}
-            className={cn(viewMode === "output" ? "bg-muted" : "")}
+            className={`hidden w-auto p-0 px-1 md:flex flex-row items-center justify-center md:p-2 ${cn(
+              viewMode === "output" ? "bg-muted" : ""
+            )}`}
             aria-label="Output view"
           >
             {isWebChallenge ? (
@@ -199,23 +203,29 @@ Execution completed successfully.`);
             variant="outline"
             size="sm"
             onClick={() => setViewMode("split")}
-            className={cn(viewMode === "split" ? "bg-muted" : "")}
+            className={`hidden w-auto p-0 px-1 md:flex flex-row items-center justify-center md:p-2 ${cn(
+              viewMode === "split" ? "bg-muted" : ""
+            )}`}
             aria-label="Split view"
           >
             <span className="hidden sm:inline">Split</span>
             <span className="sm:hidden">⚌</span>
           </Button>
           {!isWebChallenge && (
-            <Button onClick={runCode} disabled={isRunning}>
+            <Button
+              onClick={runCode}
+              disabled={isRunning}
+              className="w-auto p-0 px-1 flex flex-row items-center justify-center md:p-2"
+            >
               {isRunning ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Running...
+                  <span className="hidden md:flex">Running...</span>
                 </>
               ) : (
                 <>
                   <Play className="h-4 w-4 mr-2" />
-                  Run Code
+                  <span className="hidden md:flex">Run Code</span>
                 </>
               )}
             </Button>
@@ -223,7 +233,7 @@ Execution completed successfully.`);
         </div>
       </div>
       {isWebChallenge ? (
-        <div className="flex flex-row h-[420px]">
+        <div className="flex flex-row md:h-[435px] h-screen">
           <div
             className={`border-none resize-x ${cn(
               viewMode === "editor"
@@ -260,7 +270,7 @@ Execution completed successfully.`);
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-[420px]">
+        <div className="flex flex-col md:h-[435px] flex-1">
           <div
             className={`w-full ${cn(
               viewMode === "output"

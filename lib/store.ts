@@ -43,7 +43,19 @@ interface EditorState {
   addTerminalOutput: (output: string) => void;
 }
 
-export const useStore = create<EditorState>((set, get) => ({
+interface AppStoreTypes {
+  isMobileDashboardSidebar: boolean;
+  setIsMobileDashboardSidebar: (value: boolean) => void;
+}
+
+// General app store
+export const useStore = create<EditorState & AppStoreTypes>((set, get) => ({
+  isMobileDashboardSidebar: false,
+  setIsMobileDashboardSidebar: (value) => {
+    set({ isMobileDashboardSidebar: value });
+  },
+
+  // Editor and code env settings states
   currentFile: null,
   language: "javascript",
   code: defaultCodeTemplates.javascript || "// Start coding here",

@@ -4,13 +4,11 @@
 import { redirect, useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import ChallengeEditor from "@/components/challenge-editor";
-import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftCircle, SliceIcon, Text } from "lucide-react";
+import { ArrowLeftCircle, Inspect, Text } from "lucide-react";
 import { Challenge } from "@/TYPES";
 import { useEffect, useState } from "react";
 import { Tooltip } from "@mui/material";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Settings } from "@/components/settings";
 import { UserButton } from "@/components/user-button";
 import useUserStore from "@/lib/user.store";
@@ -45,30 +43,19 @@ export default function ChallengeClient({
   };
 
   return (
-    <div className="container pb-6 relative">
-      <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[65px]pt-1">
-        <Logo />
+    <div className="container pb-2 relative px-[0.7rem] md:px-[2rem]">
+      <header className="flex flex-row items-center justify-between sticky top-0 right-0 left-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-[65px] pt-1">
+        <Tooltip title={"Return to challenges"} arrow placement="top">
+          <Button
+            className="flex flex-row items-center gap-2 py-1"
+            onClick={() => router.back()}
+            variant="outline"
+          >
+            <ArrowLeftCircle />
+          </Button>
+        </Tooltip>
         {/* Code Editor controls */}
-        <div className="flex flex-row items-center justify-between py-2 gap-2">
-          <Tooltip title={"Return to challenges"} arrow placement="top">
-            <Button
-              className="flex flex-row items-center gap-2 py-1"
-              onClick={() => router.back()}
-              variant="outline"
-            >
-              <ArrowLeftCircle />
-            </Button>
-          </Tooltip>
-          <Tooltip title={"Settings"} arrow placement="bottom">
-            <Button
-              className="flex flex-row items-center gap-2 py-1"
-              variant="outline"
-              size="sm"
-            >
-              <Settings />
-            </Button>
-          </Tooltip>
-          <ThemeToggle />
+        <div className="flex flex-row items-center justify-between py-2 md:gap-2">
           <Tooltip
             title={
               isDetails ? "Hide challenge details." : "Show challenge details."
@@ -82,7 +69,16 @@ export default function ChallengeClient({
               variant="outline"
               size="sm"
             >
-              {isDetails ? <SliceIcon /> : <Text />}
+              {isDetails ? <Inspect /> : <Text />}
+            </Button>
+          </Tooltip>
+          <Tooltip title={"Settings"} arrow placement="bottom">
+            <Button
+              className="flex flex-row items-center gap-2 py-1"
+              variant="outline"
+              size="sm"
+            >
+              <Settings />
             </Button>
           </Tooltip>
           <UserButton />

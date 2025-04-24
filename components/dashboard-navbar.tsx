@@ -1,16 +1,29 @@
-import { Search } from "lucide-react";
+"use client";
+
+import { LayoutDashboardIcon, Search } from "lucide-react";
 import { Input } from "./ui/input";
 import { UserButton } from "./user-button";
 import { ThemeToggle } from "./theme-toggle";
+import { useStore } from "@/lib/store";
+import { Button } from "./ui/button";
 
 export const DashboardNavBar = () => {
+  const { setIsMobileDashboardSidebar } = useStore();
   return (
     <header className="flex h-14 items-center bg-background bg-opacity-40 z-10 border-b px-4 sticky top-0 left-0 right-0">
       <div className="flex items-center gap-4">
+        {/* Mobile sidebar toggle */}
+        <Button
+          className="md:hidden mx-0 px-0"
+          variant="ghost"
+          onClick={() => setIsMobileDashboardSidebar(true)}
+        >
+          <LayoutDashboardIcon />
+        </Button>
         <span className="font-medium hidden md:block">
           Check out your achievements
         </span>
-        <div className="relative">
+        <div className="relative md:block hidden">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"

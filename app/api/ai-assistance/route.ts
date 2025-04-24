@@ -6,97 +6,117 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
+    // Expect the full challenge and user code information in the request body:
     const {
-      prompt,
-      code,
-      language,
-      examples,
-      constraints,
-      title,
-      description,
-      difficulty,
-      chatHistory,
+      prompt,       // A message (e.g., "Please provide the solution code") – may be empty.
+      code,         // The user's code snippet or partial solution (if any).
+      language,     // Programming language (e.g., "Python", "JavaScript").
+      examples,     // Example input/output or sample cases.
+      constraints,  // Any problem constraints.
+      title,        // Challenge title (e.g., "Longest Palindromic Substring").
+      description,  // Challenge description (problem statement).
+      difficulty,   // Difficulty level (e.g., EASY, MEDIUM, or HARD).
+      chatHistory = [],
       modelVersion,
     } = await req.json();
 
-    // Default model if user model does not exist
-    const defaultModel = "gemini-2.0-flash";
+    // Validate required challenge details:
+    if (
+      !title ||
+      !description ||
+      !code ||
+      !language ||
+      (typeof prompt === "string" && prompt.trim().length === 0)
+    ) {
+      throw new Error("Missing required challenge information.");
+    }
 
-    // Initialize the Google Generative AI with the API key
-    const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+    // Build a comprehensive system prompt with every piece of challenge info.
+    // This prompt instructs the AI to provide hints, tips, and advice only.
+    // It emphasizes self-learning, careful analysis, and learning from mistakes.
+    const systemPromptText = `
+You are SyntaxSpring Code Assist, a dedicated AI coding assistant focused on helping users learn and improve their problem-solving skills. You have full context of the coding challenge provided below:
 
-    // Create a system prompt that includes context about the code
-    const systemPrompt = `You are an AI coding assistant for the Syntax Spring a modern, interactive coding challenge platform designed to help developers improve their programming skills through hands-on practice. 
-    Help users with their coding questions, explain concepts, suggest improvements, 
-    and provide code examples but not a direct solution to the problem.
+**Challenge Title:** ${title}
+**Challenge Description:** ${description}
+**Difficulty Level:** ${difficulty || "Not specified"}
+**Programming Language:** ${language}
 
-    Make sure to be friendly and respond to greetings with short answers.
-    
-    Here is the information about the challenge:
-    Challenge Title: ${title}
-    Challenge Description: ${description}
-    Difficulty: ${difficulty}. Let your response nature be based on the DIFFICULTY level (it can be EASY, MEDIUM, HARD)
-    constraints: ${constraints}
-    Examples of solution behavior: ${examples}
+**User Code Provided:**
+\`\`\`${language}
+${code}
+\`\`\`
 
-    The user is working with ${language} code. Here is their current code:
-    \`\`\`${language}
-    ${code}
-    \`\`\`
-    
-    Based on the above information provide the user with tips, hints, online reference on how to complete the challenge but NOT THE ACTUAL solution. Let the user learn and figure out the solution with your help.
-    
-    Also provide them with advice on the importance of going thought process and figuring out the answer without using any ai tool or any other code examples out there to provide them solution. They should take their time and learn.
+**Examples:** ${examples || "None provided"}
+**Constraints:** ${constraints || "None provided"}
 
-    Remember to be friendly, kind, reply to greetings and be cool.
-    `;
+**Your Role:**
+- Provide clear, helpful tips and hints rather than complete solution code.
+- Emphasize self-learning, encourage the user to analyze their mistakes, and guide them through the problem-solving process.
+- Ask clarifying questions and suggest steps that the user can take to debug and improve their solution.
+- Emphasize the importance of understanding underlying concepts and learning by doing.
+- When providing code snippets, add comments that explain the logic behind each step.
+- Do not reveal the entire solution; instead, offer advice that nudges the user towards discovering the solution on their own.
 
-    // Create initial Chatbot history
-    const history = chatHistory.map((chat: any) => {
-      return {
-        role: chat.role,
-        parts: [{ text: chat.content }],
-      };
-    });
+Use the context above for every response. If the user does not provide additional directions, always refer to this challenge context in your explanations and advice.
+    `.trim();
 
+    // Create an initial chat message from the user.
     const initialUserChat = {
       role: "user",
-      parts: [
-        {
-          text: "Hello, ai",
-        },
-      ],
+      parts: [{ text: prompt || "Hello, AI" }],
     };
 
-    // Create an initial chat session
+    // Build system instruction with the comprehensive prompt.
+    const systemInstruction = {
+      role: "system",
+      parts: [{ text: systemPromptText }],
+    };
+
+    // Default model, if none provided.
+    const defaultModel = "gemini-2.0-flash";
+
+    // Initialize the Google Generative AI with the API key.
+    const genAI = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY!,
+    });
+
+    // Start the chat session with full challenge context.
     const chat = genAI.chats.create({
       model: modelVersion || defaultModel,
+      history: [initialUserChat, ...chatHistory],
+      contents: `This conversation is about ${title}, ${language} coding challenge. Use the provided context for every reply.`,
       config: {
         temperature: 0.5,
-        maxOutputTokens: 1024,
-        systemInstruction: systemPrompt,
+        maxOutputTokens: 5000,
+systemInstruction,
       },
-      history: [initialUserChat, ...history],
     });
 
-    // Send the message
-    const response = await chat.sendMessage({
-      message: prompt,
-    });
-
-    if (!response.text) {
-      throw new Error("An error occurred. Try again later.");
+    // Send the message from the user; stream back the AI's response.
+    let response = "";
+    try {
+      const result = await chat.sendMessageStream({ message: prompt });
+      for await (const chunk of result) {
+        response += chunk.text;
+      }
+    } catch (err: any) {
+      console.error("Error during sendMessage:", err);
+      throw new Error("Error during sendMessage: " + err);
     }
-    // Send the complete response back to the user
-    return NextResponse.json({
-      response: response.text,
-    });
+
+    if (!response) {
+      throw new Error("No response received from the AI model.");
+    }
+
+    // Return the final response.
+    return NextResponse.json({ response: response });
   } catch (error) {
     console.error("AI assistance error:", error);
     return NextResponse.json(
       {
         error: "Failed to get AI assistance.",
-        message: "An error occurred. Try again later.",
+        message: "Error during sendMessage: " + error,
       },
       { status: 500 }
     );

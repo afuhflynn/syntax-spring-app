@@ -85,11 +85,11 @@ const blogPosts = [
 
 export default function BlogPageComponent() {
   const router = useRouter();
-  const isReady = false;
+  const isReady = true;
 
-  useLayoutEffect(() => {
-    router.push("/");
-  }, []);
+ // useLayoutEffect(() => {
+    //router.push("/");
+ // }, []);
 
   if (!isReady) {
     return null;
@@ -97,7 +97,7 @@ export default function BlogPageComponent() {
   return (
     <div className="container py-12">
       <div className="mb-12 text-center">
-        <h1 className="text-4xl font-bold tracking-tighter mb-4">Blog</h1>
+
         <p className="text-muted-foreground max-w-[700px] mx-auto">
           Read our latest articles about coding, programming languages, and
           software development.

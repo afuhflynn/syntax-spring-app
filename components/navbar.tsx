@@ -55,7 +55,8 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "Challenges", path: "/platform/challenges" },
     { name: "Community", path: "/platform/community" },
-    { name: "About", path: "/platform/about" },
+{ name: "About", path: "/platform/about" },
+    { name: "Blog", path: "/platform/blog" },
   ];
 
   return (

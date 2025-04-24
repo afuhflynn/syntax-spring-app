@@ -23,7 +23,7 @@ import Link from "next/link";
 /**
  * maxLength: number - max message input length
  */
-const maxLength = 200;
+const maxLength = 1024;
 
 const formSchema = z.object({
   name: z
@@ -207,16 +207,13 @@ export default function ContactPage() {
                       <FormControl>
                         <Textarea
                           placeholder="Your message"
-                          className="min-h-[150px] resize-none"
+                          className={`min-h-[150px] resize-none ${field.value.length >= maxLength ? "text-red-400" : ""}`}
                           {...field}
-                          disabled={field.value.length > maxLength}
                         />
                       </FormControl>
                       <FormMessage />
                       <div
-                        className={`flex flex-row items-center justify-between w-full h-auto ${
-                          field.value.length >= maxLength ? "text-red" : ""
-                        }`}
+                        className={`flex flex-row items-center justify-between w-full h-auto ${field.value.length >= maxLength ? "text-red-400" : ""}`}
                       >
                         <span>Max</span>
                         <span>

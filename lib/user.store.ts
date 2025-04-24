@@ -10,11 +10,16 @@ interface UserStore {
   checkAuth: () => void;
 }
 
+const date = new Date()
+
 const dummyUser = {
+  name: "Tembeng",
   username: "AfuhFlynn",
   avatarUrl: "",
   password: "123",
   email: "flyinnsafuh@gmail.com",
+  createdAt: date,
+  updatedAt: date
 };
 const useUserStore = create<UserStore>((set, _) => ({
   user: dummyUser,

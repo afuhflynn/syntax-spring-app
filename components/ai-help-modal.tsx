@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, easeIn } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, Send, Copy, LucideCopyCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -37,41 +37,83 @@ export default function AIHelpModal({
   description,
   difficulty,
 }: AIHelpModalProps) {
+  // Initialize conversation as empty so the first message comes from the API.
+  const [conversation, setConversation] = useState<
+    Array<{ role: "user" | "model"; content: string }>
+  >([]);
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCopyingText, setIsCopyingText] = useState<boolean>(false);
   const { aiSettings } = useStore();
-  // Refs
   const bottomRef = useRef<null | HTMLSpanElement>(null);
   const chatContainerRef = useRef<null | HTMLDivElement>(null);
 
-  const username = "afuhflynn"; // TODO: Change to real user name
-  const [conversation, setConversation] = useState<
-    Array<{ role: "user" | "model"; content: string }>
-  >([
-    {
-      role: "model",
-      content: `Hi ${username}! I'm SyntaxSpring Code Assist.\nHow can I help you with "${title}" challenge. What specific help do you need?`,
-    },
+  const username = "afuhflynn"; // TODO: Replace with actual username if needed.
+  const [copiedIndex, setCopiedIndex] = useState<null | number>(null);
+
+  // Trigger the initial AI response when the modal opens.
+  useEffect(() => {
+    if (isOpen && conversation.length === 0 && !isLoading) {
+      setIsLoading(true);
+      axios
+        .post<{ response: string }>("/api/ai-assistance", {
+          prompt: `Introduce yourself as SyntaxSpring Code Assist and ask how you can help with the challenge titled "${title}".`,
+          code,
+          language,
+          examples,
+          constraints,
+          title,
+          description,
+          difficulty,
+          chatHistory: [], // No prior conversation.
+          modelVersion: aiSettings.model,
+        })
+        .then((res) => {
+          setConversation([{ role: "model", content: res.data.response }]);
+        })
+        .catch((error) => {
+          console.error("Error getting initial AI response:", error);
+          setConversation([
+            {
+              role: "model",
+              content:
+                "Sorry, I couldn't load the initial assistance. Please try sending a message.",
+            },
+          ]);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [
+    isOpen,
+    conversation.length,
+    isLoading,
+    aiSettings.model,
+    code,
+    language,
+    examples,
+    constraints,
+    title,
+    description,
+    difficulty,
   ]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!question.trim() || isLoading) return;
 
-    // Add user message to conversation
-    setConversation([...conversation, { role: "user", content: question }]);
-
-    // Clear input
+    // Append the user message to conversation
+    setConversation((prev) => [
+      ...prev,
+      { role: "user", content: question },
+    ]);
     setQuestion("");
-
-    // Set loading state
     setIsLoading(true);
 
     try {
       const res = await axios.post<{ response: string }>("/api/ai-assistance", {
-        question,
+        prompt: question,
         code,
         language,
         examples,
@@ -83,22 +125,20 @@ export default function AIHelpModal({
         modelVersion: aiSettings.model,
       });
       const aiResponse = res.data.response;
-
-      // Add AI response to conversation
-      setConversation([
-        ...conversation,
+      setConversation((prev) => [
+        ...prev,
         { role: "user", content: question },
         { role: "model", content: aiResponse },
       ]);
     } catch (error: any) {
       let err = "";
-      if (error.response.data.message) {
+      if (error.response?.data?.message) {
         err = error.response.data.message;
       } else {
         err = error.message;
       }
-      setConversation([
-        ...conversation,
+      setConversation((prev) => [
+        ...prev,
         { role: "user", content: question },
         { role: "model", content: err },
       ]);
@@ -108,17 +148,16 @@ export default function AIHelpModal({
     }
   };
 
-  // Scroll to bottom on initial load
+  // Auto-scroll to the bottom of the conversation when messages update.
   useEffect(() => {
     if (bottomRef && bottomRef.current) {
-      bottomRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [bottomRef, conversation]);
+  }, [conversation]);
 
-  const handleCopyResponse = (data: string) => {
+  const handleCopyResponse = (data: string, index: number) => {
     setIsCopyingText((prev) => !prev);
+    setCopiedIndex(index);
     navigator.clipboard.writeText(data);
     setTimeout(() => {
       setIsCopyingText((prev) => !prev);
@@ -169,9 +208,7 @@ export default function AIHelpModal({
                   {message.role === "model" && (
                     <Avatar className="h-8 w-8 bg-secondary">
                       <Image
-                        src={
-                          "https://res.cloudinary.com/duzg7l0eo/image/upload/v1742920199/fav-icon_mnoce0.png"
-                        }
+                        src="https://res.cloudinary.com/duzg7l0eo/image/upload/v1742920199/fav-icon_mnoce0.png"
                         alt="Syntax spring logo"
                         width={40}
                         height={40}
@@ -193,11 +230,11 @@ export default function AIHelpModal({
                     <Tooltip title="Copy" placement="right-end" arrow>
                       <button
                         className="absolute right-1 -bottom-5 text-muted-foreground"
-                        onClick={() => handleCopyResponse(message.content)}
+                        onClick={() => handleCopyResponse(message.content, index)}
                         aria-label="Copy"
                       >
-                        {isCopyingText ? (
-                          <LucideCopyCheck className="h-4 w-4 text-green-500" />
+                        {isCopyingText && copiedIndex === index ? (
+                          <LucideCopyCheck className="h-4 w-4" />
                         ) : (
                           <Copy className="h-4 w-4" />
                         )}
@@ -211,9 +248,7 @@ export default function AIHelpModal({
                 <div className="flex gap-3 mb-4 items-start">
                   <Avatar className="h-8 w-8 bg-secondary">
                     <Image
-                      src={
-                        "https://res.cloudinary.com/duzg7l0eo/image/upload/v1742920199/fav-icon_mnoce0.png"
-                      }
+                      src="https://res.cloudinary.com/duzg7l0eo/image/upload/v1742920199/fav-icon_mnoce0.png"
                       alt="Syntax spring logo"
                       width={40}
                       height={40}
@@ -234,12 +269,11 @@ export default function AIHelpModal({
                 <Textarea
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  placeholder="Add a message to tailore the response..."
+                  placeholder="Add a message to tailor the response..."
                   className={`flex-1 min-h-[80px] resize-none ${
                     question.length >= maxLength ? "text-red-400" : ""
                   }`}
                 />
-
                 <Tooltip title="Send" placement="right-end" arrow>
                   <Button
                     type="submit"
